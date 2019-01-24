@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;Staging</Configurations>
+    <ProjectGuid>{22779D9E-E51D-4573-8F9B-AB8D02400117}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>
