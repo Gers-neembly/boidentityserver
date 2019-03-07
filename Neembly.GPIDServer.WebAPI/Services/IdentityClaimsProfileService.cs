@@ -45,9 +45,7 @@ namespace Neembly.BOIDServer.WebAPI.Services
             }
 
             foreach (string role in roles)
-            {
                 claims.Add(new Claim(JwtClaimTypes.Role, role));
-            }
 
             context.IssuedClaims = claims;
         }
