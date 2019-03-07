@@ -10,9 +10,7 @@ public class RegisterDTOValidator : AbstractValidator<RegisterDTO>
         RuleFor(x => x.Email).NotNull().NotEmpty().EmailAddress();
         RuleFor(x => x.Password).NotNull().NotEmpty().Length(0, 20);
         RuleFor(x => x.ConfirmPassword).NotNull().NotEmpty().Length(0, 20);
-        RuleFor(x => x.HostedUrl).NotNull().NotEmpty();
         RuleFor(x => x.OperatorId).NotNull().NotEmpty().GreaterThan(0);
-        RuleFor(x => x.BackOfficeUserInfo).NotNull();
     }
     #endregion
 }

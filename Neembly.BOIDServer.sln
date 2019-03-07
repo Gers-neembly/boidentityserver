@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neembly.BOIDServer.SharedCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neembly.BOIDServer.SharedServices", "Neembly.GPIDServer.SharedServices\Neembly.BOIDServer.SharedServices.csproj", "{933A6989-972A-4D71-B08C-E88A1E548BD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neembly.BOIDServer.Constants", "Neembly.GPIDServer.Constants\Neembly.BOIDServer.Constants.csproj", "{E6BAEF48-834A-4674-B115-1337E15498B6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,12 +48,6 @@ Global
 		{933A6989-972A-4D71-B08C-E88A1E548BD4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{933A6989-972A-4D71-B08C-E88A1E548BD4}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
 		{933A6989-972A-4D71-B08C-E88A1E548BD4}.Staging|Any CPU.Build.0 = Debug|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6BAEF48-834A-4674-B115-1337E15498B6}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,7 +57,6 @@ Global
 		{17F351B7-4B4B-4AFC-8D0B-89BC618293AF} = {510EAA41-BFBC-4950-B963-A0AA7847FD45}
 		{22779D9E-E51D-4573-8F9B-AB8D02400117} = {A035BFB7-0AD8-42C8-AD32-0B5DF81A2D7A}
 		{933A6989-972A-4D71-B08C-E88A1E548BD4} = {A035BFB7-0AD8-42C8-AD32-0B5DF81A2D7A}
-		{E6BAEF48-834A-4674-B115-1337E15498B6} = {A035BFB7-0AD8-42C8-AD32-0B5DF81A2D7A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {360FE2A0-18EA-4652-9BC2-704EB76C5E16}
