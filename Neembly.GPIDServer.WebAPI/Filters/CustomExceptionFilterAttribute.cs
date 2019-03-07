@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using Neembly.GPIDServer.WebAPI.Exceptions;
+using Neembly.BOIDServer.WebAPI.Exceptions;
 using System;
 using System.Net;
 
 
-namespace Neembly.GPIDServer.WebAPI.Filters
+namespace Neembly.BOIDServer.WebAPI.Filters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute

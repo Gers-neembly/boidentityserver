@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Neembly.GPIDServer.Persistence.Entities
+namespace Neembly.BOIDServer.Persistence.Entities
 {
     public class AppUser : IdentityUser
     {
-        //Extended proprties
         public string DisplayUsername { get; set; }
-        public string OperatorId { get; set; }
+        public int OperatorId { get; set; }
         public string BackOfficeUserId { get; set; }
         public string RegistrationStatus { get; set; }
     }

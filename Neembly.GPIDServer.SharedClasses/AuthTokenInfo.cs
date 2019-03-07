@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Neembly.GPIDServer.SharedClasses
+namespace Neembly.BOIDServer.SharedClasses
 {
     public class AuthTokenInfo
     {

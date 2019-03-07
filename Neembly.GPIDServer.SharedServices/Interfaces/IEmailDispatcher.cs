@@ -1,7 +1,7 @@
-﻿using Neembly.GPIDServer.SharedClasses;
+﻿using Neembly.BOIDServer.SharedClasses;
 using System.Threading.Tasks;
 
-namespace Neembly.GPIDServer.SharedServices.Interfaces
+namespace Neembly.BOIDServer.SharedServices.Interfaces
 {
     public interface IEmailDispatcher
     {

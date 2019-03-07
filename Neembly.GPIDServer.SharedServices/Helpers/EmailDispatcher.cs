@@ -2,10 +2,10 @@
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Neembly.GPIDServer.SharedClasses;
-using Neembly.GPIDServer.SharedServices.Interfaces;
+using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedServices.Interfaces;
 
-namespace Neembly.GPIDServer.SharedServices.Helpers
+namespace Neembly.BOIDServer.SharedServices.Helpers
 {
     public class EmailDispatcher : IEmailDispatcher
     {

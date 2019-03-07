@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neembly.GPIDServer.Constants\Neembly.GPIDServer.Constants.csproj" />
-    <ProjectReference Include="..\Neembly.GPIDServer.Persistence\Neembly.GPIDServer.Persistence.csproj" />
-    <ProjectReference Include="..\Neembly.GPIDServer.SharedServices\Neembly.GPIDServer.SharedServices.csproj" />
+    <ProjectReference Include="..\Neembly.GPIDServer.Constants\Neembly.BOIDServer.Constants.csproj" />
+    <ProjectReference Include="..\Neembly.GPIDServer.Persistence\Neembly.BOIDServer.Persistence.csproj" />
+    <ProjectReference Include="..\Neembly.GPIDServer.SharedServices\Neembly.BOIDServer.SharedServices.csproj" />
   </ItemGroup>
 
 </Project>

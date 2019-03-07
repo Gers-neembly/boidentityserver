@@ -5,13 +5,13 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Neembly.GPIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Entities;
 using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Neembly.GPIDServer.WebAPI.Services
+namespace Neembly.BOIDServer.WebAPI.Services
 {
     public class IdentityClaimsProfileService : IProfileService
     {
@@ -34,7 +34,7 @@ namespace Neembly.GPIDServer.WebAPI.Services
             var roles = await _userManager.GetRolesAsync(user);
             var claims = principal.Claims.ToList();
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            claims.Add(new Claim("operatorId", user.OperatorId));
+            claims.Add(new Claim("operatorId", user.OperatorId.ToString()));
             claims.Add(new Claim("backofficeuserId", user.BackOfficeUserId));
             claims.Add(new Claim("registrationStatus", user.RegistrationStatus));
 

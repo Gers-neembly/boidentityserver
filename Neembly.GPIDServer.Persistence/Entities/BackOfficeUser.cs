@@ -1,7 +1,7 @@
-﻿using Neembly.GPIDServer.SharedClasses;
+﻿using Neembly.BOIDServer.SharedClasses;
 using System.ComponentModel.DataAnnotations;
 
-namespace Neembly.GPIDServer.Persistence.Entities
+namespace Neembly.BOIDServer.Persistence.Entities
 {
     public class BackOfficeUser
     {

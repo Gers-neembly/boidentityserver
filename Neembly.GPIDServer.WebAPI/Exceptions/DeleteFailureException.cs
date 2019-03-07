@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Neembly.GPIDServer.WebAPI.Exceptions
+namespace Neembly.BOIDServer.WebAPI.Exceptions
 {
     public class DeleteFailureException : Exception
     {

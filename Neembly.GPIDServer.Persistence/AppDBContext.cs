@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Neembly.GPIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Entities;
 
-namespace Neembly.GPIDServer.Persistence
+namespace Neembly.BOIDServer.Persistence
 {
     public class AppDBContext : IdentityDbContext<AppUser>
     {

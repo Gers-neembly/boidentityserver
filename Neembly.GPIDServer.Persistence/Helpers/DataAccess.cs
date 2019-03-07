@@ -1,11 +1,11 @@
-﻿using Neembly.GPIDServer.Persistence.Entities;
-using Neembly.GPIDServer.Persistence.Interfaces;
-using Neembly.GPIDServer.SharedClasses;
+﻿using Neembly.BOIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Interfaces;
+using Neembly.BOIDServer.SharedClasses;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Neembly.GPIDServer.Persistence.Helpers
+namespace Neembly.BOIDServer.Persistence.Helpers
 {
     public class DataAccess : IDataAccess
     {
@@ -16,13 +16,13 @@ namespace Neembly.GPIDServer.Persistence.Helpers
             _appDBContext = appDBContext;
         }
 
-        public async Task<string> CreateBackOfficeUserById(string userId, string operatorId, BackOfficeUserInfo BackOfficeUserInfo = null)
+        public async Task<string> CreateBackOfficeUserById(string userId, int operatorId, BackOfficeUserInfo BackOfficeUserInfo = null)
         {
             var BackOfficeUser = _appDBContext.Users.Where(r => r.Id.Equals(userId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
             if (BackOfficeUser == null)
                 return string.Empty;
             long tagId = 1;
-            var operatorRecord = _appDBContext.OperatorData.Where(r => r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            var operatorRecord = _appDBContext.OperatorData.Where(r => r.OperatorId == operatorId).FirstOrDefault();
             if (operatorRecord == null)
             {
                 _appDBContext.OperatorData.Add(new OperatorData { OperatorId = operatorId, TagId = 1 });
@@ -48,15 +48,15 @@ namespace Neembly.GPIDServer.Persistence.Helpers
             return tagFormatted;
         }
 
-        public AppUser GetAppUser(string email, string username, string operatorId)
+        public AppUser GetAppUser(string email, string username, int operatorId)
         {
             var BackOfficeUserInfo =  _appDBContext.Users.Where(r => r.Email.ToLower() == email.ToLower()
-                                                            && r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                                                            && r.OperatorId == operatorId).FirstOrDefault();
             if (BackOfficeUserInfo != null)
               return BackOfficeUserInfo;
 
             BackOfficeUserInfo = _appDBContext.Users.Where(r => r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)
-                                                        && r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                                                        && r.OperatorId == operatorId).FirstOrDefault();
             return BackOfficeUserInfo;
         }
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Neembly.GPIDServer.WebAPI.Models;
+using Neembly.BOIDServer.WebAPI.Models;
 using System.Reflection;
 
-namespace Neembly.GPIDServer.WebAPI.Controllers
+namespace Neembly.BOIDServer.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

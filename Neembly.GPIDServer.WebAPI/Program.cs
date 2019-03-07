@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Neembly.GPIDServer.WebAPI
+namespace Neembly.BOIDServer.WebAPI
 {
     public class Program
     {

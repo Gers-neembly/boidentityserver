@@ -1,4 +1,4 @@
-﻿namespace Neembly.GPIDServer.WebAPI.Models
+﻿namespace Neembly.BOIDServer.WebAPI.Models
 {
     public class VersionInfo
     {

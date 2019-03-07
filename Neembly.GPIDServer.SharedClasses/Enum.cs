@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Neembly.GPIDServer.SharedClasses
+namespace Neembly.BOIDServer.SharedClasses
 {
     public enum RegistrationStatusNames
     {
