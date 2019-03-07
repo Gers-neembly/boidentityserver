@@ -51,13 +51,13 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         public async Task<IActionResult> Profile([FromBody] ProfileUpdateDTO profileUpdateInfo)
         {
             var dataInfo = await _dataAccess.ProfileRequestChange(profileUpdateInfo.BackOfficeUserId, 
-                new BackOfficeUserInfo
-                {
-                    FirstName = profileUpdateInfo.BackOfficeUserInfo.FirstName,
-                    LastName = profileUpdateInfo.BackOfficeUserInfo.LastName,
-                    MobileNo = profileUpdateInfo.BackOfficeUserInfo.MobileNo,
-                    MobilePrefix = profileUpdateInfo.BackOfficeUserInfo.MobilePrefix
-                });
+                                    new BackOfficeUserInfo
+                                    {
+                                        FirstName = profileUpdateInfo.BackOfficeUserInfo.FirstName,
+                                        LastName = profileUpdateInfo.BackOfficeUserInfo.LastName,
+                                        MobileNo = profileUpdateInfo.BackOfficeUserInfo.MobileNo,
+                                        MobilePrefix = profileUpdateInfo.BackOfficeUserInfo.MobilePrefix
+                                    });
             return Ok(dataInfo);
         }
         #endregion
@@ -72,77 +72,35 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 return NotFound("Passwords do not matched.");
             }
 
-            int clientOperatorId = registerInfo.OperatorId;
+            AppUser boUser = _dataAccess.GetAppUser(registerInfo.Email, registerInfo.UserName);
+            string userId = string.Empty;
 
-            string clientUsername = registerInfo.UserName + '_' + clientOperatorId.ToString();
-
-            AppUser BackOfficeUser = _dataAccess.GetAppUser(registerInfo.Email, clientUsername, clientOperatorId);
-            if (BackOfficeUser != null)
-                return NotFound("User already exists.");
-
-            var user = new AppUser
+            if (boUser != null)
+                userId = boUser.Id;
+            else
             {
-                UserName = clientUsername,
-                OperatorId = clientOperatorId,
-                Email = registerInfo.Email,
-                DisplayUsername = registerInfo.UserName,
-                RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Pending)
-            };
-
-            var result = await _userManager.CreateAsync(user, registerInfo.Password);
-            if (!result.Succeeded)
-                return NotFound("Registration failed.");
-
-            string urlReferer = Request.Headers["Origin"].ToString();
-            string theRole = string.IsNullOrEmpty(registerInfo.RoleType) ? "BackOfficeUser" : registerInfo.RoleType.ToLower();
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
-
-            if (theRole == "BackOfficeUser")
-            {
-                user.BackOfficeUserId = await _dataAccess.CreateBackOfficeUserById(user.Id, user.OperatorId, registerInfo.BackOfficeUserInfo);
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", user.OperatorId.ToString()));
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeuserId", user.BackOfficeUserId));
+                var user = new AppUser { UserName = registerInfo.UserName, Email = registerInfo.Email,
+                                         DisplayUsername = registerInfo.UserName,
+                                         RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Registered)
+                                       };
+                var result = await _userManager.CreateAsync(user, registerInfo.Password);
+                if (!result.Succeeded)
+                    return NotFound("Registration failed.");
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
+
+                if (registerInfo.Roles != null)
+                {
+                    foreach (var roleItem in registerInfo.Roles)
+                        await CreateUserRoles(user, roleItem);
+                }
+                userId = user.Id;
             }
 
-            await CreateUserRoles(user, theRole);
-
-            var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Action(
-                "verifyemail", "account",
-                values: new { userId = user.Id, code = emailConfirmationToken, operatorId = user.OperatorId, urlreferer = urlReferer, urlhosted = registerInfo.HostedUrl },
-                protocol: Request.Scheme);
-
-            bool registerationCompleted = !string.IsNullOrEmpty(emailConfirmationToken);
-
-            if (registerationCompleted)
-            {
-                await SendWelcomeEmail(urlReferer, user.DisplayUsername, user.Email);
-                await SendActivationEmail(callbackUrl, user.DisplayUsername, user.Email);
-            }
+            await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
 
             return Ok();
-        }
-        #endregion
-
-        #region Verify Email
-        [Route("verifyemail")]
-        [HttpGet]
-        public async Task<IActionResult> VerifyEmail(string userId, string code, int operatorId, string urlreferer, string urlhosted)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user != null)
-            {
-                var emailConfirmationResult = await _userManager.ConfirmEmailAsync(user, code);
-                if (emailConfirmationResult.Succeeded)
-                { 
-                    if (!string.IsNullOrEmpty(user.BackOfficeUserId))
-                        await SetRegistrationStatus(userId, RegistrationStatusNames.Registered);
-                    return Redirect(urlreferer);
-                }
-            }
-            return NotFound("Email verification code failed.");
         }
         #endregion
 

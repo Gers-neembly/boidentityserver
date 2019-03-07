@@ -42,8 +42,6 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     DisplayUsername = table.Column<string>(nullable: true),
-                    OperatorId = table.Column<int>(nullable: false),
-                    BackOfficeUserId = table.Column<string>(nullable: true),
                     RegistrationStatus = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -55,7 +53,7 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                 name: "BackOfficeUsers",
                 columns: table => new
                 {
-                    BackOfficeUserId = table.Column<string>(nullable: false),
+                    NetUserId = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     MobilePrefix = table.Column<string>(nullable: true),
@@ -63,7 +61,21 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BackOfficeUsers", x => x.BackOfficeUserId);
+                    table.PrimaryKey("PK_BackOfficeUsers", x => x.NetUserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OperatorAssignments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    NetUserId = table.Column<string>(nullable: true),
+                    OperatorId = table.Column<int>(nullable: false),
+                    BackOfficeUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperatorAssignments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +255,9 @@ namespace Neembly.BOIDServer.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "BackOfficeUsers");
+
+            migrationBuilder.DropTable(
+                name: "OperatorAssignments");
 
             migrationBuilder.DropTable(
                 name: "OperatorData");

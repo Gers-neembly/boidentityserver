@@ -63,7 +63,7 @@ namespace Neembly.BOIDServer.WebAPI
                     .AddAspNetIdentity<AppUser>();
 
             services.Configure<IdentityOptions>(o => {
-                o.SignIn.RequireConfirmedEmail = true;
+                o.SignIn.RequireConfirmedEmail = false;
             });
 
             // dependency injections

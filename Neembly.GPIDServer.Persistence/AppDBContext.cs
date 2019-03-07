@@ -11,6 +11,7 @@ namespace Neembly.BOIDServer.Persistence
         }
         public DbSet<BackOfficeUser> BackOfficeUsers { get; set; }
         public DbSet<OperatorData> OperatorData { get; set; }
+        public DbSet<OperatorAssignment> OperatorAssignments { get; set; }
 
     }
 }

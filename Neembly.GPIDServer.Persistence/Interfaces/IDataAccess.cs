@@ -1,14 +1,16 @@
 ﻿using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.SharedClasses;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Neembly.BOIDServer.Persistence.Interfaces
 {
     public interface IDataAccess
     {
-        AppUser GetAppUser(string email, string username, int operatorId);
-        Task<string> CreateBackOfficeUserById(string userId, int operatorId, BackOfficeUserInfo BackOfficeUserInfo = null);
+        AppUser GetAppUser(string email, string username);
+        Task<bool> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo BackOfficeUserInfo = null);
         Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registerStatus);
         Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo BackOfficeUserInfo);
+        IEnumerable<int> GetOperatorAssignments(string netUserId);
     }
 }

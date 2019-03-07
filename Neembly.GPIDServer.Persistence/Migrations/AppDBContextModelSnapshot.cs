@@ -133,8 +133,6 @@ namespace Neembly.BOIDServer.Persistence.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("BackOfficeUserId");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -154,8 +152,6 @@ namespace Neembly.BOIDServer.Persistence.Migrations
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
-
-                    b.Property<int>("OperatorId");
 
                     b.Property<string>("PasswordHash");
 
@@ -186,7 +182,7 @@ namespace Neembly.BOIDServer.Persistence.Migrations
 
             modelBuilder.Entity("Neembly.BOIDServer.Persistence.Entities.BackOfficeUser", b =>
                 {
-                    b.Property<string>("BackOfficeUserId")
+                    b.Property<string>("NetUserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FirstName");
@@ -197,9 +193,25 @@ namespace Neembly.BOIDServer.Persistence.Migrations
 
                     b.Property<string>("MobilePrefix");
 
-                    b.HasKey("BackOfficeUserId");
+                    b.HasKey("NetUserId");
 
                     b.ToTable("BackOfficeUsers");
+                });
+
+            modelBuilder.Entity("Neembly.BOIDServer.Persistence.Entities.OperatorAssignment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BackOfficeUserId");
+
+                    b.Property<string>("NetUserId");
+
+                    b.Property<int>("OperatorId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OperatorAssignments");
                 });
 
             modelBuilder.Entity("Neembly.BOIDServer.Persistence.Entities.OperatorData", b =>
