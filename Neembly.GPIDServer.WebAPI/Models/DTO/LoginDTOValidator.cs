@@ -1,14 +1,17 @@
 ﻿using FluentValidation;
-using Neembly.BOIDServer.WebAPI.Models.DTO;
 
-public class LoginDTOValidator : AbstractValidator<LoginDTO>
+namespace Neembly.BOIDServer.WebAPI.Models.DTO
 {
-    #region Constructor
-    public LoginDTOValidator()
+    public class LoginDTOValidator : AbstractValidator<LoginDTO>
     {
-        RuleFor(x => x.Password).NotNull().NotEmpty().Length(0, 20);
-        RuleFor(x => x.Email).NotNull().NotEmpty().Length(0, 80);
-        RuleFor(x => x.OperatorId).NotNull().NotEmpty().GreaterThan(0);
+        #region Constructor
+        public LoginDTOValidator()
+        {
+            RuleFor(x => x.Password).NotNull().NotEmpty().Length(0, 20);
+            RuleFor(x => x.Email).NotNull().NotEmpty().Length(0, 80);
+            RuleFor(x => x.OperatorId).NotNull().NotEmpty().GreaterThan(0);
+        }
+        #endregion
     }
-    #endregion
 }
+

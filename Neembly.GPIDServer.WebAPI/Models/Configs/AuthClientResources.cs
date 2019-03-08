@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Neembly.BOIDServer.WebAPI.Models.Configs
+﻿namespace Neembly.BOIDServer.WebAPI.Models.Configs
 {
     public class AuthClientResources
     {
