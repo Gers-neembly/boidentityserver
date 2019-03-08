@@ -1,7 +1,7 @@
 ﻿using Neembly.BOIDServer.SharedClasses;
 using System.Collections.Generic;
 
-namespace Neembly.BOIDServer.WebAPI.Models.DTO
+namespace Neembly.BOIDServer.WebAPI.Models.DTO.Inputs
 {
     public class RegisterDTO
     {

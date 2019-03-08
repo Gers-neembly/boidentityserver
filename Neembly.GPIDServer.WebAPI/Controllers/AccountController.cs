@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
 using Neembly.BOIDServer.SharedServices.Interfaces;
-using Neembly.BOIDServer.WebAPI.Models.DTO;
+using Neembly.BOIDServer.WebAPI.Models.DTO.Inputs;
 
 namespace Neembly.BOIDServer.WebAPI.Controllers
 {
@@ -68,9 +69,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerInfo)
         {
             if (registerInfo.Password != registerInfo.ConfirmPassword)
-            {
-                return NotFound("Passwords do not matched.");
-            }
+                return NotFound(GlobalConstants.ErrPasswordsMismatch);
 
             AppUser boUser = _dataAccess.GetAppUser(registerInfo.Email, registerInfo.UserName);
             string userId = string.Empty;
@@ -85,7 +84,8 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                                        };
                 var result = await _userManager.CreateAsync(user, registerInfo.Password);
                 if (!result.Succeeded)
-                    return NotFound("Registration failed.");
+                    return NotFound(GlobalConstants.ErrCreateAccount);
+
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
