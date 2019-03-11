@@ -203,7 +203,7 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BackOfficeUserId");
+                    b.Property<int>("BackOfficeId");
 
                     b.Property<string>("NetUserId");
 

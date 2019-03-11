@@ -10,6 +10,6 @@ namespace Neembly.BOIDServer.Persistence.Entities
         public string Id { get; set; }
         public string NetUserId { get; set; }
         public int OperatorId { get; set; }
-        public string BackOfficeUserId { get; set; }
+        public int BackOfficeId { get; set; }
     }
 }

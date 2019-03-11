@@ -9,9 +9,9 @@ namespace Neembly.BOIDServer.Persistence.Interfaces
     {
         AppUser GetAppUser(string email, string username);
         bool UserOperatorExists(string email, string username, int operatorId);
-        Task<bool> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo BackOfficeUserInfo = null);
+        Task<int> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo boUserInfo = null);
         Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registerStatus);
-        Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo BackOfficeUserInfo);
+        Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo boUserInfo);
         IEnumerable<int> GetOperatorAssignments(string netUserId);
     }
 }

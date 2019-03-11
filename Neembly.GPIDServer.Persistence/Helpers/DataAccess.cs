@@ -1,4 +1,5 @@
-﻿using Neembly.BOIDServer.Persistence.Entities;
+﻿using Neembly.BOIDServer.Constants;
+using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
 using System;
@@ -17,27 +18,17 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             _appDBContext = appDBContext;
         }
 
-        public async Task<bool> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo BackOfficeUserInfo = null)
+        public async Task<int> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo boUserInfo = null)
         {
-            // check and add backoffice user profile
-            var boUserProfile = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (boUserProfile == null)
-            {
-                _appDBContext.BackOfficeUsers.Add(new BackOfficeUser
-                {
-                    NetUserId = boUserId,
-                    FirstName = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.FirstName,
-                    LastName = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.LastName,
-                    MobilePrefix = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.MobilePrefix,
-                    MobileNo = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.MobileNo,
-                });
-            }
+            int resultBackOfficeId = 0;
 
-            // check and add backoffice user operatorId assignments
             OperatorAssignment boOperator = CheckOperatorAssignment(boUserId, operatorId);
-            if (boOperator == null)
+
+            if (boOperator != null)
+                resultBackOfficeId = boOperator.BackOfficeId;
+            else
             {
-                long tagId = 1;
+                long tagId = GlobalConstants.PlayerIdTagStarts;
                 var operatorRecord = _appDBContext.OperatorData.Where(r => r.OperatorId == operatorId).FirstOrDefault();
                 if (operatorRecord == null)
                     _appDBContext.OperatorData.Add(new OperatorData { OperatorId = operatorId, TagId = 1 });
@@ -45,11 +36,28 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                 {
                     tagId = operatorRecord.TagId + 1;
                     operatorRecord.TagId = tagId;
+                    _appDBContext.Update(operatorRecord);
                 }
-                string tagFormatted = $"{operatorId}-{tagId:D8}";
-                _appDBContext.OperatorAssignments.Add(new OperatorAssignment { NetUserId = boUserId, OperatorId = operatorId, BackOfficeUserId = tagFormatted });
+                _appDBContext.OperatorAssignments.Add(new OperatorAssignment { NetUserId = boUserId, OperatorId = operatorId, BackOfficeId = (int) tagId});
+                resultBackOfficeId = (int) tagId;
             };
-            return (await _appDBContext.SaveChangesAsync() > 0);
+
+            var boUserProfile = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+
+            if (boUserProfile == null)
+            {
+                _appDBContext.BackOfficeUsers.Add(new BackOfficeUser
+                {
+                    NetUserId = boUserId,
+                    FirstName = boUserInfo == null ? string.Empty : boUserInfo.FirstName,
+                    LastName = boUserInfo == null ? string.Empty : boUserInfo.LastName,
+                    MobilePrefix = boUserInfo == null ? string.Empty : boUserInfo.MobilePrefix,
+                    MobileNo = boUserInfo == null ? string.Empty : boUserInfo.MobileNo,
+                });
+            }
+
+            await _appDBContext.SaveChangesAsync();
+            return (resultBackOfficeId);
         }
 
         public AppUser GetAppUser(string email, string username)
@@ -73,15 +81,15 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             }
         }
 
-        public async Task<bool> ProfileRequestChange(string boUserId, BackOfficeUserInfo BackOfficeUserInfo)
+        public async Task<bool> ProfileRequestChange(string boUserId, BackOfficeUserInfo boUserInfo)
         {
             var boUser = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
             if (boUser == null)
                 return false;
-            boUser.FirstName = BackOfficeUserInfo.FirstName;
-            boUser.LastName = BackOfficeUserInfo.LastName;
-            boUser.MobilePrefix = BackOfficeUserInfo.MobilePrefix;
-            boUser.MobileNo = BackOfficeUserInfo.MobileNo;
+            boUser.FirstName = boUserInfo.FirstName;
+            boUser.LastName = boUserInfo.LastName;
+            boUser.MobilePrefix = boUserInfo.MobilePrefix;
+            boUser.MobileNo = boUserInfo.MobileNo;
             return (await _appDBContext.SaveChangesAsync() > 0);
         }
 

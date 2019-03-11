@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Neembly.BOIDServer.Persistence.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20190307105105_initial_boidserver")]
-    partial class initial_boidserver
+    [Migration("20190311085654_initial_boidentity")]
+    partial class initial_boidentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,7 +205,7 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BackOfficeUserId");
+                    b.Property<int>("BackOfficeId");
 
                     b.Property<string>("NetUserId");
 

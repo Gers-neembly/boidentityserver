@@ -21,5 +21,9 @@
         public const string ApiScope = "Neembly.GP.Web.PlayerPortalApi";
         #endregion
 
+        #region Operator Tag Ids
+        public const int PlayerIdTagStarts = 10000;
+        #endregion
+
     }
 }

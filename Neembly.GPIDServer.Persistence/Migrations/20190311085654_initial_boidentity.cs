@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Neembly.BOIDServer.Persistence.Migrations
 {
-    public partial class initial_boidserver : Migration
+    public partial class initial_boidentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,7 +71,7 @@ namespace Neembly.BOIDServer.Persistence.Migrations
                     Id = table.Column<string>(nullable: false),
                     NetUserId = table.Column<string>(nullable: true),
                     OperatorId = table.Column<int>(nullable: false),
-                    BackOfficeUserId = table.Column<string>(nullable: true)
+                    BackOfficeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

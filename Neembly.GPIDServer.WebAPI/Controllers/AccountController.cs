@@ -68,6 +68,8 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerInfo)
         {
+            AppUser user = null;
+
             if (registerInfo.Password != registerInfo.ConfirmPassword)
                 return NotFound(GlobalConstants.ErrPasswordsMismatch);
 
@@ -81,7 +83,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 userId = boUser.Id;
             else
             {
-                var user = new AppUser { UserName = registerInfo.UserName, Email = registerInfo.Email,
+                user = new AppUser { UserName = registerInfo.UserName, Email = registerInfo.Email,
                                          DisplayUsername = registerInfo.UserName,
                                          RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Registered)
                                        };
@@ -92,6 +94,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", registerInfo.OperatorId.ToString()));
 
                 if (registerInfo.Roles != null)
                 {
@@ -101,7 +104,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 userId = user.Id;
             }
 
-            await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
+            int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
+            if (user != null) 
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
 
             return Ok();
         }
