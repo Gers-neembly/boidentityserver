@@ -71,6 +71,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             if (registerInfo.Password != registerInfo.ConfirmPassword)
                 return NotFound(GlobalConstants.ErrPasswordsMismatch);
 
+            if (_dataAccess.UserOperatorExists(registerInfo.Email, registerInfo.UserName, registerInfo.OperatorId))
+                return NotFound(GlobalConstants.ErrExistingAccount);
+
             AppUser boUser = _dataAccess.GetAppUser(registerInfo.Email, registerInfo.UserName);
             string userId = string.Empty;
 

@@ -91,6 +91,13 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                                                           .Select(s => s.OperatorId).ToList();
         }
 
+        public bool UserOperatorExists(string email, string username, int operatorId)
+        {
+            var appUser = _appDBContext.Users.Where(r => r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)
+                                                          || r.Email.ToLower() == email.ToLower()).FirstOrDefault();
+            return (appUser == null) ? false : CheckOperatorAssignment(appUser.Id, operatorId) != null;
+        }
+
         #region Private Methods
         private OperatorAssignment CheckOperatorAssignment(string netUserId, int operatorId)
         {
