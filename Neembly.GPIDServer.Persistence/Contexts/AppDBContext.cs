@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Neembly.BOIDServer.Persistence.Entities;
 
-namespace Neembly.BOIDServer.Persistence
+namespace Neembly.BOIDServer.Persistence.Contexts
 {
     public class AppDBContext : IdentityDbContext<AppUser>
     {
