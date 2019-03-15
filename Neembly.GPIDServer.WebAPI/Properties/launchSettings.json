@@ -14,10 +14,10 @@
       "launchBrowser": true,
       "launchUrl": "api/version",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Local"
       }
     },
-    "Neembly.GPIDServer.WebAPI": {
+    "Neembly.BOIDServer.WebAPI": {
       "commandName": "Project",
       "launchUrl": "api/version",
       "environmentVariables": {

@@ -1,6 +1,6 @@
-﻿using Neembly.GPIDServer.SharedClasses;
+﻿using Neembly.BOIDServer.SharedClasses;
 
-namespace Neembly.GPIDServer.WebAPI.Models.DTO
+namespace Neembly.BOIDServer.WebAPI.Models.DTO.Inputs
 {
     public class ProfileUpdateDTO
     {

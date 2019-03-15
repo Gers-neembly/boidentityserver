@@ -2,10 +2,10 @@
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Neembly.GPIDServer.SharedClasses;
-using Neembly.GPIDServer.SharedServices.Interfaces;
+using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedServices.Interfaces;
 
-namespace Neembly.GPIDServer.SharedServices.Helpers
+namespace Neembly.BOIDServer.SharedServices.Helpers
 {
     public class EmailDispatcher : IEmailDispatcher
     {
@@ -27,7 +27,7 @@ namespace Neembly.GPIDServer.SharedServices.Helpers
 
         public async Task SendActivationLink(string emailLink, string name, string toEmail)
         {
-            string emailBody = $"<html><body><h2>Hi {name},</h2><h1>Thank you for your registration</h1><a href = {emailLink}>Please Click to confirm your gaming account</a></body></html>";
+            string emailBody = $"<html><body><h2>Hi {name},</h2><h1>Thank you for your registration</h1><a href = {emailLink}>Please Click to activate your access to management page</a></body></html>";
              EmailInfo emailInfo = new EmailInfo
             {
                 From = "info@neembly.com",

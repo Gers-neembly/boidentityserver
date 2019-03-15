@@ -5,25 +5,32 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Neembly.GPIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Interfaces;
 using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Neembly.GPIDServer.WebAPI.Services
+namespace Neembly.BOIDServer.WebAPI.Services
 {
     public class IdentityClaimsProfileService : IProfileService
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserClaimsPrincipalFactory<AppUser> _claimsFactory;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IDataAccess _dataAccess;
 
-        public IdentityClaimsProfileService(UserManager<AppUser> userManager, IUserClaimsPrincipalFactory<AppUser> claimsFactory, IHostingEnvironment hostingEnvironment)
+        public IdentityClaimsProfileService(
+            UserManager<AppUser> userManager, 
+            IUserClaimsPrincipalFactory<AppUser> claimsFactory, 
+            IHostingEnvironment hostingEnvironment,
+            IDataAccess dataAccess)
         {
             _userManager = userManager;
             _claimsFactory = claimsFactory;
             _hostingEnvironment = hostingEnvironment;
+            _dataAccess = dataAccess;
         }
 
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
@@ -33,21 +40,18 @@ namespace Neembly.GPIDServer.WebAPI.Services
             var principal = await _claimsFactory.CreateAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
             var claims = principal.Claims.ToList();
+            var operatorList = _dataAccess.GetOperatorAssignments(user.Id);
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            claims.Add(new Claim("operatorId", user.OperatorId));
-            claims.Add(new Claim("backofficeuserId", user.BackOfficeUserId));
+            claims.Add(new Claim("email", user.Email));
+            claims.Add(new Claim("username", user.UserName));
             claims.Add(new Claim("registrationStatus", user.RegistrationStatus));
 
-            if (_hostingEnvironment.IsDevelopment() || _hostingEnvironment.EnvironmentName.ToLower() == "local")
-            {
-                claims.Add(new Claim("email-debugonly", user.Email));
-                claims.Add(new Claim("username-debugonly", user.UserName));
-            }
+            int index = 1;
+            foreach(var itemOperator in operatorList)
+                claims.Add(new Claim($"operator[{index++}]", itemOperator.ToString()));
 
             foreach (string role in roles)
-            {
                 claims.Add(new Claim(JwtClaimTypes.Role, role));
-            }
 
             context.IssuedClaims = claims;
         }

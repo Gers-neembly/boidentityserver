@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neembly.GPIDServer.Constants\Neembly.GPIDServer.Constants.csproj" />
-    <ProjectReference Include="..\Neembly.GPIDServer.SharedClasses\Neembly.GPIDServer.SharedClasses.csproj" />
+    <ProjectReference Include="..\Neembly.GPIDServer.SharedClasses\Neembly.BOIDServer.SharedClasses.csproj" />
   </ItemGroup>
 
 </Project>

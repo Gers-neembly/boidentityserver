@@ -8,17 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Neembly.GPIDServer.Persistence;
-using Neembly.GPIDServer.Persistence.Entities;
-using Neembly.GPIDServer.Persistence.Helpers;
-using Neembly.GPIDServer.Persistence.Interfaces;
-using Neembly.GPIDServer.SharedServices.Helpers;
-using Neembly.GPIDServer.SharedServices.Interfaces;
-using Neembly.GPIDServer.WebAPI.Filters;
-using Neembly.GPIDServer.WebAPI.Services;
+using Neembly.BOIDServer.Persistence;
+using Neembly.BOIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Helpers;
+using Neembly.BOIDServer.Persistence.Interfaces;
+using Neembly.BOIDServer.SharedServices.Helpers;
+using Neembly.BOIDServer.SharedServices.Interfaces;
+using Neembly.BOIDServer.WebAPI.Filters;
+using Neembly.BOIDServer.WebAPI.Models.Configs;
+using Neembly.BOIDServer.WebAPI.Services;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Neembly.GPIDServer.WebAPI
+namespace Neembly.BOIDServer.WebAPI
 {
     public class Startup
     {
@@ -49,16 +50,20 @@ namespace Neembly.GPIDServer.WebAPI
                     .AddEntityFrameworkStores<AppDBContext>()
                     .AddDefaultTokenProviders();
 
+            var authClientConfig = new AuthClientConfiguration();
+            Configuration.Bind("AuthClientConfiguration", authClientConfig);
+            services.AddSingleton(authClientConfig);
+
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
                     .AddInMemoryPersistedGrants()
                     .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                    .AddInMemoryApiResources(Config.GetApiResources())
-                    .AddInMemoryClients(Config.GetClients())
+                    .AddInMemoryApiResources(Config.GetApiResources(authClientConfig.AuthClientResourcesList))
+                    .AddInMemoryClients(Config.GetClients(authClientConfig.AuthClientInfoList))
                     .AddAspNetIdentity<AppUser>();
 
             services.Configure<IdentityOptions>(o => {
-                o.SignIn.RequireConfirmedEmail = true;
+                o.SignIn.RequireConfirmedEmail = false;
             });
 
             // dependency injections

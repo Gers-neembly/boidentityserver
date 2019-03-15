@@ -1,12 +1,11 @@
-﻿using Neembly.GPIDServer.SharedClasses;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Neembly.GPIDServer.Persistence.Entities
+namespace Neembly.BOIDServer.Persistence.Entities
 {
     public class BackOfficeUser
     {
         [Key]
-        public string BackOfficeUserId { get; set; }
+        public string NetUserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MobilePrefix { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Neembly.GPIDServer.SharedClasses
+﻿namespace Neembly.BOIDServer.SharedClasses
 {
     public class BackOfficeUserRegisterInfo
     {

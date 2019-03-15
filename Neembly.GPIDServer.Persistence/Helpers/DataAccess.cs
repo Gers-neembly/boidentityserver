@@ -1,11 +1,13 @@
-﻿using Neembly.GPIDServer.Persistence.Entities;
-using Neembly.GPIDServer.Persistence.Interfaces;
-using Neembly.GPIDServer.SharedClasses;
+﻿using Neembly.BOIDServer.Constants;
+using Neembly.BOIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Interfaces;
+using Neembly.BOIDServer.SharedClasses;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Neembly.GPIDServer.Persistence.Helpers
+namespace Neembly.BOIDServer.Persistence.Helpers
 {
     public class DataAccess : IDataAccess
     {
@@ -16,77 +18,100 @@ namespace Neembly.GPIDServer.Persistence.Helpers
             _appDBContext = appDBContext;
         }
 
-        public async Task<string> CreateBackOfficeUserById(string userId, string operatorId, BackOfficeUserInfo BackOfficeUserInfo = null)
+        public async Task<int> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo boUserInfo = null)
         {
-            var BackOfficeUser = _appDBContext.Users.Where(r => r.Id.Equals(userId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (BackOfficeUser == null)
-                return string.Empty;
-            long tagId = 1;
-            var operatorRecord = _appDBContext.OperatorData.Where(r => r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (operatorRecord == null)
-            {
-                _appDBContext.OperatorData.Add(new OperatorData { OperatorId = operatorId, TagId = 1 });
-            }
+            int resultBackOfficeId = 0;
+
+            OperatorAssignment boOperator = CheckOperatorAssignment(boUserId, operatorId);
+
+            if (boOperator != null)
+                resultBackOfficeId = boOperator.BackOfficeId;
             else
             {
-                tagId = operatorRecord.TagId + 1;
-                operatorRecord.TagId = tagId;
+                long tagId = GlobalConstants.PlayerIdTagStarts;
+                var operatorRecord = _appDBContext.OperatorData.Where(r => r.OperatorId == operatorId).FirstOrDefault();
+                if (operatorRecord == null)
+                    _appDBContext.OperatorData.Add(new OperatorData { OperatorId = operatorId, TagId = 1 });
+                else
+                {
+                    tagId = operatorRecord.TagId + 1;
+                    operatorRecord.TagId = tagId;
+                    _appDBContext.Update(operatorRecord);
+                }
+                _appDBContext.OperatorAssignments.Add(new OperatorAssignment { NetUserId = boUserId, OperatorId = operatorId, BackOfficeId = (int) tagId});
+                resultBackOfficeId = (int) tagId;
+            };
+
+            var boUserProfile = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+
+            if (boUserProfile == null)
+            {
+                _appDBContext.BackOfficeUsers.Add(new BackOfficeUser
+                {
+                    NetUserId = boUserId,
+                    FirstName = boUserInfo == null ? string.Empty : boUserInfo.FirstName,
+                    LastName = boUserInfo == null ? string.Empty : boUserInfo.LastName,
+                    MobilePrefix = boUserInfo == null ? string.Empty : boUserInfo.MobilePrefix,
+                    MobileNo = boUserInfo == null ? string.Empty : boUserInfo.MobileNo,
+                });
             }
 
-            string tagFormatted = $"{operatorId}-{tagId:D8}";
-
-            _appDBContext.BackOfficeUsers.Add(new BackOfficeUser
-            { BackOfficeUserId = tagFormatted,
-              FirstName = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.FirstName,
-              LastName = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.LastName,
-              MobilePrefix = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.MobilePrefix,
-              MobileNo = BackOfficeUserInfo == null ? string.Empty : BackOfficeUserInfo.MobileNo,
-            });
-            BackOfficeUser.BackOfficeUserId = tagFormatted;
-
             await _appDBContext.SaveChangesAsync();
-            return tagFormatted;
+            return (resultBackOfficeId);
         }
 
-        public AppUser GetAppUser(string email, string username, string operatorId)
+        public AppUser GetAppUser(string email, string username)
         {
-            var BackOfficeUserInfo =  _appDBContext.Users.Where(r => r.Email.ToLower() == email.ToLower()
-                                                            && r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (BackOfficeUserInfo != null)
-              return BackOfficeUserInfo;
-
-            BackOfficeUserInfo = _appDBContext.Users.Where(r => r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)
-                                                        && r.OperatorId.Equals(operatorId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            return BackOfficeUserInfo;
+            return _appDBContext.Users.Where(r => r.Email.ToLower() == email.ToLower()
+                                             && r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
         }
 
         public async Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registerStatus)
         {
-            var BackOfficeUserInfo = await _appDBContext.Users.FindAsync(userId);
-            if (BackOfficeUserInfo == null)
+            var boUser = await _appDBContext.Users.FindAsync(userId);
+            if (boUser == null)
                 return false;
             string strStatus = Enum.GetName(typeof(RegistrationStatusNames), registerStatus);
-            if (BackOfficeUserInfo.RegistrationStatus.Equals(strStatus, StringComparison.InvariantCultureIgnoreCase))
+            if (boUser.RegistrationStatus.Equals(strStatus, StringComparison.InvariantCultureIgnoreCase))
                 return true;
             else
             {
-                BackOfficeUserInfo.RegistrationStatus = strStatus;
+                boUser.RegistrationStatus = strStatus;
                 return (await _appDBContext.SaveChangesAsync() > 0);
             }
         }
 
-        public async Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo BackOfficeUserInfo)
+        public async Task<bool> ProfileRequestChange(string boUserId, BackOfficeUserInfo boUserInfo)
         {
-            var BackOfficeUserRecord = _appDBContext.BackOfficeUsers.Where(r => r.BackOfficeUserId.Equals(BackOfficeUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (BackOfficeUserRecord == null)
+            var boUser = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            if (boUser == null)
                 return false;
-            BackOfficeUserRecord.FirstName = BackOfficeUserInfo.FirstName;
-            BackOfficeUserRecord.LastName = BackOfficeUserInfo.LastName;
-            BackOfficeUserRecord.MobilePrefix = BackOfficeUserInfo.MobilePrefix;
-            BackOfficeUserRecord.MobileNo = BackOfficeUserInfo.MobileNo;
+            boUser.FirstName = boUserInfo.FirstName;
+            boUser.LastName = boUserInfo.LastName;
+            boUser.MobilePrefix = boUserInfo.MobilePrefix;
+            boUser.MobileNo = boUserInfo.MobileNo;
             return (await _appDBContext.SaveChangesAsync() > 0);
         }
 
+        public IEnumerable<int> GetOperatorAssignments(string netUserId)
+        {
+            return _appDBContext.OperatorAssignments.Where(r => r.NetUserId.Equals(netUserId, StringComparison.InvariantCultureIgnoreCase))
+                                                          .Select(s => s.OperatorId).ToList();
+        }
 
+        public bool UserOperatorExists(string email, string username, int operatorId)
+        {
+            var appUser = _appDBContext.Users.Where(r => r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)
+                                                          || r.Email.ToLower() == email.ToLower()).FirstOrDefault();
+            return (appUser == null) ? false : CheckOperatorAssignment(appUser.Id, operatorId) != null;
+        }
+
+        #region Private Methods
+        private OperatorAssignment CheckOperatorAssignment(string netUserId, int operatorId)
+        {
+            return _appDBContext.OperatorAssignments.Where(r => r.NetUserId.Equals(netUserId, StringComparison.InvariantCultureIgnoreCase)
+                                                    && r.OperatorId == operatorId).FirstOrDefault();
+        }
+        #endregion
     }
 }

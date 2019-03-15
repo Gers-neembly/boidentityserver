@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Neembly.GPIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Entities;
 
-namespace Neembly.GPIDServer.Persistence
+namespace Neembly.BOIDServer.Persistence
 {
     public class AppDBContext : IdentityDbContext<AppUser>
     {
@@ -11,6 +11,7 @@ namespace Neembly.GPIDServer.Persistence
         }
         public DbSet<BackOfficeUser> BackOfficeUsers { get; set; }
         public DbSet<OperatorData> OperatorData { get; set; }
+        public DbSet<OperatorAssignment> OperatorAssignments { get; set; }
 
     }
 }

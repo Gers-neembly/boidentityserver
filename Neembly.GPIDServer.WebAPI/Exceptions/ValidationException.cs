@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Neembly.GPIDServer.WebAPI.Exceptions
+namespace Neembly.BOIDServer.WebAPI.Exceptions
 {
     public class ValidationException : Exception
     {
