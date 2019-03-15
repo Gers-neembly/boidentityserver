@@ -69,6 +69,7 @@ namespace Neembly.BOIDServer.WebAPI
             services.AddScoped<IEmailDispatcher, EmailDispatcher>();
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
 
+
             services.AddCors();
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
