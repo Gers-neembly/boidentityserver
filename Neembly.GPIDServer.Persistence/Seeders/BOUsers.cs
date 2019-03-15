@@ -18,7 +18,7 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         private const int operatorId0 = 200;
         private const int operatorId1 = 300;
         private const int operatorId2 = 350;
-        private const string UserDev1 = "jc";
+        private const string UserDev1 = "rea";
         private const string UserDev2 = "mel";
         private const string UserTag1 = "bouserA";
         private const string UserTag2 = "bouserB";
