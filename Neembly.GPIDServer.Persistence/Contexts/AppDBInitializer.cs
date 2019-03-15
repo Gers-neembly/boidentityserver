@@ -15,11 +15,9 @@ namespace Neembly.BOIDServer.Persistence.Contexts
         {
             var context = serviceProvider.GetRequiredService<AppDBContext>();
             var dataAccess = serviceProvider.GetRequiredService<IDataAccess>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             context.Database.EnsureCreated();
-            BOUsers.SeedUserData(dataAccess, userManager, roleManager);
+            BOUsers.SeedUserData(context, dataAccess);
         }
 
     }

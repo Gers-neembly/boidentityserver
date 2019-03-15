@@ -18,10 +18,10 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         private const int operatorId0 = 200;
         private const int operatorId1 = 300;
         private const int operatorId2 = 350;
-        private const string UserTag1 = "bouserA";
-        private const string UserTag2 = "bouserB";
-        private const string UserRole1 = "testerA";
-        private const string UserRole2 = "testerB";
+        private const string UserTag1 = "bouser1";
+        private const string UserTag2 = "bouser2";
+        private const string UserRole1 = "tester1";
+        private const string UserRole2 = "tester2";
         #endregion
 
         #region Data Definitions
@@ -39,35 +39,42 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         #endregion
 
         #region Seeder Methods
-        public static async void SeedUserData(IDataAccess dataAccess, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async void SeedUserData(AppDBContext context, IDataAccess dataAccess)
         {
-            foreach (var regUser in registerUserAccount)
+            foreach(var regUser in registerUserAccount)
             {
-
-                if (userManager.FindByNameAsync(regUser.Username).Result == null)
+                var user = new AppUser
                 {
-                    var user = new AppUser
-                    {
-                        UserName = regUser.Username,
-                        Email = regUser.Email,
-                        DisplayUsername = regUser.Username,
-                        RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Registered),
-                    };
+                    UserName = regUser.Username,
+                    Email = regUser.Email,
+                    NormalizedUserName = regUser.Username,
+                    NormalizedEmail = regUser.Email,
+                    EmailConfirmed = false,
+                    LockoutEnabled = false,
+                    DisplayUsername = regUser.Username,
+                    RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Registered),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
 
-                    IdentityResult idResult = await userManager.CreateAsync(user, regUser.Password);
+                var roleStore = new RoleStore<IdentityRole>(context);
 
-                    if (idResult.Succeeded)
-                    {
-                        await dataAccess.CreateBackOfficeUserById(user.Id, regUser.OperatorId);
-                        var roleCheck = await roleManager.RoleExistsAsync(regUser.Role);
-                        if (!roleCheck)
-                            await roleManager.CreateAsync(new IdentityRole(regUser.Role));
-                        await userManager.AddToRoleAsync(user, regUser.Role);
-                    }
-
+                if (!context.Roles.Any(r => r.Name == regUser.Role))
+                {
+                    await roleStore.CreateAsync(new IdentityRole { Name = regUser.Role, NormalizedName = regUser.Role });
                 }
 
+                if (!context.Users.Any(r => r.UserName == regUser.Username))
+                {
+                    var password = new PasswordHasher<AppUser>();
+                    var hashed = password.HashPassword(user, regUser.Password);
+                    user.PasswordHash = hashed;
+                    var userStore = new UserStore<AppUser>(context);
+                    await userStore.CreateAsync(user);
+                    await userStore.AddToRoleAsync(user, regUser.Role);
+                    await dataAccess.CreateBackOfficeUserById(user.Id, regUser.OperatorId);
+                }
             }
+            await context.SaveChangesAsync();
         }
         #endregion
 
