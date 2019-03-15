@@ -32,8 +32,8 @@ namespace Neembly.BOIDServer.Persistence.Seeders
 
         private static readonly IList<RegisterUser> registerUserAccount = new List<RegisterUser>
         {
-            { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = DevUser1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
-            { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = DevUser2+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
+            { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserDev1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
+            { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserDev2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
             { new RegisterUser{Email = UserTag1+operatorId0+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId0, OperatorId = operatorId0, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
