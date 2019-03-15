@@ -2,7 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Neembly.BOIDServer.Persistence.Contexts;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Neembly.BOIDServer.Persistence;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Neembly.BOIDServer.Persistence.Migrations
