@@ -41,7 +41,6 @@ namespace Neembly.BOIDServer.Persistence.Seeders
             { new RegisterUser{Email = UserTag2+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserTag2+operatorId1, OperatorId = operatorId1, Role = UserRole2} },
             { new RegisterUser{Email = UserTag2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserTag2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
         };
-
         #endregion
 
         #region Seeder Methods
