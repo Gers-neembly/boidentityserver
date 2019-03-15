@@ -18,6 +18,8 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         private const int operatorId0 = 200;
         private const int operatorId1 = 300;
         private const int operatorId2 = 350;
+        private const string UserDev1 = "jc";
+        private const string UserDev2 = "mel";
         private const string UserTag1 = "bouserA";
         private const string UserTag2 = "bouserB";
         private const string UserRole1 = "testerA";
@@ -30,6 +32,8 @@ namespace Neembly.BOIDServer.Persistence.Seeders
 
         private static readonly IList<RegisterUser> registerUserAccount = new List<RegisterUser>
         {
+            { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = DevUser1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
+            { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = DevUser2+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId0+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId0, OperatorId = operatorId0, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
@@ -57,7 +61,6 @@ namespace Neembly.BOIDServer.Persistence.Seeders
                     };
 
                     IdentityResult idResult = await userManager.CreateAsync(user, regUser.Password);
-
                     if (idResult.Succeeded)
                     {
                         await dataAccess.CreateBackOfficeUserById(user.Id, regUser.OperatorId);
