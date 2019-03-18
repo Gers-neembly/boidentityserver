@@ -1,6 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
 using IdentityServer4.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Neembly.BOIDServer.Persistence;
+using Neembly.BOIDServer.Persistence.Contexts;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Helpers;
 using Neembly.BOIDServer.Persistence.Interfaces;
@@ -17,7 +16,6 @@ using Neembly.BOIDServer.SharedServices.Interfaces;
 using Neembly.BOIDServer.WebAPI.Filters;
 using Neembly.BOIDServer.WebAPI.Models.Configs;
 using Neembly.BOIDServer.WebAPI.Services;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace Neembly.BOIDServer.WebAPI
 {
@@ -71,6 +69,7 @@ namespace Neembly.BOIDServer.WebAPI
             services.AddScoped<IEmailDispatcher, EmailDispatcher>();
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
 
+
             services.AddCors();
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
@@ -96,6 +95,8 @@ namespace Neembly.BOIDServer.WebAPI
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            AppDBInitializer.Seeder(app.ApplicationServices, env);
 
             app.UseIdentityServer();
             app.UseHttpsRedirection();

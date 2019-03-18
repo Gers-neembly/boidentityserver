@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 
-namespace Neembly.BOIDServer.Persistence
+namespace Neembly.BOIDServer.Persistence.Contexts
 {
     class PPDbContextDesignTimeFactory : IDesignTimeDbContextFactory<AppDBContext>
     {
