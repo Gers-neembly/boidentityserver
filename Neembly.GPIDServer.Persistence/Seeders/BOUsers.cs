@@ -18,23 +18,29 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         private const int operatorId0 = 200;
         private const int operatorId1 = 300;
         private const int operatorId2 = 350;
+
         private const string UserDev1 = "rea";
         private const string UserDev2 = "mel";
+        private const string UserDev3 = "dev";
+
+        private const string UserQa1 = "ralph";
+        private const string UserQa2 = "rob";
+        private const string UserQa3 = "qa";
+
         private const string UserTag1 = "bouserA";
         private const string UserTag2 = "bouserB";
+
         private const string UserRole1 = "testerA";
         private const string UserRole2 = "testerB";
+
         private const string UserEmailTag = "@gmail.com";
         private const string UserDefaultPassword = "password";
+
         #endregion
 
-        #region Data Definitions
-
-        private static readonly IList<RegisterUser> registerUserAccount = new List<RegisterUser>
+        #region Local Data Definitions
+        private static readonly IList<RegisterUser> localUserAccount = new List<RegisterUser>
         {
-            { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserDev1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
-            { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserDev2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
-            { new RegisterUser{Email = UserTag1+operatorId0+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId0, OperatorId = operatorId0, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
             { new RegisterUser{Email = UserTag2+operatorId0+UserEmailTag, Password = UserDefaultPassword, Username = UserTag2+operatorId0, OperatorId = operatorId0, Role = UserRole2} },
@@ -43,12 +49,44 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         };
         #endregion
 
-        #region Seeder Methods
-        public static async void SeedUserData(IDataAccess dataAccess, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        #region Dev Data Definitions
+        private static readonly IList<RegisterUser> devUserAccount = new List<RegisterUser>
         {
+            { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserDev1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
+            { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserDev2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
+            { new RegisterUser{Email = UserDev3+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserDev3+operatorId2, OperatorId = operatorId0, Role = UserRole1} },
+        };
+        #endregion
+
+        #region QA Data Definitions
+        private static readonly IList<RegisterUser> qaUserAccount = new List<RegisterUser>
+        {
+            { new RegisterUser{Email = UserQa1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserQa1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
+            { new RegisterUser{Email = UserQa2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserQa2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
+            { new RegisterUser{Email = UserQa3+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserQa3+operatorId2, OperatorId = operatorId0, Role = UserRole1} },
+        };
+        #endregion
+
+        #region Seeder Methods
+        public static async void SeedUserData(IDataAccess dataAccess, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, string environment)
+        {
+            IList<RegisterUser> registerUserAccount = null;
+
+            if (environment.Equals("Local", StringComparison.InvariantCultureIgnoreCase))
+            {
+                registerUserAccount = localUserAccount;
+            }
+            else if (environment.Equals("Development", StringComparison.InvariantCultureIgnoreCase))
+            {
+                registerUserAccount = devUserAccount;
+            }
+            else if (environment.Equals("Staging", StringComparison.InvariantCultureIgnoreCase))
+            {
+                registerUserAccount = qaUserAccount;
+            }
+
             foreach (var regUser in registerUserAccount)
             {
-
                 if (userManager.FindByNameAsync(regUser.Username).Result == null)
                 {
                     var user = new AppUser
