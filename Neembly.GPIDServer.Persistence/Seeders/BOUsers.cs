@@ -39,7 +39,7 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         #endregion
 
         #region Local Data Definitions
-        private static readonly IList<RegisterUser> localUserAccount = new List<RegisterUser>
+        private static readonly List<RegisterUser> localUserAccount = new List<RegisterUser>
         {
             { new RegisterUser{Email = UserTag1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserTag1+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserTag1+operatorId2, OperatorId = operatorId2, Role = UserRole1} },
@@ -50,7 +50,7 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         #endregion
 
         #region Dev Data Definitions
-        private static readonly IList<RegisterUser> devUserAccount = new List<RegisterUser>
+        private static readonly List<RegisterUser> devUserAccount = new List<RegisterUser>
         {
             { new RegisterUser{Email = UserDev1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserDev1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserDev2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserDev2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
@@ -59,7 +59,7 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         #endregion
 
         #region QA Data Definitions
-        private static readonly IList<RegisterUser> qaUserAccount = new List<RegisterUser>
+        private static readonly List<RegisterUser> qaUserAccount = new List<RegisterUser>
         {
             { new RegisterUser{Email = UserQa1+operatorId1+UserEmailTag, Password = UserDefaultPassword, Username = UserQa1+operatorId1, OperatorId = operatorId1, Role = UserRole1} },
             { new RegisterUser{Email = UserQa2+operatorId2+UserEmailTag, Password = UserDefaultPassword, Username = UserQa2+operatorId2, OperatorId = operatorId2, Role = UserRole2} },
@@ -70,22 +70,16 @@ namespace Neembly.BOIDServer.Persistence.Seeders
         #region Seeder Methods
         public static async void SeedUserData(IDataAccess dataAccess, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, string environment)
         {
-            IList<RegisterUser> registerUserAccount = null;
-
-            if (environment.Equals("Local", StringComparison.InvariantCultureIgnoreCase))
+            if (environment.Equals("Development", StringComparison.InvariantCultureIgnoreCase))
             {
-                registerUserAccount = localUserAccount;
-            }
-            else if (environment.Equals("Development", StringComparison.InvariantCultureIgnoreCase))
-            {
-                registerUserAccount = devUserAccount;
+                localUserAccount.AddRange(devUserAccount);
             }
             else if (environment.Equals("Staging", StringComparison.InvariantCultureIgnoreCase))
             {
-                registerUserAccount = qaUserAccount;
+                localUserAccount.AddRange(qaUserAccount);
             }
 
-            foreach (var regUser in registerUserAccount)
+            foreach (var regUser in localUserAccount)
             {
                 if (userManager.FindByNameAsync(regUser.Username).Result == null)
                 {
