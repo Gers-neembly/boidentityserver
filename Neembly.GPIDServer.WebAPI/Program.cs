@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using NLog.Web;
 using Microsoft.Extensions.Logging;
+
+using NLog;
 
 namespace Neembly.BOIDServer.WebAPI
 {
@@ -14,7 +17,25 @@ namespace Neembly.BOIDServer.WebAPI
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            // NLog: setup the logger first to catch all errors
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog($"{Directory.GetCurrentDirectory()}//nlog.{environmentName}.config").GetCurrentClassLogger();
+            try
+            {
+                logger.Debug("init main");
+                CreateWebHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                //NLog: catch setup errors
+                logger.Error(ex, "Stopped program because of exception");
+                throw;
+            }
+            finally
+            {
+                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
+                NLog.LogManager.Shutdown();
+            }
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -27,8 +48,14 @@ namespace Neembly.BOIDServer.WebAPI
             return new WebHostBuilder()
                 .ConfigureAppConfiguration(ConfigConfiguration)
                 .UseConfiguration(config)
-                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                })
+                .UseNLog()
+                .UseKestrel()
                 .UseStartup<Startup>();
         }
 
