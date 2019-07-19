@@ -79,7 +79,8 @@ namespace Neembly.BOIDServer.Persistence.Seeders
             {
                 localUserAccount.AddRange(devUserAccount);
             }
-            else if (environment.Equals("Staging", StringComparison.InvariantCultureIgnoreCase))
+            else if (environment.Equals("Staging", StringComparison.InvariantCultureIgnoreCase) ||
+                environment.Equals("Sandbox", StringComparison.InvariantCultureIgnoreCase))
             {
                 localUserAccount.AddRange(qaUserAccount);
             }
