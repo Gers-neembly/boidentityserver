@@ -1,13 +1,4 @@
-{
-  "exclude": [
-    "**/bin",
-    "**/bower_components",
-    "**/jspm_packages",
-    "**/node_modules",
-    "**/obj",
-    "**/platforms"
-  ],
-  "menuItem": [
+[
     {
       "code": "DASHBOARD",
       "name": "Dashboard",
@@ -233,14 +224,6 @@
       "parentItemCode": "CASINO"
     },
     {
-      "code": "",
-      "name": "",
-      "order": "",
-      "isMenuItem": "",
-      "isMenuHeader": "",
-      "parentItemCode": ""
-    },
-    {
       "code": "FINANCIAL",
       "name": "Financial",
       "order": "3",
@@ -369,4 +352,3 @@
       "parentItemCode": "PLAYERMETHODSETTINGS"
     }
   ]
-}
