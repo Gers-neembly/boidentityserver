@@ -9,7 +9,7 @@ namespace Neembly.BOIDServer.WebAPI.Models.DTO.Inputs
         public ProfileUpdateDTOValidator()
         {
             RuleFor(x => x.BackOfficeUserId).NotNull().NotEmpty().WithMessage(GlobalConstants.ErrUserAccountNotExisting)
-                                            .Length(0, 25);
+                                            .Length(0, 36);
             RuleFor(x => x.BackOfficeUserInfo).NotNull();
         }
         #endregion
