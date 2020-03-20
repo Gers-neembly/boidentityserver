@@ -22,4 +22,11 @@ namespace Neembly.BOIDServer.SharedClasses
         Get = 3,
     }
 
+    public enum BOUserStatus
+    {
+        [Description("Active")]
+        Active = 1,
+        [Description("Inactive")]
+        Inactive = 2
+    }
 }
