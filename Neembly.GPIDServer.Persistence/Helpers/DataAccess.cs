@@ -39,8 +39,8 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     operatorRecord.TagId = tagId;
                     _appDBContext.Update(operatorRecord);
                 }
-                _appDBContext.OperatorAssignments.Add(new OperatorAssignment { NetUserId = boUserId, OperatorId = operatorId, BackOfficeId = (int) tagId});
-                resultBackOfficeId = (int) tagId;
+                _appDBContext.OperatorAssignments.Add(new OperatorAssignment { NetUserId = boUserId, OperatorId = operatorId, BackOfficeId = (int)tagId });
+                resultBackOfficeId = (int)tagId;
             };
 
             var boUserProfile = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(boUserId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
@@ -113,6 +113,30 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             return _appDBContext.OperatorAssignments.Where(r => r.NetUserId.Equals(netUserId, StringComparison.InvariantCultureIgnoreCase)
                                                     && r.OperatorId == operatorId).FirstOrDefault();
         }
+        #endregion
+
+        #region UAC Methods
+
+        public UserInfo GetUserInfo(string username)
+        {
+            var userInfo = _appDBContext.Users.Join(_appDBContext.BackOfficeUsers,
+                user => user.Id,
+                boinfo => boinfo.NetUserId,
+                (user, boinfo) => new UserInfo
+                {
+                    UserId = user.Id,
+                    Username = user.UserName,
+                    FirstName = boinfo.FirstName,
+                    LastName = boinfo.LastName,
+                    Email = user.Email,
+                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
+                })
+                .Where(r => r.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+
+            return userInfo;
+        }
+
+
         #endregion
     }
 }

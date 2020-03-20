@@ -13,5 +13,6 @@ namespace Neembly.BOIDServer.Persistence.Interfaces
         Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registerStatus);
         Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo boUserInfo);
         IEnumerable<int> GetOperatorAssignments(string netUserId);
+        UserInfo GetUserInfo(string username);
     }
 }

@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Neembly.BOIDServer.Constants;
+using Neembly.BOIDServer.Persistence.Entities;
+using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Neembly.BOIDServer.WebAPI.Controllers
 {
@@ -10,6 +15,22 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
     [ApiController]
     public class UACController : ControllerBase
     {
+        #region Member Variable
+        private readonly IDataAccess _dataAccess;
+        #endregion
+
+        #region Constructor
+        public UACController(
+            IDataAccess dataAccess
+            )
+        {
+            _dataAccess = dataAccess;
+        }
+        #endregion
+
+
+        #region READ
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -20,5 +41,18 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 return new JsonResult(menus);
             }
         }
+
+        [Route("user-profile")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserProfile(string username)
+        {
+            var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+            if (userInfo == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+
+            return Ok(userInfo);
+        }
+
+        #endregion
     }
 }
