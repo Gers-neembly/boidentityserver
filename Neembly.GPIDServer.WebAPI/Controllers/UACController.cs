@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
@@ -46,6 +47,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         public async Task<IActionResult> GetUserProfile(string username)
         {
             var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+            if (userInfo == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+
             return Ok(userInfo);
         }
 
