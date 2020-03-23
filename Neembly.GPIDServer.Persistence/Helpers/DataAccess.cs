@@ -149,7 +149,7 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     FirstName = boinfo.FirstName,
                     LastName = boinfo.LastName,
                     Email = user.Email,
-                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
+                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
                 }).ToList();
 
             return userlist;
