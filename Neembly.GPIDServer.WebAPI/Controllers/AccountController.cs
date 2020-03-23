@@ -85,7 +85,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             {
                 user = new AppUser { UserName = registerInfo.UserName, Email = registerInfo.Email,
                                          DisplayUsername = registerInfo.UserName,
-                                         RegistrationStatus = Enum.GetName(typeof(RegistrationStatusNames), RegistrationStatusNames.Registered)
+                                         RegistrationStatus = Enum.GetName(typeof(BOUserStatus), BOUserStatus.Active),
+                                         CreatedDate = DateTime.UtcNow,
+                                         ModifiedDate = DateTime.UtcNow
                                        };
                 var result = await _userManager.CreateAsync(user, registerInfo.Password);
                 if (!result.Succeeded)

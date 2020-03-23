@@ -129,7 +129,9 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     FirstName = boinfo.FirstName,
                     LastName = boinfo.LastName,
                     Email = user.Email,
-                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
+                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
+                    CreatedDate = user.CreatedDate,
+                    ModifiedDate = user.ModifiedDate
                 })
                 .Where(r => r.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 
@@ -149,7 +151,9 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     FirstName = boinfo.FirstName,
                     LastName = boinfo.LastName,
                     Email = user.Email,
-                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
+                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
+                    CreatedDate = user.CreatedDate,
+                    ModifiedDate = user.ModifiedDate
                 }).ToList();
 
             return userlist;
