@@ -53,6 +53,17 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             return Ok(userInfo);
         }
 
+        [Route("users")]
+        [HttpGet]
+        public async Task<IActionResult> GetBOUsers()
+        {
+            var users = await Task.Run(() => _dataAccess.GetUsers());
+            if (users == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+
+            return Ok(users);
+        }
+
         #endregion
     }
 }
