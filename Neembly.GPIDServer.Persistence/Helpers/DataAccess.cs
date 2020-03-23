@@ -139,7 +139,7 @@ namespace Neembly.BOIDServer.Persistence.Helpers
 
         public List<UserInfo> GetUsers()
         {
-            var userInfo = _appDBContext.Users.Join(_appDBContext.BackOfficeUsers,
+            var userlist = _appDBContext.Users.Join(_appDBContext.BackOfficeUsers,
                 user => user.Id,
                 boinfo => boinfo.NetUserId,
                 (user, boinfo) => new UserInfo
@@ -152,7 +152,7 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString()
                 }).ToList();
 
-            return userInfo;
+            return userlist;
         }
         #endregion
     }
