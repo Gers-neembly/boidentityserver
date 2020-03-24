@@ -53,8 +53,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             return Ok(userInfo);
         }
 
-        [Route("users")]
-        [HttpGet]
+        [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
             var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
