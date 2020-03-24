@@ -139,21 +139,26 @@ namespace Neembly.BOIDServer.Persistence.Helpers
         }
 
 
-        public List<UserInfo> GetUsers()
+        public List<UserInfo> GetUsers(int operatorId)
         {
-            var userlist = _appDBContext.Users.Join(_appDBContext.BackOfficeUsers,
-                user => user.Id,
+            var userlist = _appDBContext.Users
+                .Join(_appDBContext.OperatorAssignments.Where(r => r.OperatorId == operatorId)
+                    ,users => users.Id, op => op.NetUserId, 
+                    (users, op) => new { userTable = users, operatorInfo = op })
+                .Join(_appDBContext.BackOfficeUsers,
+                user => user.userTable.Id,
                 boinfo => boinfo.NetUserId,
                 (user, boinfo) => new UserInfo
                 {
-                    UserId = user.Id,
-                    Username = user.UserName,
+                    UserId = user.userTable.Id,
+                    Username = user.userTable.UserName,
                     FirstName = boinfo.FirstName,
                     LastName = boinfo.LastName,
-                    Email = user.Email,
-                    Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
-                    CreatedDate = user.CreatedDate,
-                    ModifiedDate = user.ModifiedDate
+                    Email = user.userTable.Email,
+                    Status = user.userTable.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.userTable.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
+                    OperatorId = user.operatorInfo.OperatorId,
+                    CreatedDate = user.userTable.CreatedDate,
+                    ModifiedDate = user.userTable.ModifiedDate
                 }).ToList();
 
             return userlist;
