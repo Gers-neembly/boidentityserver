@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +9,7 @@ using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedClasses.Outputs;
 using Neembly.BOIDServer.SharedServices.Interfaces;
 using Neembly.BOIDServer.WebAPI.Models.DTO.Inputs;
 
@@ -51,7 +54,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Profile([FromBody] ProfileUpdateDTO profileUpdateInfo)
         {
-            var dataInfo = await _dataAccess.ProfileRequestChange(profileUpdateInfo.BackOfficeUserId, 
+            var dataInfo = await _dataAccess.ProfileRequestChange(profileUpdateInfo.BackOfficeUserId,
                                     new BackOfficeUserInfo
                                     {
                                         FirstName = profileUpdateInfo.BackOfficeUserInfo.FirstName,
@@ -83,12 +86,15 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 userId = boUser.Id;
             else
             {
-                user = new AppUser { UserName = registerInfo.UserName, Email = registerInfo.Email,
-                                         DisplayUsername = registerInfo.UserName,
-                                         RegistrationStatus = Enum.GetName(typeof(BOUserStatus), BOUserStatus.Active),
-                                         CreatedDate = DateTime.UtcNow,
-                                         ModifiedDate = DateTime.UtcNow
-                                       };
+                user = new AppUser
+                {
+                    UserName = registerInfo.UserName,
+                    Email = registerInfo.Email,
+                    DisplayUsername = registerInfo.UserName,
+                    RegistrationStatus = registerInfo.Status.ToLower() == BOUserStatus.Active.ToString().ToLower() ? Enum.GetName(typeof(BOUserStatus), BOUserStatus.Active) : Enum.GetName(typeof(BOUserStatus), BOUserStatus.Inactive),
+                    CreatedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.UtcNow
+                };
                 var result = await _userManager.CreateAsync(user, registerInfo.Password);
                 if (!result.Succeeded)
                     return NotFound(GlobalConstants.ErrCreateAccount);
@@ -107,7 +113,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             }
 
             int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
-            if (user != null) 
+            if (user != null)
                 await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
 
             return Ok();
@@ -128,9 +134,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         #endregion
 
         #region PrivateMethod Registration Status
-        private async Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registrationStatus)
+        private async Task<bool> SetRegistrationStatus(string userId, BOUserStatus registrationStatus)
         {
-           return await _dataAccess.SetRegistrationStatus(userId, registrationStatus);
+            return await _dataAccess.SetRegistrationStatus(userId, registrationStatus);
         }
         #endregion
 
@@ -138,7 +144,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         private async Task SendWelcomeEmail(string referer, string name, string email)
         {
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").ToLower();
-            if (environmentName != "release" 
+            if (environmentName != "release"
                  || environmentName != "production")
             {
                 await _emailDispatcher.SendWelcomeEmail(referer, name, email);
@@ -154,6 +160,59 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 await _emailDispatcher.SendActivationLink(content, name, email);
             }
         }
+        #endregion
+
+        #region Claims or Permissions
+        [Route("save-claims")]
+        [HttpPost]
+        public async Task<IActionResult> SaveUserClaims([FromBody] ClaimsDTO claimsInfo)
+        {
+            List<ClaimsViewModel> existClaims = null;
+            AppUser boUser = _dataAccess.GetAppUser(claimsInfo.Email, claimsInfo.Username);
+            if (boUser != null)
+                existClaims = await _dataAccess.GetUserClaims(boUser.Id);
+            else
+                return NotFound(GlobalConstants.ErrUserAccountNotExisting);
+
+            if (existClaims != null)
+            {
+                foreach (var item in claimsInfo.Permissions)
+                {
+                    if (existClaims.Any(a => a.ClaimType == item.ClaimType))
+                    {
+                        var current = existClaims.Find(x => x.UserId == boUser.Id && x.ClaimType == item.ClaimType);
+                        await _userManager.ReplaceClaimAsync(boUser
+                            , new System.Security.Claims.Claim(current.ClaimType, System.Enum.Parse(typeof(ClaimValue),current.ClaimValue).ToString())
+                            , new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
+                    }
+                    else
+                    {
+                        await _userManager.AddClaimAsync(boUser, new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
+                    }
+                }
+            }
+
+            return Ok();
+        }
+
+        [Route("claims")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserClaims([FromBody] ClaimsDTO claimsInfo)
+        {
+            List<ClaimsViewModel> claims = null;
+            AppUser boUser = _dataAccess.GetAppUser(claimsInfo.Email, claimsInfo.Username);
+
+            string userId = string.Empty;
+
+            if (boUser != null)
+            {
+                claims = await _dataAccess.GetUserClaims(boUser.Id);
+            }
+
+            return Ok(claims);
+        }
+
+
         #endregion
 
         #endregion
