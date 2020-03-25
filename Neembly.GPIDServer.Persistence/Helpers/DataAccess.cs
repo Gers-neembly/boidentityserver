@@ -1,8 +1,10 @@
-﻿using Neembly.BOIDServer.Constants;
+﻿using Microsoft.EntityFrameworkCore;
+using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Contexts;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedClasses.Outputs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,12 +69,12 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                                              && r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
         }
 
-        public async Task<bool> SetRegistrationStatus(string userId, RegistrationStatusNames registerStatus)
+        public async Task<bool> SetRegistrationStatus(string userId, BOUserStatus registerStatus)
         {
             var boUser = await _appDBContext.Users.FindAsync(userId);
             if (boUser == null)
                 return false;
-            string strStatus = Enum.GetName(typeof(RegistrationStatusNames), registerStatus);
+            string strStatus = Enum.GetName(typeof(BOUserStatus), registerStatus);
             if (boUser.RegistrationStatus.Equals(strStatus, StringComparison.InvariantCultureIgnoreCase))
                 return true;
             else
@@ -138,12 +140,11 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             return userInfo;
         }
 
-
         public List<UserInfo> GetUsers(int operatorId)
         {
             var userlist = _appDBContext.Users
                 .Join(_appDBContext.OperatorAssignments.Where(r => r.OperatorId == operatorId)
-                    ,users => users.Id, op => op.NetUserId, 
+                    , users => users.Id, op => op.NetUserId,
                     (users, op) => new { userTable = users, operatorInfo = op })
                 .Join(_appDBContext.BackOfficeUsers,
                 user => user.userTable.Id,
@@ -162,6 +163,20 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                 }).ToList();
 
             return userlist;
+        }
+
+        public async Task<List<ClaimsViewModel>> GetUserClaims(string userId)
+        {
+            var claims = await _appDBContext.UserClaims
+                .Where(r => r.UserId == userId)
+                .Select(s => new ClaimsViewModel
+                {
+                    UserId = s.UserId,
+                    ClaimType = s.ClaimType,
+                    ClaimValue = s.ClaimValue
+                }).ToListAsync();
+
+            return claims;
         }
         #endregion
     }
