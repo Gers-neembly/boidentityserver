@@ -162,7 +162,23 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         }
         #endregion
 
-        #region Claims or Permissions
+        #region Password
+        [Route("reset-password")]
+        [HttpPost]
+        public async Task<IActionResult> UpdatePassword([FromBody] ResetPasswordDTO user)
+        {
+            AppUser boUser = _dataAccess.GetAppUser(user.Email, user.Username);
+            if (boUser == null)
+                return NotFound(GlobalConstants.ErrUserAccountNotExisting);
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(boUser);
+            var result = await _userManager.ResetPasswordAsync(boUser, token, user.NewPassword);
+            return Ok(result);
+        }
+
+        #endregion
+
+            #region Claims or Permissions
         [Route("save-claims")]
         [HttpPost]
         public async Task<IActionResult> SaveUserClaims([FromBody] ClaimsDTO claimsInfo)
