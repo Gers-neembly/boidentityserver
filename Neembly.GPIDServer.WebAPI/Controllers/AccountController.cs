@@ -99,10 +99,10 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 if (!result.Succeeded)
                     return NotFound(GlobalConstants.ErrCreateAccount);
 
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", registerInfo.OperatorId.ToString()));
+                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
+                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
+                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
+                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", registerInfo.OperatorId.ToString()));
 
                 if (registerInfo.Roles != null)
                 {
@@ -113,8 +113,8 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             }
 
             int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
-            if (user != null)
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
+            //if (user != null)
+            //    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
 
             return Ok();
         }
@@ -178,7 +178,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
 
         #endregion
 
-            #region Claims or Permissions
+        #region Claims or Permissions
         [Route("save-claims")]
         [HttpPost]
         public async Task<IActionResult> SaveUserClaims([FromBody] ClaimsDTO claimsInfo)
@@ -190,23 +190,21 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             else
                 return NotFound(GlobalConstants.ErrUserAccountNotExisting);
 
-            if (existClaims != null)
+            foreach (var item in claimsInfo.Permissions)
             {
-                foreach (var item in claimsInfo.Permissions)
+                if (existClaims != null && existClaims.Any(a => a.ClaimType == item.ClaimType))
                 {
-                    if (existClaims.Any(a => a.ClaimType == item.ClaimType))
-                    {
-                        var current = existClaims.Find(x => x.UserId == boUser.Id && x.ClaimType == item.ClaimType);
-                        await _userManager.ReplaceClaimAsync(boUser
-                            , new System.Security.Claims.Claim(current.ClaimType, System.Enum.Parse(typeof(ClaimValue),current.ClaimValue).ToString())
-                            , new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
-                    }
-                    else
-                    {
-                        await _userManager.AddClaimAsync(boUser, new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
-                    }
+                    var current = existClaims.Find(x => x.UserId == boUser.Id && x.ClaimType == item.ClaimType);
+                    await _userManager.ReplaceClaimAsync(boUser
+                        , new System.Security.Claims.Claim(current.ClaimType, System.Enum.Parse(typeof(ClaimValue), current.ClaimValue).ToString())
+                        , new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
+                }
+                else
+                {
+                    await _userManager.AddClaimAsync(boUser, new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
                 }
             }
+
 
             return Ok();
         }
