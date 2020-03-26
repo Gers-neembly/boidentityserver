@@ -99,10 +99,10 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 if (!result.Succeeded)
                     return NotFound(GlobalConstants.ErrCreateAccount);
 
-                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
-                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
-                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
-                //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", registerInfo.OperatorId.ToString()));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("username", user.DisplayUsername));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("registrationStatus", user.RegistrationStatus));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("operatorId", registerInfo.OperatorId.ToString()));
 
                 if (registerInfo.Roles != null)
                 {
@@ -113,8 +113,8 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             }
 
             int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
-            //if (user != null)
-            //    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
+            if (user != null)
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
 
             return Ok();
         }
@@ -204,7 +204,6 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                     await _userManager.AddClaimAsync(boUser, new System.Security.Claims.Claim(item.ClaimType, System.Enum.Parse(typeof(ClaimValue), item.ClaimValue).ToString()));
                 }
             }
-
 
             return Ok();
         }
