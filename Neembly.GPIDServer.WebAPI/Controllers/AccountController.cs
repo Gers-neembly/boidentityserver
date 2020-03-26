@@ -208,12 +208,11 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             return Ok();
         }
 
-        [Route("claims")]
-        [HttpGet]
-        public async Task<IActionResult> GetUserClaims([FromBody] ClaimsDTO claimsInfo)
+        [HttpGet("claims/{email}/{username}")]
+        public async Task<IActionResult> GetUserClaims(string email, string username)
         {
             List<ClaimsViewModel> claims = null;
-            AppUser boUser = _dataAccess.GetAppUser(claimsInfo.Email, claimsInfo.Username);
+            AppUser boUser = _dataAccess.GetAppUser(email, username);
 
             string userId = string.Empty;
 
