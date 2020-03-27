@@ -72,26 +72,22 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerInfo)
         {
             AppUser user = null;
-
-            if (registerInfo.Password != registerInfo.ConfirmPassword)
-                return NotFound(GlobalConstants.ErrPasswordsMismatch);
+            string userId = string.Empty;
 
             if (_dataAccess.UserOperatorExists(registerInfo.Email, registerInfo.UserName, registerInfo.OperatorId))
                 return NotFound(GlobalConstants.ErrExistingAccount);
-
-            AppUser boUser = _dataAccess.GetAppUser(registerInfo.Email, registerInfo.UserName);
-            string userId = string.Empty;
-
-            if (boUser != null)
-                userId = boUser.Id;
             else
             {
+                registerInfo.Password = RandomGenerator.RandomPassword(8);
+                registerInfo.ConfirmPassword = registerInfo.Password;
+                registerInfo.BackOfficeUserInfo.InitialPassword = registerInfo.Password;
+
                 user = new AppUser
                 {
                     UserName = registerInfo.UserName,
                     Email = registerInfo.Email,
                     DisplayUsername = registerInfo.UserName,
-                    RegistrationStatus = registerInfo.Status.ToLower() == BOUserStatus.Active.ToString().ToLower() ? Enum.GetName(typeof(BOUserStatus), BOUserStatus.Active) : Enum.GetName(typeof(BOUserStatus), BOUserStatus.Inactive),
+                    RegistrationStatus = System.Enum.Parse(typeof(BOUserStatus), registerInfo.Status).ToString(),
                     CreatedDate = DateTime.UtcNow,
                     ModifiedDate = DateTime.UtcNow
                 };
@@ -109,14 +105,14 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                     foreach (var roleItem in registerInfo.Roles)
                         await CreateUserRoles(user, roleItem);
                 }
+
                 userId = user.Id;
+                int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
+                if (user != null)
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
+
+                return Ok();
             }
-
-            int backOfficeUserId = await _dataAccess.CreateBackOfficeUserById(userId, registerInfo.OperatorId, registerInfo.BackOfficeUserInfo);
-            if (user != null)
-                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("backofficeId", backOfficeUserId.ToString()));
-
-            return Ok();
         }
         #endregion
 

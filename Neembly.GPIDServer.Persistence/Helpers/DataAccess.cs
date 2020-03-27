@@ -56,6 +56,7 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     LastName = boUserInfo == null ? string.Empty : boUserInfo.LastName,
                     MobilePrefix = boUserInfo == null ? string.Empty : boUserInfo.MobilePrefix,
                     MobileNo = boUserInfo == null ? string.Empty : boUserInfo.MobileNo,
+                    InitialPassword = boUserInfo == null ? string.Empty : boUserInfo.InitialPassword,
                 });
             }
 
