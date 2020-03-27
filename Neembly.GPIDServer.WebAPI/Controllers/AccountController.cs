@@ -50,10 +50,14 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         #region Actions
 
         #region Profiles
-        [Route("profile")]
-        [HttpPut]
+        [Route("update-user")]
+        [HttpPost]
         public async Task<IActionResult> Profile([FromBody] ProfileUpdateDTO profileUpdateInfo)
         {
+            AppUser boUser = _dataAccess.GetAppUserById(profileUpdateInfo.BackOfficeUserId);
+            if (boUser == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+
             var dataInfo = await _dataAccess.ProfileRequestChange(profileUpdateInfo.BackOfficeUserId,
                                     new BackOfficeUserInfo
                                     {
@@ -62,7 +66,18 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                                         MobileNo = profileUpdateInfo.BackOfficeUserInfo.MobileNo,
                                         MobilePrefix = profileUpdateInfo.BackOfficeUserInfo.MobilePrefix
                                     });
-            return Ok(dataInfo);
+
+            boUser.ModifiedDate = DateTime.UtcNow;
+            boUser.RegistrationStatus = System.Enum.Parse(typeof(BOUserStatus), profileUpdateInfo.Status).ToString();
+            var update = await _userManager.UpdateAsync(boUser);
+
+            string token = await _userManager.GenerateChangeEmailTokenAsync(boUser, profileUpdateInfo.Email);
+            var result = await _userManager.ChangeEmailAsync(boUser, profileUpdateInfo.Email, token);
+
+            if (!result.Succeeded || !update.Succeeded)
+                return NotFound(GlobalConstants.ErrCreateAccount);
+
+            return Ok(result);
         }
         #endregion
 
@@ -72,9 +87,10 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerInfo)
         {
             AppUser user = null;
+
             string userId = string.Empty;
 
-            if (_dataAccess.UserOperatorExists(registerInfo.Email, registerInfo.UserName, registerInfo.OperatorId))
+            if (_dataAccess.UserOperatorExists(registerInfo.Email, registerInfo.UserName))
                 return NotFound(GlobalConstants.ErrExistingAccount);
             else
             {

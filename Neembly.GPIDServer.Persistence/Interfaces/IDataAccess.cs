@@ -9,7 +9,8 @@ namespace Neembly.BOIDServer.Persistence.Interfaces
     public interface IDataAccess
     {
         AppUser GetAppUser(string email, string username);
-        bool UserOperatorExists(string email, string username, int operatorId);
+        AppUser GetAppUserById(string Id);
+        bool UserOperatorExists(string email, string username);
         Task<int> CreateBackOfficeUserById(string boUserId, int operatorId, BackOfficeUserInfo boUserInfo = null);
         Task<bool> SetRegistrationStatus(string userId, BOUserStatus registerStatus);
         Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo boUserInfo);

@@ -70,6 +70,12 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                                              && r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
         }
 
+        public AppUser GetAppUserById(string Id)
+        {
+            return _appDBContext.Users.Where(r => r.Id == Id).FirstOrDefault();
+        }
+
+
         public async Task<bool> SetRegistrationStatus(string userId, BOUserStatus registerStatus)
         {
             var boUser = await _appDBContext.Users.FindAsync(userId);
@@ -103,11 +109,11 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                                                           .Select(s => s.OperatorId).ToList();
         }
 
-        public bool UserOperatorExists(string email, string username, int operatorId)
+        public bool UserOperatorExists(string email, string username)
         {
             var appUser = _appDBContext.Users.Where(r => r.UserName.Equals(username, StringComparison.InvariantCultureIgnoreCase)
                                                           || r.Email.ToLower() == email.ToLower()).FirstOrDefault();
-            return (appUser == null) ? false : CheckOperatorAssignment(appUser.Id, operatorId) != null;
+            return (appUser != null);
         }
 
         #region Private Methods
