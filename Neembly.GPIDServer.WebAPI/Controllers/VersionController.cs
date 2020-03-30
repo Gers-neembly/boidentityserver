@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Neembly.BOIDServer.WebAPI.Models;
+using System;
 using System.Reflection;
 
 namespace Neembly.BOIDServer.WebAPI.Controllers
@@ -15,7 +16,8 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             {
                 ProviderName = "Neembly BackOffice Identity Host Service",
                 Version = "Version 1.0.0",
-                BuildNo = $"Build {Assembly.GetEntryAssembly().GetName().Version}"
+                BuildNo = $"Build {Assembly.GetEntryAssembly().GetName().Version}",
+                Environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
             };
             return new JsonResult(versionTag);
         }

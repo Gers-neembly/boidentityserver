@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=206.189.92.97;Port=9099;Username=identity_api;Password=BourneIdentity;Database=boidentityserver;"
+    "DefaultConnection": "Host=178.128.125.73;Port=9099;Username=identity_api;Password=BourneIdentity;Database=boidentityserver;"
   }
 }

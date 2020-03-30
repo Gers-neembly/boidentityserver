@@ -10,5 +10,6 @@ namespace Neembly.BOIDServer.Persistence.Entities
         public string LastName { get; set; }
         public string MobilePrefix { get; set; }
         public string MobileNo { get; set; }
+        public string InitialPassword { get; set; }
     }
 }

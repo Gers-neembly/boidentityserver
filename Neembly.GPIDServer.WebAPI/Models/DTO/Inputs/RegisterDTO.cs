@@ -10,6 +10,7 @@ namespace Neembly.BOIDServer.WebAPI.Models.DTO.Inputs
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public int OperatorId { get; set; }
+        public string Status { get; set; }
         public List<string> Roles { get; set; }
         public BackOfficeUserInfo BackOfficeUserInfo { get; set; }
     }
