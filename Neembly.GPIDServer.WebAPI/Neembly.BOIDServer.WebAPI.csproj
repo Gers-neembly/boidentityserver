@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="uacmenulist.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Filters\" />
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="uacmenulist.json" />
   </ItemGroup>
 
   <ItemGroup>
