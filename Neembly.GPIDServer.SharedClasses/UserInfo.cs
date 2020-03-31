@@ -14,5 +14,6 @@ namespace Neembly.BOIDServer.SharedClasses
         public string Status { get; set; }
         public int OperatorId { get; set; }
         public string Password { get; set; }
+        public bool IsPasswordReset { get; set; }
     }
 }
