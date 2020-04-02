@@ -97,6 +97,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
                 registerInfo.Password = RandomGenerator.RandomPassword(8);
                 registerInfo.ConfirmPassword = registerInfo.Password;
                 registerInfo.BackOfficeUserInfo.InitialPassword = registerInfo.Password;
+                registerInfo.BackOfficeUserInfo.IsPasswordReset = true;
 
                 user = new AppUser
                 {
@@ -185,6 +186,7 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(boUser);
             var result = await _userManager.ResetPasswordAsync(boUser, token, user.NewPassword);
+            var issetstatus = await _dataAccess.SetPasswordResetStatus(boUser.Id, user.IsPasswordReset);
             return Ok(result);
         }
 

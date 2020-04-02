@@ -11,5 +11,6 @@ namespace Neembly.BOIDServer.WebAPI.Models.DTO.Inputs
         public string Username { get; set; }
         public string Email { get; set; }
         public string NewPassword { get; set; }
+        public bool IsPasswordReset { get; set; }
     }
 }

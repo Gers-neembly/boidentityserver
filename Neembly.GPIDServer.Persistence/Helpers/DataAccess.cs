@@ -57,6 +57,7 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     MobilePrefix = boUserInfo == null ? string.Empty : boUserInfo.MobilePrefix,
                     MobileNo = boUserInfo == null ? string.Empty : boUserInfo.MobileNo,
                     InitialPassword = boUserInfo == null ? string.Empty : boUserInfo.InitialPassword,
+                    IsPasswordReset = boUserInfo == null ? false : boUserInfo.IsPasswordReset,
                 });
             }
 
@@ -140,7 +141,8 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     Email = user.Email,
                     Status = user.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
                     CreatedDate = user.CreatedDate,
-                    ModifiedDate = user.ModifiedDate
+                    ModifiedDate = user.ModifiedDate,
+                    IsPasswordReset = boinfo.IsPasswordReset
                 })
                 .Where(r => r.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 
@@ -184,6 +186,16 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                 }).ToListAsync();
 
             return claims;
+        }
+
+
+        public async Task<bool> SetPasswordResetStatus(string userId, bool status)
+        {
+            var boUser = _appDBContext.BackOfficeUsers.Where(r => r.NetUserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            if (boUser == null)
+                return false;
+            boUser.IsPasswordReset = status;
+            return (await _appDBContext.SaveChangesAsync() > 0);
         }
         #endregion
     }
