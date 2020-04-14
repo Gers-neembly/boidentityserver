@@ -41,6 +41,7 @@ namespace Neembly.BOIDServer.WebAPI.Services
             var roles = await _userManager.GetRolesAsync(user);
             var claims = principal.Claims.ToList();
             var operatorList = _dataAccess.GetOperatorAssignments(user.Id);
+            var permissions = await _userManager.GetClaimsAsync(user);
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("username", user.UserName));
@@ -49,6 +50,9 @@ namespace Neembly.BOIDServer.WebAPI.Services
             int index = 1;
             foreach(var itemOperator in operatorList)
                 claims.Add(new Claim($"operator[{index++}]", itemOperator.ToString()));
+
+            foreach (var item in permissions)
+                claims.Add(new Claim(item.Type, item.Value));
 
             foreach (string role in roles)
                 claims.Add(new Claim(JwtClaimTypes.Role, role));
