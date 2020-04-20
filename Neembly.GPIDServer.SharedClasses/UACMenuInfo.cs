@@ -8,5 +8,6 @@
         public bool IsMenuItem { get; set; }
         public bool IsMenuHeader { get; set; }
         public string ParentItemCode { get; set; }
+        public bool HasChild { get; set; }
     }
 }
