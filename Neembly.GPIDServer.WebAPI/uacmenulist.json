@@ -1,354 +1,398 @@
 [
-    {
-      "code": "DASHBOARD",
-      "name": "Dashboard",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "CMS",
-      "name": "CMS",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "MEDIAMANAGER",
-      "name": "Media Manager",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CMS"
-    },
-    {
-      "code": "PAGEBUILDER",
-      "name": "Page Builder",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "CMS"
-    },
-    {
-      "code": "PAGECATEGORIES",
-      "name": "Page Categories",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PAGEBUILDER"
-    },
-    {
-      "code": "PAGES",
-      "name": "Pages",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PAGEBUILDER"
-    },
-    {
-      "code": "PAGEHEADER",
-      "name": "Page Header",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PAGEBUILDER"
-    },
-    {
-      "code": "PAGEFOOTER",
-      "name": "Page Footer",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PAGEBUILDER"
-    },
-    {
-      "code": "MOBILESIDEBAR",
-      "name": "Mobile Sidebar",
-      "order": "5",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PAGEBUILDER"
-    },
-    {
-      "code": "SITESETTINGS",
-      "name": "Site Settings",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CMS"
-    },
-    {
-      "code": "WIDGETS",
-      "name": "Widgets",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CMS"
-    },
-    {
-      "code": "PLAYERMANAGEMENT",
-      "name": "Player Management",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "PLAYERS",
-      "name": "Players",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERMANAGEMENT"
-    },
-    {
-      "code": "DEPOSITREQUESTS",
-      "name": "Deposit Requests",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERMANAGEMENT"
-    },
-    {
-      "code": "WITHDRAWALREQUESTS",
-      "name": "Withdrawal Requests",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERMANAGEMENT"
-    },
-    {
-      "code": "GAMEMANAGEMENT",
-      "name": "Game Management",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "FINANCE",
-      "name": "Finance",
-      "order": "5",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "MANUALPAYMENTSEGMENTS",
-      "name": "Manual Payment Segments",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCE"
-    },
-    {
-      "code": "REPORTS",
-      "name": "Reports",
-      "order": "6",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "SPORTSBOOK",
-      "name": "Sportsbook",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "REPORTS"
-    },
-    {
-      "code": "SPORTSBET",
-      "name": "Sports Bet",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "SPORTSBOOK"
-    },
-    {
-      "code": "CASINO",
-      "name": "Casino",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "REPORTS"
-    },
-    {
-      "code": "CASINOBETREPORT",
-      "name": "Casino Bet Report",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "CASINOGAMEREPORT",
-      "name": "Casino Game Report",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "CASINOPROVIDERREPORT",
-      "name": "Casino Provider Report",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "CASINOPLAYERREPORT",
-      "name": "Casino Player Report",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "PLAYERGAMEREPORT",
-      "name": "Player Game Report",
-      "order": "5",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "CASINOGAMINGREPORT",
-      "name": "Casino Gaming Report",
-      "order": "6",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "CASINO"
-    },
-    {
-      "code": "FINANCIAL",
-      "name": "Financial",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "REPORTS"
-    },
-    {
-      "code": "DEPOSITREPORT",
-      "name": "Deposit Report",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCIAL"
-    },
-    {
-      "code": "BALANCEREPORT",
-      "name": "Balance Report",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCIAL"
-    },
-    {
-      "code": "PLAYERREPORT",
-      "name": "Player Report",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCIAL"
-    },
-    {
-      "code": "PAYMENTREPORT",
-      "name": "Payment Report",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCIAL"
-    },
-    {
-      "code": "SALESREPORT",
-      "name": "Sales Report",
-      "order": "5",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "FINANCIAL"
-    },
-    {
-      "code": "SETTINGS",
-      "name": "Settings",
-      "order": "7",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "none"
-    },
-    {
-      "code": "USERMANAGEMENT",
-      "name": "User Management",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "SETTINGS"
-    },
-    {
-      "code": "PLAYERSETTINGS",
-      "name": "Player Settings",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "SETTINGS"
-    },
-    {
-      "code": "PLAYERREGISTRATION",
-      "name": "Player Registration",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERSETTINGS"
-    },
-    {
-      "code": "PLAYERAUTHENTICATIONSETTINGS",
-      "name": "Player Authentication Settings",
-      "order": "2",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERSETTINGS"
-    },
-    {
-      "code": "PLAYERVERIFICATIONSETTINGS",
-      "name": "Player Verification Settings",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERSETTINGS"
-    },
-    {
-      "code": "GLOBALLIMITS",
-      "name": "Global Limits",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERSETTINGS"
-    },
-    {
-      "code": "MESSAGETEMPLATES",
-      "name": "Message Templates",
-      "order": "3",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "SETTINGS"
-    },
-    {
-      "code": "PLAYERMETHODSSETTINGS",
-      "name": "Player Methods Settings",
-      "order": "4",
-      "isMenuItem": "true",
-      "isMenuHeader": "true",
-      "parentItemCode": "SETTINGS"
-    },
-    {
-      "code": "MANUALPAYMENTSETTINGS",
-      "name": "Manual Payment Settings",
-      "order": "1",
-      "isMenuItem": "true",
-      "isMenuHeader": "false",
-      "parentItemCode": "PLAYERMETHODSETTINGS"
-    }
-  ]
+  {
+    "code": "DASHBOARD",
+    "name": "Dashboard",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "false"
+  },
+  {
+    "code": "CMS",
+    "name": "CMS",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "MEDIAMANAGER",
+    "name": "Media Manager",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PAGEBUILDER",
+    "name": "Page Builder",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "CMS",
+    "hasChild": "true"
+  },
+  {
+    "code": "PAGECATEGORIES",
+    "name": "Page Categories",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "PAGES",
+    "name": "Pages",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "PAGEHEADER",
+    "name": "Page Header",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "PAGEFOOTER",
+    "name": "Page Footer",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "MOBILESIDEBAR",
+    "name": "Mobile Sidebar",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "SITESETTINGS",
+    "name": "Site Settings",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
+    "code": "WIDGETS",
+    "name": "Widgets",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERMANAGEMENT",
+    "name": "Player Management",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "PLAYERS",
+    "name": "Players",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
+    "code": "DEPOSITREQUESTS",
+    "name": "Deposit Requests",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
+    "code": "WITHDRAWALREQUESTS",
+    "name": "Withdrawal Requests",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
+    "code": "GAMEMANAGEMENT",
+    "name": "Game Management",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "false"
+  },
+  {
+    "code": "FINANCE",
+    "name": "Finance",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "MANUALPAYMENTSEGMENTS",
+    "name": "Manual Payment Segments",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCE",
+    "hasChild": "false"
+  },
+  {
+    "code": "REPORTS",
+    "name": "Reports",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "SPORTSBOOK",
+    "name": "Sportsbook",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "SPORTSBET",
+    "name": "Sports Bet",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
+    "code": "CASINO",
+    "name": "Casino",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "CASINOBETREPORT",
+    "name": "Casino Bet Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "CASINOGAMEREPORT",
+    "name": "Casino Game Report",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "CASINOPROVIDERREPORT",
+    "name": "Casino Provider Report",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "CASINOPLAYERREPORT",
+    "name": "Casino Player Report",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERGAMEREPORT",
+    "name": "Player Game Report",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "CASINOGAMINGREPORT",
+    "name": "Casino Gaming Report",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CASINO",
+    "hasChild": "false"
+  },
+  {
+    "code": "FINANCIAL",
+    "name": "Financial",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "DEPOSITREPORT",
+    "name": "Deposit Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "BALANCEREPORT",
+    "name": "Balance Report",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERREPORT",
+    "name": "Player Report",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "PAYMENTREPORT",
+    "name": "Payment Report",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "SALESREPORT",
+    "name": "Sales Report",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "SETTINGS",
+    "name": "Settings",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "USERMANAGEMENT",
+    "name": "User Management",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERSETTINGS",
+    "name": "Player Settings",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "true"
+  },
+  {
+    "code": "PLAYERREGISTRATION",
+    "name": "Player Registration",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERAUTHENTICATIONSETTINGS",
+    "name": "Player Authentication Settings",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERVERIFICATIONSETTINGS",
+    "name": "Player Verification Settings",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "GLOBALLIMITS",
+    "name": "Global Limits",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "MESSAGETEMPLATES",
+    "name": "Message Templates",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERMETHODSETTINGS",
+    "name": "Player Methods Settings",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "true"
+  },
+  {
+    "code": "MANUALPAYMENTSETTINGS",
+    "name": "Manual Payment Settings",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMETHODSETTINGS",
+    "hasChild": "false"
+  }
+]
