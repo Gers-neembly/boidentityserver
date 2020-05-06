@@ -117,6 +117,12 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             return (appUser != null);
         }
 
+        public bool UpdateEmailExist(string email, string username)
+        {
+            var appUser = _appDBContext.Users.Where(r => r.Email.ToLower() == email.ToLower()).FirstOrDefault();
+            return (appUser != null && appUser.UserName != username);
+        }
+
         #region Private Methods
         private OperatorAssignment CheckOperatorAssignment(string netUserId, int operatorId)
         {
