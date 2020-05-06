@@ -58,6 +58,9 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             if (boUser == null)
                 return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
 
+            if (_dataAccess.UpdateEmailExist(profileUpdateInfo.Email, profileUpdateInfo.Username))
+                return NotFound(GlobalConstants.ErrExistingAccount);
+
             var dataInfo = await _dataAccess.ProfileRequestChange(profileUpdateInfo.BackOfficeUserId,
                                     new BackOfficeUserInfo
                                     {
@@ -71,13 +74,16 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             boUser.RegistrationStatus = System.Enum.Parse(typeof(BOUserStatus), profileUpdateInfo.Status).ToString();
             var update = await _userManager.UpdateAsync(boUser);
 
-            string token = await _userManager.GenerateChangeEmailTokenAsync(boUser, profileUpdateInfo.Email);
-            var result = await _userManager.ChangeEmailAsync(boUser, profileUpdateInfo.Email, token);
+            if (boUser.Email != profileUpdateInfo.Email)
+            {
+                string token = await _userManager.GenerateChangeEmailTokenAsync(boUser, profileUpdateInfo.Email);
+                var result = await _userManager.ChangeEmailAsync(boUser, profileUpdateInfo.Email, token);
+            }
 
-            if (!result.Succeeded || !update.Succeeded)
+            if (!update.Succeeded)
                 return NotFound(GlobalConstants.ErrCreateAccount);
 
-            return Ok(result);
+            return Ok(update);
         }
         #endregion
 
