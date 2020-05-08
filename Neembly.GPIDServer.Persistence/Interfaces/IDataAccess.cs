@@ -19,5 +19,6 @@ namespace Neembly.BOIDServer.Persistence.Interfaces
         List<UserInfo> GetUsers(int operatorId);
         Task<List<ClaimsViewModel>> GetUserClaims(string userId);
         Task<bool> SetPasswordResetStatus(string userId, bool status);
+        bool UpdateEmailExist(string email, string username);
     }
 }
