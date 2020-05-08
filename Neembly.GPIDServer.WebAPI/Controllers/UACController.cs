@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedServices.Interfaces;
+using Neembly.BOIDServer.WebAPI.Filters;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,14 +21,17 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
     {
         #region Member Variable
         private readonly IDataAccess _dataAccess;
+        private readonly ITokenProviderService _tokenProviderService;
         #endregion
 
         #region Constructor
         public UACController(
-            IDataAccess dataAccess
+            IDataAccess dataAccess,
+            ITokenProviderService tokenProviderService
             )
         {
             _dataAccess = dataAccess;
+            _tokenProviderService = tokenProviderService;
         }
         #endregion
 
@@ -42,25 +49,41 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             }
         }
 
+        [NeemblyAuthorize]
         [Route("user-profile")]
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
-            var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
-            if (userInfo == null)
-                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+            string accessToken = Request.Headers["Authorization"].ToString().Substring(7);
+            string permission = await _tokenProviderService.GetClaimsPermission(accessToken, GlobalConstants.Modules.UserManagement);
+            if (permission.Equals(GlobalConstants.AccessPermission.Permitted, StringComparison.InvariantCultureIgnoreCase) ||
+                permission.Equals(GlobalConstants.AccessPermission.CanModify, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+                if (userInfo == null)
+                    return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
 
-            return Ok(userInfo);
+                return Ok(userInfo);
+            }
+            else return Unauthorized(); 
         }
 
+        [NeemblyAuthorize]
         [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
-            var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
-            if (users == null)
-                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+            string accessToken = Request.Headers["Authorization"].ToString().Substring(7);
+            string permission = await _tokenProviderService.GetClaimsPermission(accessToken, GlobalConstants.Modules.UserManagement);
+            if (permission.Equals(GlobalConstants.AccessPermission.Permitted, StringComparison.InvariantCultureIgnoreCase) ||
+                permission.Equals(GlobalConstants.AccessPermission.CanModify, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
+                if (users == null)
+                    return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
 
-            return Ok(users);
+                return Ok(users);
+            }
+            else return Unauthorized();
         }
 
         #endregion
