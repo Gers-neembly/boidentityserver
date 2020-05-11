@@ -25,5 +25,20 @@
         public const int PlayerIdTagStarts = 10000;
         #endregion
 
+        #region Defined Modules
+        public static class Modules
+        {
+            public const string UserManagement = "USERMANAGEMENT";
+        }
+        #endregion
+
+        #region Permission Values
+        public static class AccessPermission
+        {
+            public const string Permitted = "Permitted";
+            public const string CanModify = "CanModify";
+        }
+        #endregion
+
     }
 }
