@@ -21,14 +21,16 @@ namespace Neembly.BOIDServer.WebAPI.Filters
     {
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            string accessToken = context.HttpContext.Request.Headers["Authorization"].ToString().Substring(7);
-            var serviceToken = context.HttpContext.RequestServices.GetService<ITokenProviderService>();
-            if (!await serviceToken.ValidateToken(accessToken))
+            string auth = context.HttpContext.Request.Headers["Authorization"].ToString();
+            if (!string.IsNullOrEmpty(auth))
             {
-                context.Result = new UnauthorizedResult();
+                string accessToken = auth.Substring(7);
+                var serviceToken = context.HttpContext.RequestServices.GetService<ITokenProviderService>();
+                if (!await serviceToken.ValidateToken(accessToken))
+                {
+                    context.Result = new UnauthorizedResult();
+                }
             }
         }
-
-
     }
 }
