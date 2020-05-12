@@ -54,10 +54,14 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
-            string accessToken = Request.Headers["Authorization"].ToString().Substring(7);
-            string permission = await _tokenProviderService.GetClaimsPermission(accessToken, GlobalConstants.Modules.UserManagement);
-            if (permission.Equals(GlobalConstants.AccessPermission.Permitted, StringComparison.InvariantCultureIgnoreCase) ||
-                permission.Equals(GlobalConstants.AccessPermission.CanModify, StringComparison.InvariantCultureIgnoreCase))
+            string auth = Request.Headers["Authorization"].ToString();
+            bool isValid = false;
+            if (!string.IsNullOrEmpty(auth))
+            {
+                string accessToken = auth.Substring(7);
+                isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted+","+GlobalConstants.AccessPermission.CanModify);
+            }
+            if (isValid || string.IsNullOrEmpty(auth))
             {
                 var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
                 if (userInfo == null)
@@ -72,10 +76,14 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
-            string accessToken = Request.Headers["Authorization"].ToString().Substring(7);
-            string permission = await _tokenProviderService.GetClaimsPermission(accessToken, GlobalConstants.Modules.UserManagement);
-            if (permission.Equals(GlobalConstants.AccessPermission.Permitted, StringComparison.InvariantCultureIgnoreCase) ||
-                permission.Equals(GlobalConstants.AccessPermission.CanModify, StringComparison.InvariantCultureIgnoreCase))
+            string auth = Request.Headers["Authorization"].ToString();
+            bool isValid = false;
+            if (!string.IsNullOrEmpty(auth))
+            {
+                string accessToken = auth.Substring(7);
+                isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted + "," + GlobalConstants.AccessPermission.CanModify);
+            }
+            if (isValid || string.IsNullOrEmpty(auth))
             {
                 var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
                 if (users == null)

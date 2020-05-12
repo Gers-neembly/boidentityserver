@@ -40,5 +40,13 @@
         }
         #endregion
 
+        #region Authentication Claims
+        public static class TokenClaims
+        {
+            public const string Client_Id = "client_id";
+            public const string Issuer = "iss";
+        }
+        #endregion
+
     }
 }
