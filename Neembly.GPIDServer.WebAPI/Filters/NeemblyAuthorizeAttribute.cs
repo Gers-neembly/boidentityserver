@@ -22,7 +22,7 @@ namespace Neembly.BOIDServer.WebAPI.Filters
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             string auth = context.HttpContext.Request.Headers["Authorization"].ToString();
-            if (!string.IsNullOrEmpty(auth))
+            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0,6).Equals("Bearer"))
             {
                 string accessToken = auth.Substring(7);
                 var serviceToken = context.HttpContext.RequestServices.GetService<ITokenProviderService>();

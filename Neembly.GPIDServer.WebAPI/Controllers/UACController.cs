@@ -49,25 +49,49 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
             }
         }
 
+        [NeemblyAuthorize]
         [Route("user-profile")]
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
+            string auth = Request.Headers["Authorization"].ToString();
+            bool isValid = false;
+            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0, 6).Equals("Bearer"))
+            {
+                string accessToken = auth.Substring(7);
+                isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted + "," + GlobalConstants.AccessPermission.CanModify);
+            }
+            if (isValid || (string.IsNullOrEmpty(auth) || auth.Substring(0, 6).Equals("Bearer")))
+            {
                 var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
                 if (userInfo == null)
                     return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
 
                 return Ok(userInfo);
+            }
+            else return Unauthorized();
         }
 
+        [NeemblyAuthorize]
         [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
+            string auth = Request.Headers["Authorization"].ToString();
+            bool isValid = false;
+            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0, 6).Equals("Bearer"))
+            {
+                string accessToken = auth.Substring(7);
+                isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted + "," + GlobalConstants.AccessPermission.CanModify);
+            }
+            if (isValid || (string.IsNullOrEmpty(auth) || auth.Substring(0, 6).Equals("Bearer")))
+            {
                 var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
                 if (users == null)
                     return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
 
                 return Ok(users);
+            }
+            else return Unauthorized();
         }
 
         #endregion
