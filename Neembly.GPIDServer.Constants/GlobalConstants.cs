@@ -37,6 +37,7 @@
         {
             public const string Permitted = "Permitted";
             public const string CanModify = "CanModify";
+            public const string AllowAccessToUAC = "USERMANAGEMENT=CanModify,Permitted";
         }
         #endregion
 
@@ -45,6 +46,7 @@
         {
             public const string Client_Id = "client_id";
             public const string Issuer = "iss";
+            public const string Bearer = "Bearer";
         }
         #endregion
 

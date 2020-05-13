@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Neembly.BOIDServer.SharedServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using Neembly.BOIDServer.Constants;
 
 namespace Neembly.BOIDServer.WebAPI.Filters
 {
@@ -22,7 +23,8 @@ namespace Neembly.BOIDServer.WebAPI.Filters
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             string auth = context.HttpContext.Request.Headers["Authorization"].ToString();
-            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0,6).Equals("Bearer"))
+            if (string.IsNullOrEmpty(auth) || auth.IndexOf(GlobalConstants.TokenClaims.Bearer) == -1 ? true : false) context.Result = new UnauthorizedResult();
+            if(auth.Length > 15)
             {
                 string accessToken = auth.Substring(7);
                 var serviceToken = context.HttpContext.RequestServices.GetService<ITokenProviderService>();

@@ -51,31 +51,35 @@ namespace Neembly.BOIDServer.SharedServices.Helpers
         #region private methods
         private bool VerifyToken(string authToken)
         {
-            JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
-            var tokenS = jwtHandler.ReadJwtToken(authToken);
             int validCounter = 0;
-            if (DateTime.UtcNow > tokenS.ValidTo)
+            try
             {
-                return false;
-            }
-            var claims = tokenS.Claims.Where(claim => claim.Type.Contains(GlobalConstants.TokenClaims.Client_Id, StringComparison.InvariantCultureIgnoreCase) || claim.Type.Contains(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase)).ToList();
-            foreach (var claim in claims)
-            {
-                if (claim.Type.Equals(GlobalConstants.TokenClaims.Client_Id, StringComparison.InvariantCultureIgnoreCase))
+                JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
+                var tokenS = jwtHandler.ReadJwtToken(authToken);
+                if (DateTime.UtcNow > tokenS.ValidTo)
                 {
-                    if (claim.Value.Equals(_authTokenInfo.ClientId, StringComparison.InvariantCultureIgnoreCase))
-                    { validCounter++; }
-                    else
-                    { return false; }
+                    return false;
                 }
-                if (claim.Type.Equals(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase))
+                var claims = tokenS.Claims.Where(claim => claim.Type.Contains(GlobalConstants.TokenClaims.Client_Id, StringComparison.InvariantCultureIgnoreCase) || claim.Type.Contains(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                foreach (var claim in claims)
                 {
-                    if (claim.Value.Equals(_authTokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
-                    { validCounter++; }
-                    else
-                    { return false; }
+                    if (claim.Type.Equals(GlobalConstants.TokenClaims.Client_Id, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (claim.Value.Equals(_authTokenInfo.ClientId, StringComparison.InvariantCultureIgnoreCase))
+                        { validCounter++; }
+                        else
+                        { return false; }
+                    }
+                    if (claim.Type.Equals(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (claim.Value.Equals(_authTokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
+                        { validCounter++; }
+                        else
+                        { return false; }
+                    }
                 }
             }
+            catch (Exception) { return false; }
             return (validCounter == 2);
         }
 

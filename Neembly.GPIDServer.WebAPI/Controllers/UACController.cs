@@ -56,17 +56,18 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         {
             string auth = Request.Headers["Authorization"].ToString();
             bool isValid = false;
-            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0, 6).Equals("Bearer"))
+            bool found = auth.IndexOf(GlobalConstants.TokenClaims.Bearer) == -1 ? false : true ;
+            if (string.IsNullOrEmpty(auth) || !found) return Unauthorized();
+            if (auth.Length > 15)
             {
                 string accessToken = auth.Substring(7);
                 isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted + "," + GlobalConstants.AccessPermission.CanModify);
             }
-            if (isValid || (string.IsNullOrEmpty(auth) || auth.Substring(0, 6).Equals("Bearer")))
+            if (isValid || found)
             {
                 var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
                 if (userInfo == null)
                     return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
                 return Ok(userInfo);
             }
             else return Unauthorized();
@@ -78,17 +79,18 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         {
             string auth = Request.Headers["Authorization"].ToString();
             bool isValid = false;
-            if (!string.IsNullOrEmpty(auth) && !auth.Substring(0, 6).Equals("Bearer"))
+            bool found = auth.IndexOf(GlobalConstants.TokenClaims.Bearer) == -1 ? false : true;
+            if (string.IsNullOrEmpty(auth) || !found) return Unauthorized();
+            if (auth.Length > 15)
             {
                 string accessToken = auth.Substring(7);
                 isValid = await _tokenProviderService.HasValidPermission(accessToken, GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.Permitted + "," + GlobalConstants.AccessPermission.CanModify);
             }
-            if (isValid || (string.IsNullOrEmpty(auth) || auth.Substring(0, 6).Equals("Bearer")))
+            if (isValid || found)
             {
                 var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
                 if (users == null)
                     return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
                 return Ok(users);
             }
             else return Unauthorized();
