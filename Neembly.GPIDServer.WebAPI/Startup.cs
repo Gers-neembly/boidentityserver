@@ -73,8 +73,6 @@ namespace Neembly.BOIDServer.WebAPI
             services.AddScoped<IDataAccess, DataAccess>();
             services.AddScoped<IEmailDispatcher, EmailDispatcher>();
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
-            services.AddScoped<ITokenProviderService, TokenProviderService>();
-
 
             services.AddCors();
             services

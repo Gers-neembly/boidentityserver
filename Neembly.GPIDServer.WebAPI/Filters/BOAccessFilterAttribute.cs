@@ -1,55 +1,52 @@
-﻿using IdentityServer4;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.SharedClasses;
 using Neembly.BOIDServer.SharedServices.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Neembly.BOIDServer.SharedServices.Helpers
+namespace Neembly.BOIDServer.WebAPI.Filters
 {
-    public class TokenProviderService : ITokenProviderService
+    public class BOAccessFilter : ActionFilterAttribute //, IAuthorizationFilter
     {
-        #region Member Variables
-        private readonly IdentityServerTools _identityServerTools;
-        private readonly AuthTokenInfo _authTokenInfo;
+        #region Member Variable
+        public string _argument { get; }
+        public string _values { get; }
         #endregion
 
         #region Constructor
-        public TokenProviderService(IdentityServerTools identityServerTools, AuthTokenInfo authTokenInfo)
+        public BOAccessFilter(string argument, string values)
         {
-            _identityServerTools = identityServerTools;
-            _authTokenInfo = authTokenInfo;
+            _argument = argument;
+            _values = values;
+        }
+        #endregion  
+
+        #region OnAuthorization Trigger
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            string auth = filterContext.HttpContext.Request.Headers["Authorization"].ToString();
+            var authTokenInfo = filterContext.HttpContext.RequestServices.GetRequiredService<AuthTokenInfo>();
+            bool isPermitted = false;
+            bool found = auth.IndexOf(GlobalConstants.TokenClaims.Bearer) == -1 ? false : true;
+            if (string.IsNullOrEmpty(auth) || !found) filterContext.Result = new UnauthorizedResult();
+            if (auth.Length > 15)
+            {
+                string accessToken = auth.Substring(7);
+                if(ValidToken(accessToken, authTokenInfo)) isPermitted = HasValidPermission(accessToken, _argument, _values);
+                if (!isPermitted) filterContext.Result = new UnauthorizedResult();
+            }
         }
         #endregion
-
-        #region Actions
-
-        #region Validate Token
-        public async Task<bool> ValidateToken(string authToken)
-        {
-            return await Task.Run(() => VerifyToken(authToken));
-        }
-        #endregion
-
-        #region Get Claims Permission
-        public async Task<string> GetClaimsPermission(string authToken, string moduleName)
-        {
-            return await Task.Run(() => GetAccessPermission(authToken, moduleName));
-        }
-        #endregion
-
-        #region Validate Permission
-        public async Task<bool> HasValidPermission(string authToken, string moduleName, string claimValues)
-        {
-            return await Task.Run(() => IsValidPermission (authToken, moduleName, claimValues));
-        }
-        #endregion
-
 
         #region private methods
-        private bool VerifyToken(string authToken)
+        private bool ValidToken(string authToken, AuthTokenInfo tokenInfo)
         {
             int validCounter = 0;
             try
@@ -65,14 +62,14 @@ namespace Neembly.BOIDServer.SharedServices.Helpers
                 {
                     if (claim.Type.Equals(GlobalConstants.TokenClaims.Client_Id, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (claim.Value.Equals(_authTokenInfo.ClientId, StringComparison.InvariantCultureIgnoreCase))
+                        if (claim.Value.Equals(tokenInfo.ClientId, StringComparison.InvariantCultureIgnoreCase))
                         { validCounter++; }
                         else
                         { return false; }
                     }
                     if (claim.Type.Equals(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (claim.Value.Equals(_authTokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
+                        if (claim.Value.Equals(tokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
                         { validCounter++; }
                         else
                         { return false; }
@@ -83,28 +80,13 @@ namespace Neembly.BOIDServer.SharedServices.Helpers
             return (validCounter == 2);
         }
 
-        private string GetAccessPermission(string authToken, string moduleName)
-        {
-            JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
-            var tokenS = jwtHandler.ReadJwtToken(authToken);
-            string accessPermission = "";
-            foreach (var claim in tokenS.Claims)
-            {
-                if (claim.Type.Equals(moduleName))
-                {
-                    accessPermission = claim.Value;
-                    break;
-                }
-            }
-            return accessPermission;
-        }
-
-        private bool IsValidPermission(string authToken, string moduleName, string claimValues)
+        private bool HasValidPermission(string authToken, string moduleName, string claimValues)
         {
             JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
             var tokenS = jwtHandler.ReadJwtToken(authToken);
             bool found = false;
-            string[] accessPermission = claimValues.Split(",");
+            string[] values = claimValues.Split("=");
+            string[] accessPermission = values[1].Split(",");
             var claims = tokenS.Claims.Where(claim => moduleName.Contains(claim.Type)).ToList();
             foreach (var claimItem in claims)
             {
@@ -120,7 +102,6 @@ namespace Neembly.BOIDServer.SharedServices.Helpers
             return found;
         }
         #endregion
-    }
 
-    #endregion
+    }
 }
