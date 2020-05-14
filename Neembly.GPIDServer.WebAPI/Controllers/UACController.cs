@@ -21,17 +21,17 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
     {
         #region Member Variable
         private readonly IDataAccess _dataAccess;
-        private readonly ITokenProviderService _tokenProviderService;
+        private readonly AuthTokenInfo _authTokenInfo;
         #endregion
 
         #region Constructor
         public UACController(
             IDataAccess dataAccess,
-            ITokenProviderService tokenProviderService
+            AuthTokenInfo authTokenInfo
             )
         {
             _dataAccess = dataAccess;
-            _tokenProviderService = tokenProviderService;
+            _authTokenInfo = authTokenInfo;
         }
         #endregion
 
@@ -53,21 +53,20 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
-                var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
-                if (userInfo == null)
-                    return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
-                return Ok(userInfo);
+        var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+        if (userInfo == null)
+            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+        return Ok(userInfo);
         }
 
+        [BOAccessFilter(GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.AllowAccessToUAC)]
         [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
-                var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
-                if (users == null)
-                    return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
-                return Ok(users);
+        var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
+        if (users == null)
+            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+        return Ok(users);
         }
 
         #endregion
