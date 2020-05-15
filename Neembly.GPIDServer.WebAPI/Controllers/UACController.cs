@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
+using Neembly.BOIDServer.SharedServices.Interfaces;
+using Neembly.BOIDServer.WebAPI.Filters;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,14 +21,17 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
     {
         #region Member Variable
         private readonly IDataAccess _dataAccess;
+        private readonly AuthTokenInfo _authTokenInfo;
         #endregion
 
         #region Constructor
         public UACController(
-            IDataAccess dataAccess
+            IDataAccess dataAccess,
+            AuthTokenInfo authTokenInfo
             )
         {
             _dataAccess = dataAccess;
+            _authTokenInfo = authTokenInfo;
         }
         #endregion
 
@@ -46,21 +53,20 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
-            var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
-            if (userInfo == null)
-                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
-            return Ok(userInfo);
+        var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+        if (userInfo == null)
+            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+        return Ok(userInfo);
         }
 
+        [BOAccessFilter(GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.AllowAccessToUAC)]
         [HttpGet("users/{operatorId}")]
         public async Task<IActionResult> GetBOUsers(int operatorId)
         {
-            var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
-            if (users == null)
-                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-
-            return Ok(users);
+        var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
+        if (users == null)
+            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+        return Ok(users);
         }
 
         #endregion

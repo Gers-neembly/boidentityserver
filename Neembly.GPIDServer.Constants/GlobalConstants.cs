@@ -25,5 +25,30 @@
         public const int PlayerIdTagStarts = 10000;
         #endregion
 
+        #region Defined Modules
+        public static class Modules
+        {
+            public const string UserManagement = "USERMANAGEMENT";
+        }
+        #endregion
+
+        #region Permission Values
+        public static class AccessPermission
+        {
+            public const string Permitted = "Permitted";
+            public const string CanModify = "CanModify";
+            public const string AllowAccessToUAC = "USERMANAGEMENT=CanModify,Permitted";
+        }
+        #endregion
+
+        #region Authentication Claims
+        public static class TokenClaims
+        {
+            public const string Client_Id = "client_id";
+            public const string Issuer = "iss";
+            public const string Bearer = "Bearer";
+        }
+        #endregion
+
     }
 }
