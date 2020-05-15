@@ -12,6 +12,7 @@ using Neembly.BOIDServer.Persistence.Contexts;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Helpers;
 using Neembly.BOIDServer.Persistence.Interfaces;
+using Neembly.BOIDServer.SharedClasses;
 using Neembly.BOIDServer.SharedServices.Helpers;
 using Neembly.BOIDServer.SharedServices.Interfaces;
 using Neembly.BOIDServer.WebAPI.Filters;
@@ -35,7 +36,6 @@ namespace Neembly.BOIDServer.WebAPI
             // Add DBContext services
             services.AddDbContext<AppDBContext>(options =>
                                                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
             //// Add Identity services
             services.AddIdentity<AppUser, IdentityRole>(user =>
                     {
@@ -53,6 +53,10 @@ namespace Neembly.BOIDServer.WebAPI
             Configuration.Bind("AuthClientConfiguration", authClientConfig);
             services.AddSingleton(authClientConfig);
 
+            var authTokenConfig = new AuthTokenInfo();
+            Configuration.Bind("AuthTokenInfo", authTokenConfig);
+            services.AddSingleton(authTokenConfig);
+
             services.AddIdentityServer()
                     .AddDeveloperSigningCredential()
                     .AddInMemoryPersistedGrants()
@@ -69,7 +73,6 @@ namespace Neembly.BOIDServer.WebAPI
             services.AddScoped<IDataAccess, DataAccess>();
             services.AddScoped<IEmailDispatcher, EmailDispatcher>();
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
-
 
             services.AddCors();
             services
