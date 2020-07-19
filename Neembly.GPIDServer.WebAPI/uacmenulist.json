@@ -387,6 +387,15 @@
     "hasChild": "true"
   },
   {
+    "code": "PREFERENCES",
+    "name": "Preferences",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "false"
+  },
+  {
     "code": "MANUALPAYMENTSETTINGS",
     "name": "Manual Payment Settings",
     "order": "1",
