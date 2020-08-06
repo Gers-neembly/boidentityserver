@@ -145,7 +145,7 @@ pipelines:
             - dotnet publish $PROJECT_NAME --configuration Sandbox 
             - apt-get update && apt-get -qq install ncftp
             - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_ROOTDIR_SANDBOX $DOTNET_BUILD_DIR/bin/Sandbox/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
-            - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_STAGING $FTP_ROOTDIR_SANDBOX $DOTNET_BUILD_DIR/*.json            
+            - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_ROOTDIR_SANDBOX $DOTNET_BUILD_DIR/*.json            
             - cd $DB_PROJECT_DIR
             - dotnet ef database update
             - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
