@@ -19,8 +19,10 @@
     },
     "Neembly.BOIDServer.WebAPI": {
       "commandName": "Project",
+      "launchBrowser": true,
       "launchUrl": "api/version",
       "environmentVariables": {
+        "ASPNETCORE_CLUSTER": "None",
         "ASPNETCORE_ENVIRONMENT": "Local"
       },
       "applicationUrl": "https://localhost:7001;http://localhost:7000"
