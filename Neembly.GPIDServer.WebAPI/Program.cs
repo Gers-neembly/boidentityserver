@@ -61,8 +61,15 @@ namespace Neembly.BOIDServer.WebAPI
 
         static void ConfigConfiguration(WebHostBuilderContext ctx, IConfigurationBuilder config)
         {
+            string configFileName = $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json";
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Release")
+            {
+                var clusterEnv = Environment.GetEnvironmentVariable("ASPNETCORE_CLUSTER");
+                if (!string.IsNullOrEmpty(clusterEnv) && (clusterEnv != "None"))
+                    configFileName = $"appsettings.{clusterEnv}.json";
+            }
             config.SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                  .AddJsonFile(configFileName, optional: true, reloadOnChange: true);
         }
     }
 }
