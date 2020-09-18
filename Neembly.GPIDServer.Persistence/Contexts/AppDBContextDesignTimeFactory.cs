@@ -11,6 +11,12 @@ namespace Neembly.BOIDServer.Persistence.Contexts
         public AppDBContext CreateDbContext(string[] args)
         {
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Release")
+            {
+                var clusterEnv = Environment.GetEnvironmentVariable("ASPNETCORE_CLUSTER");
+                if (!string.IsNullOrEmpty(clusterEnv) && (clusterEnv != "None"))
+                    environmentName = clusterEnv;
+            }
             IConfigurationRoot configuration = new ConfigurationBuilder()
                              .SetBasePath(Directory.GetCurrentDirectory())
                              .AddJsonFile($"connection.{environmentName}.json")
