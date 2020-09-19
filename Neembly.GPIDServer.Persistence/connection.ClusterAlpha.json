@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=209.97.174.177;Port=9099;Username=identity_api;Password=BourneIdentity;Database=boidentityserver;"
+    "DefaultConnection": "Host=postgresql://boidentityserver:ot0ofrpcts2uglhq@alpha-db-main-do-user-7893263-0.b.db.ondigitalocean.com:25061/boidentityserver-pool?sslmode=require;Username=boidentityserver;Password=ot0ofrpcts2uglhq;Database=boidentityserver-pool;"
   }
 }
