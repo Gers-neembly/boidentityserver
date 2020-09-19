@@ -57,6 +57,8 @@ pipelines:
           name: Deploy to Production-Release
           script:
             - echo "Manual deploy to PROD-release environment (ClusterAlpha)"
+            - echo "IP Address"
+            - curl ifconfig.me
             - export ASPNETCORE_ENVIRONMENT="Release"
             - export ASPNETCORE_CLUSTER="ClusterAlpha"
             - dotnet restore
@@ -88,6 +90,8 @@ pipelines:
           - dotnetcore
         script: 
           - echo "Development deploy"
+          - echo "IP Address"
+          - curl ifconfig.me
           - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Debug
           - echo "Select pipeline deploy-to-dev to promote DEV environment manually"
