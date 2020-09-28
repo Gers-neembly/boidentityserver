@@ -18,6 +18,7 @@ using Neembly.BOIDServer.SharedServices.Interfaces;
 using Neembly.BOIDServer.WebAPI.Filters;
 using Neembly.BOIDServer.WebAPI.Models.Configs;
 using Neembly.BOIDServer.WebAPI.Services;
+using System;
 
 namespace Neembly.BOIDServer.WebAPI
 {
@@ -100,7 +101,8 @@ namespace Neembly.BOIDServer.WebAPI
                 .AllowAnyHeader()
                 .AllowCredentials());
 
-            AppDBInitializer.Seeder(app.ApplicationServices, env);
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Release")
+                AppDBInitializer.Seeder(app.ApplicationServices, env);
 
             var forwardOptions = new ForwardedHeadersOptions
             {
