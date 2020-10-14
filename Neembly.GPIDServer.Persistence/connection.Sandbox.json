@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=209.97.174.177;Port=9099;Username=identity_api;Password=BourneIdentity;Database=boidentityserver;"
+    "DefaultConnection": "Host=sb-db-do-user-4395787-0.b.db.ondigitalocean.com;Port=25061;Username=doadmin;Password=yfsjbggumr3hd9dl;Database=boidentityserver-pool;Sslmode=Require;Server Compatibility Mode=Redshift;"
   }
 }
