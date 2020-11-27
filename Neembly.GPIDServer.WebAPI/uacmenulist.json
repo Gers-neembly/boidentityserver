@@ -82,8 +82,17 @@
   },
   {
     "code": "SPORTSBET",
-    "name": "Sports Bet",
+    "name": "Sports Bet Report",
     "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
+    "code": "SPORTSMARKETTYPE",
+    "name": "Market Type Report",
+    "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "SPORTSBOOK",
