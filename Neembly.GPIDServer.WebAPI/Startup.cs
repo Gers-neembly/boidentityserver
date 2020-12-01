@@ -1,23 +1,9 @@
-﻿using FluentValidation.AspNetCore;
-using IdentityServer4.Services;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Neembly.BOIDServer.Persistence.Contexts;
-using Neembly.BOIDServer.Persistence.Entities;
-using Neembly.BOIDServer.Persistence.Helpers;
-using Neembly.BOIDServer.Persistence.Interfaces;
-using Neembly.BOIDServer.SharedClasses;
-using Neembly.BOIDServer.SharedServices.Helpers;
-using Neembly.BOIDServer.SharedServices.Interfaces;
-using Neembly.BOIDServer.WebAPI.Filters;
-using Neembly.BOIDServer.WebAPI.Models.Configs;
-using Neembly.BOIDServer.WebAPI.Services;
 using System;
 
 namespace Neembly.BOIDServer.WebAPI
@@ -34,52 +20,20 @@ namespace Neembly.BOIDServer.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add DBContext services
-            services.AddDbContext<AppDBContext>(options =>
-                                               options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            //// Add Identity services
-            services.AddIdentity<AppUser, IdentityRole>(user =>
-                    {
-                        // configure identity options
-                        user.Password.RequireDigit = false;
-                        user.Password.RequireLowercase = false;
-                        user.Password.RequireUppercase = false;
-                        user.Password.RequireNonAlphanumeric = false;
-                        user.Password.RequiredLength = 2;
-                    })
-                    .AddEntityFrameworkStores<AppDBContext>()
-                    .AddDefaultTokenProviders();
+            //DI for configs
+            DependencyInjectionConfigs.Add(services, Configuration);
 
-            var authClientConfig = new AuthClientConfiguration();
-            Configuration.Bind("AuthClientConfiguration", authClientConfig);
-            services.AddSingleton(authClientConfig);
+            //DI for services
+            DependencyInjection.Add(services);
 
-            var authTokenConfig = new AuthTokenInfo();
-            Configuration.Bind("AuthTokenInfo", authTokenConfig);
-            services.AddSingleton(authTokenConfig);
+            //DI for shared classes
+            SharedClasses.DependencyInjection.Add(services, Configuration);
 
-            services.AddIdentityServer()
-                    .AddDeveloperSigningCredential()
-                    .AddInMemoryPersistedGrants()
-                    .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                    .AddInMemoryApiResources(Config.GetApiResources(authClientConfig.AuthClientResourcesList))
-                    .AddInMemoryClients(Config.GetClients(authClientConfig.AuthClientInfoList))
-                    .AddAspNetIdentity<AppUser>();
+            //DI for shared services
+            SharedServices.DependencyInjection.Add(services);
 
-            services.Configure<IdentityOptions>(o => {
-                o.SignIn.RequireConfirmedEmail = false;
-            });
-
-            // dependency injections
-            services.AddScoped<IDataAccess, DataAccess>();
-            services.AddScoped<IEmailDispatcher, EmailDispatcher>();
-            services.AddTransient<IProfileService, IdentityClaimsProfileService>();
-
-            services.AddCors();
-            services
-                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(typeof(Exceptions.ValidationException).Assembly));
+            //DI for persistence
+            Persistence.DependencyInjection.Add(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
