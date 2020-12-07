@@ -108,6 +108,15 @@
     "hasChild": "false"
   },
   {
+    "code": "SPORTSCOMPETITION",
+    "name": "Competition Report",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
     "code": "CASINO",
     "name": "Casino",
     "order": "2",
