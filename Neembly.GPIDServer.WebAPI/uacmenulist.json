@@ -82,8 +82,35 @@
   },
   {
     "code": "SPORTSBET",
-    "name": "Sports Bet",
+    "name": "Sports Bet Report",
     "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
+    "code": "SPORTSMARKETTYPE",
+    "name": "Market Type Report",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
+    "code": "SPORT",
+    "name": "Sport Report",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SPORTSBOOK",
+    "hasChild": "false"
+  },
+  {
+    "code": "SPORTSCOMPETITION",
+    "name": "Competition Report",
+    "order": "4",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "SPORTSBOOK",
