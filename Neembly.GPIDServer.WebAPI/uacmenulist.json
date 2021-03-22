@@ -423,6 +423,8 @@
     "parentItemCode": "SETTINGS",
     "hasChild": "false"
   },
+
+
   {
     "code": "MANUALPAYMENTSETTINGS",
     "name": "Manual Payment Settings",
@@ -442,6 +444,8 @@
     "hasChild": "true"
   },
   {
+
+
     "code": "BONUSES",
     "name": "Bonuses",
     "order": "1",
