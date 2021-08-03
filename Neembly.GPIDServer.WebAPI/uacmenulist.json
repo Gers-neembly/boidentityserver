@@ -435,6 +435,15 @@
     "hasChild": "false"
   },
   {
+    "code": "COMMISSION",
+    "name": "Commission",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMETHODSETTINGS",
+    "hasChild": "false"
+  },
+  {
     "code": "CARM",
     "name": "CARM",
     "order": "7",
@@ -444,8 +453,6 @@
     "hasChild": "true"
   },
   {
-
-
     "code": "BONUSES",
     "name": "Bonuses",
     "order": "1",
