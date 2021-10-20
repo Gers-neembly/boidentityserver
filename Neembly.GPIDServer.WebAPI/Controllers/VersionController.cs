@@ -9,14 +9,18 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
     [ApiController]
     public class VersionController : ControllerBase
     {
+        #region Rebranding Tag
+        public const string VersionRebranding = "WK";
+        #endregion
+
         [HttpGet]
         public IActionResult Get()
         {
             var versionTag = new VersionInfo
             {
-                ProviderName = "Neembly BackOffice Identity Host Service",
+                ProviderName = $"{VersionRebranding} BackOffice Identity Host Service",
                 Version = $"Version {Assembly.GetEntryAssembly().GetName().Version}",
-                BuildNo = $"Build {Assembly.GetEntryAssembly().GetName().FullName}",
+                BuildNo = $"Build {Assembly.GetEntryAssembly().GetName().FullName.Replace("Neembly", VersionRebranding)}",
                 Environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
                 Cluster = Environment.GetEnvironmentVariable("ASPNETCORE_CLUSTER")
             };
