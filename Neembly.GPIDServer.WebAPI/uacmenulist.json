@@ -388,18 +388,9 @@
     "hasChild": "false"
   },
   {
-    "code": "PLAYERVERIFICATIONSETTINGS",
-    "name": "Verification Settings",
-    "order": "3",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "PLAYERSETTINGS",
-    "hasChild": "false"
-  },
-  {
     "code": "GLOBALLIMITS",
     "name": "Global Limits",
-    "order": "4",
+    "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "PLAYERSETTINGS",
