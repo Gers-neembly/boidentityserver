@@ -388,18 +388,9 @@
     "hasChild": "false"
   },
   {
-    "code": "PLAYERVERIFICATIONSETTINGS",
-    "name": "Verification Settings",
-    "order": "3",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "PLAYERSETTINGS",
-    "hasChild": "false"
-  },
-  {
     "code": "GLOBALLIMITS",
     "name": "Global Limits",
-    "order": "4",
+    "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "PLAYERSETTINGS",
@@ -423,6 +414,8 @@
     "parentItemCode": "SETTINGS",
     "hasChild": "false"
   },
+
+
   {
     "code": "MANUALPAYMENTSETTINGS",
     "name": "Manual Payment Settings",
@@ -430,6 +423,33 @@
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "PLAYERMETHODSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "COMMISSION",
+    "name": "Commission",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMETHODSETTINGS",
+    "hasChild": "false"
+  },
+  {
+    "code": "CARM",
+    "name": "CARM",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "BONUSES",
+    "name": "Bonuses",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
     "hasChild": "false"
   }
 ]
