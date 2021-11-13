@@ -15,16 +15,18 @@ steps:
           - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Release 
           - dotnet publish $PROJECT_NAME --configuration Release 
+		artifacts:
+		  - ./build
     - step: &deploy-prod-alpha-ws1
-        name: Deploy-Production-Release WS1
+        name: Deploy-Prod WS1
         script:
           - echo "Uploading to PROD-release environment (ClusterAlpha) WS1"
           - echo "IP Address"
           - curl ifconfig.me
           - echo "Uploading Server"
           - apt-get update && apt-get -qq install ncftp
-          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
-          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
+          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR ./build/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
+          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR ./build/*.json            
     - step: &updateDb-prod-alpha
         name: Update DB Prod
         script:
@@ -32,7 +34,7 @@ steps:
           - cd $DB_PROJECT_DIR
           - dotnet ef database update
     - step: &mark-filedate-ws1
-        name: Upload to Producton Alpha WS1
+        name: Uploading to Alpha WS1
         script:
           - echo "Uploading DateMarker to Alpha WS1"
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
@@ -161,4 +163,4 @@ pipelines:
           - export ASPNETCORE_CLUSTER="Sandbox"
           - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Release 
-          - dotnet publish $PROJECT_NAME --configuration Release
+          - dotnet publish $PROJECT_NAME --configuration Release 
