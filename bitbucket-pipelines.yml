@@ -1,7 +1,38 @@
-# Neembly Gaming Platform, Copyright(C) 2019
+# Neembly Gaming Platform, Copyright(C) 2021
 # Pipeline build definitions
 image: microsoft/dotnet:sdk
 
+definitions:
+steps:
+    - step: &build-releaseprod-alpha
+        name: Build-Production Release
+        caches:
+          - dotnetcore
+        script:
+          - echo "Building for PROD-release environment (alpha)"
+          - export ASPNETCORE_ENVIRONMENT="Release"
+          - export ASPNETCORE_CLUSTER="ClusterAlpha"
+          - dotnet restore
+          - dotnet build $PROJECT_NAME --configuration Release 
+          - dotnet publish $PROJECT_NAME --configuration Release 
+    - step: &deploy-prod-alpha-ws1
+        name: Deploy-Production-Release WS1
+        script:
+          - echo "Uploading to PROD-release environment (ClusterAlpha)"
+          - echo "IP Address"
+          - curl ifconfig.me
+          - echo "Uploading Server"
+          - apt-get update && apt-get -qq install ncftp
+          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
+          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
+    - step: &updateDb-prod-alpha
+          - echo "Updating Database"
+          - cd $DB_PROJECT_DIR
+          - dotnet ef database update
+    - step: &mark-filedate-ws1
+          - echo "Uploading DateMarker"
+          - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
+          - ncftpput -a -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_DEPLOYDIR builddate.txt
 pipelines:
   custom:
     # manually run 
@@ -62,30 +93,11 @@ pipelines:
           - echo "Updating DateMarker"
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_DEPLOYDIR builddate.txt
-    deploy-prod-ClusterAlpha:
-    - step:
-        name: Deploy to Production-Release
-        caches:
-          - dotnetcore
-        script:
-          - echo "Manual deploy to PROD-release environment (ClusterAlpha)"
-          - echo "IP Address"
-          - curl ifconfig.me
-          - export ASPNETCORE_ENVIRONMENT="Release"
-          - export ASPNETCORE_CLUSTER="ClusterAlpha"
-          - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Release 
-          - dotnet publish $PROJECT_NAME --configuration Release 
-          - echo "Uploading Server"
-          - apt-get update && apt-get -qq install ncftp
-          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
-          - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
-          - echo "Updating Database"
-          - cd $DB_PROJECT_DIR
-          - dotnet ef database update
-          - echo "Uploading DateMarker"
-          - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
-          - ncftpput -a -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_DEPLOYDIR builddate.txt
+    deploy-alpha-ws1-boids:
+    - step: *build-releaseprod-alpha
+    - step: *deploy-prod-alpha-ws1
+    - step: *updateDb-prod-alpha
+    - step: *mark-filedate-ws1 
   default:
     # task per ticket item build
     - step:
