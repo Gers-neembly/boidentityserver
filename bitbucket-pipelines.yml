@@ -18,7 +18,7 @@ steps:
     - step: &deploy-prod-alpha-ws1
         name: Deploy-Production-Release WS1
         script:
-          - echo "Uploading to PROD-release environment (ClusterAlpha)"
+          - echo "Uploading to PROD-release environment (ClusterAlpha) WS1"
           - echo "IP Address"
           - curl ifconfig.me
           - echo "Uploading Server"
@@ -26,11 +26,15 @@ steps:
           - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
           - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
     - step: &updateDb-prod-alpha
+        name: Update DB Prod
+        script:
           - echo "Updating Database"
           - cd $DB_PROJECT_DIR
           - dotnet ef database update
     - step: &mark-filedate-ws1
-          - echo "Uploading DateMarker"
+        name: Upload to Producton Alpha WS1
+        script:
+          - echo "Uploading DateMarker to Alpha WS1"
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS1_PROD $FTP_DEPLOYDIR builddate.txt
 pipelines:
@@ -94,10 +98,10 @@ pipelines:
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_DEPLOYDIR builddate.txt
     deploy-alpha-ws1-boids:
-      - step: *build-releaseprod-alpha
-      - step: *deploy-prod-alpha-ws1
-      - step: *updateDb-prod-alpha
-      - step: *mark-filedate-ws1 
+    - step: *build-releaseprod-alpha
+    - step: *deploy-prod-alpha-ws1
+    - step: *updateDb-prod-alpha
+    - step: *mark-filedate-ws1 
   default:
     # task per ticket item build
     - step:
@@ -157,15 +161,4 @@ pipelines:
           - export ASPNETCORE_CLUSTER="Sandbox"
           - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Release 
-          - dotnet publish $PROJECT_NAME --configuration Release 
-          - echo "Uploading Server"
-          - apt-get update && apt-get -qq install ncftp
-          - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
-          - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
-          - echo "Updating Database"
-          - cd $DB_PROJECT_DIR
-          - dotnet ef database update
-          - echo "Updating DateMarker"
-          - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
-          - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_PROD $FTP_DEPLOYDIR builddate.txt
-          
+          - dotnet publish $PROJECT_NAME --configuration Release
