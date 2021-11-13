@@ -94,10 +94,10 @@ pipelines:
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_DEPLOYDIR builddate.txt
     deploy-alpha-ws1-boids:
-    - step: *build-releaseprod-alpha
-    - step: *deploy-prod-alpha-ws1
-    - step: *updateDb-prod-alpha
-    - step: *mark-filedate-ws1 
+      - step: *build-releaseprod-alpha
+      - step: *deploy-prod-alpha-ws1
+      - step: *updateDb-prod-alpha
+      - step: *mark-filedate-ws1 
   default:
     # task per ticket item build
     - step:
