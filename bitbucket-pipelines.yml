@@ -94,12 +94,10 @@ pipelines:
           - dotnetcore
         script:
           - echo $ServerId
-          - echo ServerId
           - if [ "$Password" != "N33mb!y" ]; then exit 0 ; fi
           - if [ "$ServerId" = "1" ]; then export FTP_URL_WS_PROD=$FTP_URL_WS1_PROD ; fi
           - if [ "$ServerId" = "2" ]; then export FTP_URL_WS_PROD=$FTP_URL_WS2_PROD ; fi
           - echo $FTP_URL_WS_PROD
-          - echo FTP_URL_WS_PROD
           - echo "Manual deploy to PROD-release environment (ClusterAlpha)"
           - echo "IP Address"
           - curl ifconfig.me
