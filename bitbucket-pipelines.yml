@@ -94,8 +94,8 @@ pipelines:
           - dotnetcore
         script:
           - echo $ServerId
-          - if [ "$Password" != "$PROD_VAR_PASSWORD" ]; then exit 0 ; fi
-          - if [ "$ServerId" != "1" || "$ServerId" != "2"  ]; then exit 0 ; fi
+          - if [ "$Password" != "$PROD_VAR_PASSWORD" ]; then exit 1 ; fi
+          - if [ "$ServerId" != "1" || "$ServerId" != "2"  ]; then exit 1 ; fi
           - if [ "$ServerId" = "1" ]; then export FTP_URL_WS_PROD=$FTP_URL_WS1_PROD ; fi
           - if [ "$ServerId" = "2" ]; then export FTP_URL_WS_PROD=$FTP_URL_WS2_PROD ; fi
           - echo $FTP_URL_WS_PROD
