@@ -87,7 +87,8 @@ pipelines:
     deploy-prod-alpha-boids:
     - variables:
       - name: ServerId
-      - name: Password 		  
+      - name: VersionNo
+      - name: Password 		
     - step:
         name: Deploy ProdAlpha
         caches:
@@ -105,8 +106,8 @@ pipelines:
           - export ASPNETCORE_ENVIRONMENT="Release"
           - export ASPNETCORE_CLUSTER="ClusterAlpha"
           - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Release 
-          - dotnet publish $PROJECT_NAME --configuration Release 
+          - dotnet build $PROJECT_NAME --configuration Release /p:AssemblyVersion=$VersionNo  
+          - dotnet publish $PROJECT_NAME --configuration Release /p:AssemblyVersion=$VersionNo 
           - echo "Uploading Server"
           - apt-get update && apt-get -qq install ncftp
           - ncftpput -R -v -u $ALPHA_WS1_USER -p $ALPHA_WS1_PWD $FTP_URL_WS_PROD $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
