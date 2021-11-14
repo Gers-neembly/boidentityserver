@@ -87,8 +87,8 @@ pipelines:
     deploy-prod-alpha-boids:
     - variables:
       - name: ServerId
-      - name: VersionNo
       - name: Password 		
+      - name: VersionNo
     - step:
         name: Deploy ProdAlpha
         caches:
