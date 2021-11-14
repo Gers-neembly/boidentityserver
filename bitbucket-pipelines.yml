@@ -68,7 +68,7 @@ pipelines:
         caches:
           - dotnetcore
         script:
-          - echo "Auto Deployment CI/CD to PROD-release environment"
+          - echo "Manual Deployment CI/CD to PROD-release environment"
           - export ASPNETCORE_ENVIRONMENT="Release"
           - export ASPNETCORE_CLUSTER="Sandbox"
           - dotnet restore
@@ -89,7 +89,7 @@ pipelines:
       - name: ServerId
       - name: Password 		  
     - step:
-        name: Deploy to Production-Release
+        name: Deploy ProdAlpha
         caches:
           - dotnetcore
         script:
