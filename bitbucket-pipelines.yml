@@ -85,7 +85,7 @@ pipelines:
           - echo "Updating DateMarker"
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_PROD $FTP_DEPLOYDIR builddate.txt          	
-    deploy-prod-alpha-boids:
+    deploy-prod-alpha-pub-boids:
     - variables:
       - name: ServerId
       - name: Password 		
