@@ -451,5 +451,14 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
+  },
+  {
+    "code": "CASHBACK",
+    "name": "Cashback",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
+    "hasChild": "false"
   }
 ]
