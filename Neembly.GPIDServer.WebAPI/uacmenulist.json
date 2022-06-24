@@ -460,5 +460,14 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
+  },
+  {
+    "code": "LOYALTY",
+    "name": "Loyalty",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
+    "hasChild": "false"
   }
 ]
