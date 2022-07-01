@@ -234,15 +234,6 @@
     "hasChild": "false"
   },
   {
-    "code": "SALESREPORT",
-    "name": "Sales Report",
-    "order": "5",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "FINANCIAL",
-    "hasChild": "false"
-  },
-  {
     "code": "LOYALTYREPORT",
     "name": "Loyalty Report",
     "order": "4",
