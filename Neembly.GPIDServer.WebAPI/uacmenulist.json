@@ -233,6 +233,15 @@
     "parentItemCode": "FINANCIAL",
     "hasChild": "false"
   },
+  //{
+  //  "code": "LOYALTYREPORT",
+  //  "name": "Loyalty Report",
+  //  "order": "4",
+  //  "isMenuItem": "true",
+  //  "isMenuHeader": "false",
+  //  "parentItemCode": "REPORTS",
+  //  "hasChild": "false"
+  //},
   {
     "code": "GAMEMANAGEMENT",
     "name": "Game Management",
@@ -451,5 +460,23 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
+  },
+  {
+    "code": "CASHBACK",
+    "name": "Cashback",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
+    "hasChild": "false"
   }
+  //{
+  //  "code": "LOYALTY",
+  //  "name": "Loyalty",
+  //  "order": "3",
+  //  "isMenuItem": "true",
+  //  "isMenuHeader": "false",
+  //  "parentItemCode": "CARM",
+  //  "hasChild": "false"
+  //}
 ]
