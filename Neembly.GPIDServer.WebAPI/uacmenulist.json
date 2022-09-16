@@ -469,6 +469,15 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
+  },
+  {
+    "code": "SEGMENT",
+    "name": "Segment",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
+    "hasChild": "false"
   }
   //{
   //  "code": "LOYALTY",
