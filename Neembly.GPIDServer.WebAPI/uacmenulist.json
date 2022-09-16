@@ -471,8 +471,8 @@
     "hasChild": "false"
   },
   {
-    "code": "SEGMENT",
-    "name": "Segment",
+    "code": "SEGMENTMANAGEMENT",
+    "name": "Segment Management",
     "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "false",
