@@ -469,16 +469,16 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
-  },
-  {
-    "code": "SEGMENTMANAGEMENT",
-    "name": "Segment Management",
-    "order": "3",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "CARM",
-    "hasChild": "false"
   }
+  //{
+  //  "code": "SEGMENTMANAGEMENT",
+  //  "name": "Segment Management",
+  //  "order": "3",
+  //  "isMenuItem": "true",
+  //  "isMenuHeader": "false",
+  //  "parentItemCode": "CARM",
+  //  "hasChild": "false"
+  //}
   //{
   //  "code": "LOYALTY",
   //  "name": "Loyalty",
