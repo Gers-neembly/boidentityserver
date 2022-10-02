@@ -57,7 +57,6 @@ pipelines:
           - apt-get update && apt-get -qq install ncftp
           - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_ROOTDIR $DOTNET_BUILD_DIR/bin/Sandbox/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/*
           - ncftpput -R -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_ROOTDIR $DOTNET_BUILD_DIR/*.json            
-          - echo "Updating Database"
           - cd $DB_PROJECT_DIR
           - dotnet ef database update
           - echo "Updating DateMarker"
@@ -67,7 +66,6 @@ pipelines:
     - variables:
       - name: ServerId
       - name: Password 		
-      - name: VersionNo
     - step:
         name: Deploy SB-WS
         deployment: sandbox
@@ -85,8 +83,8 @@ pipelines:
           - echo "Deploy to SB-WS"
           - export ASPNETCORE_ENVIRONMENT="Sandbox"
           - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Sandbox /p:AssemblyVersion=$VERSION_NUMBER
-          - dotnet publish $PROJECT_NAME --configuration Sandbox /p:AssemblyVersion=$VERSION_NUMBER
+          - dotnet build $PROJECT_NAME --configuration Sandbox
+          - dotnet publish $PROJECT_NAME --configuration Sandbox
           - echo "Uploading to Server"
           - apt-get update && apt-get -y -qq install openssh-client curl
           - scp -r $DOTNET_BUILD_DIR/bin/Sandbox/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/* $SSH_USER_SBWS@$SSH_SERVER_SBWS:$SBWS_PUBDIR$FTP_ROOTDIR_WS
