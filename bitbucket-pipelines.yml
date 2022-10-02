@@ -42,7 +42,7 @@ pipelines:
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_DEVTEST $FTP_DEPLOYDIR builddate.txt
     deploy-sb:
-    - step:
+    - step
         name: Deploy to UAT-Sandbox
         deployment: sandbox
         caches:
@@ -50,7 +50,7 @@ pipelines:
         script:
           - echo "Manual deploy to UAT-Sandbox environment"
           - export ASPNETCORE_ENVIRONMENT="Sandbox"
-            - dotnet restore
+          - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Sandbox 
           - dotnet publish $PROJECT_NAME --configuration Sandbox 
           - echo "Uploading to Server"
