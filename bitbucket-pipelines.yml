@@ -65,7 +65,8 @@ pipelines:
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_DEPLOYDIR builddate.txt
     deploy-sb-ws:
     - variables:
-      - name: ServerId
+
+- name: ServerId
       - name: Password 		
     - step:
         caches:
@@ -76,6 +77,7 @@ pipelines:
           - if [ "$ServerId" = "1" ]; then export SSH_SERVER_SBWS=$SSH_SERVER_SBWS1 ; fi
           - if [ "$ServerId" = "2" ]; then export SSH_SERVER_SBWS=$SSH_SERVER_SBWS2 ; fi
           - echo $SSH_SERVER_SBWS
+          - if [ "$SSH_SERVER_SBWS" = "" ]; then exit 1 ; fi
           - echo "Deploy to SB-WS"
           - export ASPNETCORE_ENVIRONMENT="Sandbox"
           - dotnet restore
