@@ -65,8 +65,7 @@ pipelines:
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_SANDBOX $FTP_DEPLOYDIR builddate.txt
     deploy-sb-ws:
     - variables:
-
-- name: ServerId
+      - name: ServerId
       - name: Password 		
     - step:
         caches:
