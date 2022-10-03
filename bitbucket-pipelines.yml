@@ -68,6 +68,8 @@ pipelines:
       - name: ServerId
       - name: Password 		
     - step:
+        name: Deploy SB-WS
+        deployment: sandbox
         caches:
           - dotnetcore
         script:
