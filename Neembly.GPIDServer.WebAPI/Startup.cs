@@ -3,15 +3,21 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Neembly.BOIDServer.Persistence.Contexts;
 using System;
+using System.Diagnostics;
 
 namespace Neembly.BOIDServer.WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+
+        public Startup(IConfiguration configuration, ILoggerFactory logFactory)
         {
+            _logger = logFactory.CreateLogger<Startup>();
+            _logger.LogInformation($"{Process.GetCurrentProcess()} booting...");
             Configuration = configuration;
         }
 
@@ -72,6 +78,8 @@ namespace Neembly.BOIDServer.WebAPI
             app.UseIdentityServer();
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            _logger.LogInformation($"{Process.GetCurrentProcess().MainModule.FileName} started {DateTime.Now}");
         }
     }
 }
