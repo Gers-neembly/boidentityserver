@@ -469,6 +469,42 @@
     "isMenuHeader": "false",
     "parentItemCode": "CARM",
     "hasChild": "false"
+  },
+  {
+    "code": "SEGMENTMANAGEMENT",
+    "name": "Segment Management",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CARM",
+    "hasChild": "false"
+  },
+  {
+    "code": "REFERRAL",
+    "name": "Referral",
+    "order": "4",
+    "isMenuitem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "CARM",
+    "hasChild": "true"
+  },
+  {
+    "code": "REFERRALCOMMISSIONPLANMANAGEMENT",
+    "name": "Commission Plan Management",
+    "order": "1",
+    "isMenuitem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "REFERRAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "REFERRALPROGRAM",
+    "name": "Referral Program Management",
+    "order": "2",
+    "isMenuitem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "REFERRAL",
+    "hasChild": "false"
   }
   //{
   //  "code": "LOYALTY",
