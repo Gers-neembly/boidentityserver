@@ -505,6 +505,24 @@
     "isMenuHeader": "false",
     "parentItemCode": "REFERRAL",
     "hasChild": "false"
+  },
+  {
+    "code": "REFERRALPROGRAMREPORT",
+    "name": "Referral Program",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "false"
+  },
+  {
+    "code": "REFERRALDISBURSEMENT",
+    "name": "Referral Program Disbursement",
+    "order": "3",
+    "isMenuitem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "REFERRAL",
+    "hasChild": "false"
   }
   //{
   //  "code": "LOYALTY",
