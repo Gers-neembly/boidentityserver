@@ -9,5 +9,6 @@ namespace Neembly.BOIDServer.SharedClasses
         public string ClientId { get; set; }
         public int LifeTime { get; set; }
         public string ApiUrl { get; set; }
+        public bool SecuredHttps { get; set; }
     }
 }

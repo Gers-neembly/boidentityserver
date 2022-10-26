@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.SharedClasses;
-using Neembly.BOIDServer.SharedServices.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Neembly.BOIDServer.WebAPI.Filters
 {
@@ -69,10 +65,18 @@ namespace Neembly.BOIDServer.WebAPI.Filters
                     }
                     if (claim.Type.Equals(GlobalConstants.TokenClaims.Issuer, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (claim.Value.Equals(tokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
-                        { validCounter++; }
+                        if (!tokenInfo.SecuredHttps)
+                        {
+                            if (((new Uri(claim.Value)).Host).Equals((new Uri(tokenInfo.ApiUrl)).Host, StringComparison.InvariantCultureIgnoreCase)) { validCounter++; }
+                            else { return false; }
+                        }
                         else
-                        { return false; }
+                        {
+                            if (claim.Value.Equals(tokenInfo.ApiUrl, StringComparison.InvariantCultureIgnoreCase))
+                            { validCounter++; }
+                            else
+                            { return false; }
+                        }
                     }
                 }
             }
