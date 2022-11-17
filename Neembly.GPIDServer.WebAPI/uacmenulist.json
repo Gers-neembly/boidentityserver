@@ -189,6 +189,15 @@
     "hasChild": "true"
   },
   {
+    "code": "REFERRALPROGRAMREPORT",
+    "name": "Referral Program",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "false"
+  },
+  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
@@ -504,15 +513,6 @@
     "isMenuitem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "REFERRAL",
-    "hasChild": "false"
-  },
-  {
-    "code": "REFERRALPROGRAMREPORT",
-    "name": "Referral Program",
-    "order": "4",
-    "isMenuItem": "true",
-    "isMenuHeader": "true",
-    "parentItemCode": "REPORTS",
     "hasChild": "false"
   },
   {
