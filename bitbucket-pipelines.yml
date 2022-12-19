@@ -194,7 +194,7 @@ pipelines:
           - dotnet build $PROJECT_NAME --configuration Sandbox 
           - echo "Select pipeline deploy-sb to promote Sandbox environment manually"
     preprod:
-    # production push-merge build 
+    # pre production push-merge build 
     - step:
         name: Deploy to pre-production
         caches:
@@ -202,7 +202,6 @@ pipelines:
         script:
           - echo "Auto Deployment CI/CD to PROD-release environment"
           - export ASPNETCORE_ENVIRONMENT="Release"
-          - export ASPNETCORE_CLUSTER="Sandbox"
           - dotnet restore
           - dotnet build $PROJECT_NAME --configuration Release
           - echo "Select pipeline deploy-release to promote Preprod/Release environment manually"		  		  
