@@ -332,10 +332,20 @@
     "parentItemCode": "PAGEBUILDER",
     "hasChild": "false"
   },
+
+  {
+    "code": "GAMESTAGE",
+    "name": "Game Stage",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
   {
     "code": "WIDGETS",
     "name": "Widgets",
-    "order": "3",
+    "order": "4",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -344,7 +354,7 @@
   {
     "code": "SITESETTINGS",
     "name": "Site Settings",
-    "order": "4",
+    "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
