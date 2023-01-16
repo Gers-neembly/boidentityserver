@@ -270,9 +270,18 @@
     "hasChild": "true"
   },
   {
+    "code": "SITESETTINGS",
+    "name": "Site Settings",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
     "code": "MEDIAMANAGER",
     "name": "Media Manager",
-    "order": "1",
+    "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -281,7 +290,7 @@
   {
     "code": "PAGEBUILDER",
     "name": "Page Builder",
-    "order": "2",
+    "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "true",
     "parentItemCode": "CMS",
@@ -334,9 +343,18 @@
   },
 
   {
+    "code": "COMMUNITYCHAT",
+    "name": "Community Chat",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
     "code": "GAMESTAGE",
     "name": "Game Stage",
-    "order": "3",
+    "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -345,21 +363,13 @@
   {
     "code": "WIDGETS",
     "name": "Widgets",
-    "order": "4",
+    "order": "6",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
     "hasChild": "false"
   },
-  {
-    "code": "SITESETTINGS",
-    "name": "Site Settings",
-    "order": "5",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "CMS",
-    "hasChild": "false"
-  },
+
   {
     "code": "SETTINGS",
     "name": "Settings",
@@ -369,7 +379,6 @@
     "parentItemCode": "none",
     "hasChild": "true"
   },
-
   {
     "code": "USERMANAGEMENT",
     "name": "User Management",
