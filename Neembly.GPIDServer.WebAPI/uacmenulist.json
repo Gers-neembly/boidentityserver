@@ -341,7 +341,15 @@
     "parentItemCode": "PAGEBUILDER",
     "hasChild": "false"
   },
-
+  {
+    "code": "LEFTNAVIGATION",
+    "name": "Left Navigation",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
   {
     "code": "COMMUNITYCHAT",
     "name": "Community Chat",
