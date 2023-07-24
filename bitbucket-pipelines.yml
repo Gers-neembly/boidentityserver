@@ -41,7 +41,7 @@ pipelines:
           - echo "Updating DateMarker"
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_DEVTEST $FTP_DEPLOYDIR builddate.txt
-  deploy-dev-scp:
+    deploy-dev-scp:
     - step:
         name: Deploy to DEV-test
         deployment: test
