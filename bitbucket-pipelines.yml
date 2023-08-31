@@ -174,7 +174,7 @@ pipelines:
           - echo $ServerId
           - if [ "$Password" != "$PROD_VAR_PASSWORD" ]; then exit 1 ; fi
           - if [ "$ServerId" = "1" ]; then export SSH_SERVER_PUBWS=$SSH_SERVER_PUBWS1 ; fi
-          - if [ "$ServerId" = "2" ]; then export SSH_SERVER_PUBWS=$SSH_SERVER_PUBWS1 ; fi
+          - if [ "$ServerId" = "2" ]; then export SSH_SERVER_PUBWS=$SSH_SERVER_PUBWS2 ; fi
           - echo $SSH_SERVER_PUBWS
           - if [ "$SSH_SERVER_PUBWS" = "" ]; then exit 1 ; fi
           - if [ "$VersionNo" = "" ]; then export VERSION_NUMBER=$BUILD_VERSION ; else export VERSION_NUMBER=$VersionNo ; fi
