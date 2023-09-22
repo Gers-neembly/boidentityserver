@@ -523,7 +523,80 @@
     "isMenuHeader": "false",
     "parentItemCode": "REFERRAL",
     "hasChild": "false"
+  },
+  {
+    "code": "VIP",
+    "name": "Vip",
+    "order": 8,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "VIP_SETTINGS",
+    "name": "Settings",
+    "order": 0,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "TIER_SETTINGS",
+    "name": "Tier Settings",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "ACTIVITY_SETTINGS",
+    "name": "Activity Settings",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "SETTINGS_LEVEL_UP_BONUS",
+    "name": "Settings Level Up Bonus",
+    "order": 3,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "SETTINGS_CASH_REBATE",
+    "name": "Settings Cash Rebate",
+    "order": 4,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "SETTINGS_KOMP_SYSTEM",
+    "name": "Settings Komp System",
+    "order": 5,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "DISBURSEMENT",
+    "name": "Disbursement",
+    "order": 6,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
   }
+
   //{
   //  "code": "LOYALTY",
   //  "name": "Loyalty",
