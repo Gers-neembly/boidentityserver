@@ -579,17 +579,8 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_KOMP_SYSTEM",
-    "name": "Settings Komp System",
-    "order": 5,
-    "isMenuItem": true,
-    "isMenuHeader": false,
-    "parentItemCode": "VIP",
-    "hasChild": false
-  },
-  {
-    "code": "DISBURSEMENT",
-    "name": "Disbursement",
+    "code": "CASH_REBATE_DISBURSEMENT",
+    "name": "Cash Rebate Disbursement",
     "order": 6,
     "isMenuItem": true,
     "isMenuHeader": false,
