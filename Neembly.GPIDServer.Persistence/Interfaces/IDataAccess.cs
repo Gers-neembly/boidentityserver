@@ -16,7 +16,7 @@ namespace Neembly.BOIDServer.Persistence.Interfaces
         Task<bool> ProfileRequestChange(string BackOfficeUserId, BackOfficeUserInfo boUserInfo);
         IEnumerable<int> GetOperatorAssignments(string netUserId);
         UserInfo GetUserInfo(string username);
-        List<UserInfo> GetUsers(int operatorId);
+        Task<UserInfoViewModel> GetUsers(int operatorId, int pageIndex, int pageSize);
         Task<List<ClaimsViewModel>> GetUserClaims(string userId);
         Task<bool> SetPasswordResetStatus(string userId, bool status);
         bool UpdateEmailExist(string email, string username);
