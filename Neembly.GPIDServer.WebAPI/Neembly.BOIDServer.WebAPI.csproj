@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="uacmenulist.json" />
+    <Page Include="uacmenulist.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.Development2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="appsettings.ClusterAlpha.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
