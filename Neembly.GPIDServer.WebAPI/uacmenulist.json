@@ -377,7 +377,15 @@
     "parentItemCode": "CMS",
     "hasChild": "false"
   },
-
+  {
+    "code": "POPUPS",
+    "name": "Pop-ups",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
   {
     "code": "SETTINGS",
     "name": "Settings",
