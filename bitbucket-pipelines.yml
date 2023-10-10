@@ -63,6 +63,7 @@ pipelines:
             - echo "export SSH_ENV_DEV=$SSH_ENV_DEV" >> set_env_srv.sh
           artifacts: # define the artifacts to be passed to each future step
             - set_env_ws.sh
+            - set_env_srv.sh
       - step:
           name: Upload Dashboard files
           caches:
