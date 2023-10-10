@@ -42,28 +42,53 @@ pipelines:
           - echo `date +%m/%d/%Y-%H:%M:%S` > builddate.txt
           - ncftpput -a -v -u $FTP_USERNAME -p $FTP_PASSWORD $FTP_URL_DEVTEST $FTP_DEPLOYDIR builddate.txt
     deploy-dev-scp:
-    - step:
-        name: Deploy to DEV-test
-        deployment: test
-        caches:
-          - dotnetcore
-        script:
-          - echo "Manual deploy to DEV-test environment"
-          - export ASPNETCORE_ENVIRONMENT="Development"
-          - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Debug
-          - dotnet publish $PROJECT_NAME --configuration Debug
-          - echo "Uploading to Server"
-          - apt-get update && apt-get -y -qq install openssh-client curl
-          - scp -r $DOTNET_BUILD_DIR/bin/Debug/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/* $SSH_USER_DEVWS@$SSH_SERVER_DEVWS:$DEVWS_PUBDIR$FTP_ROOTDIR
-          - scp -r $DOTNET_BUILD_DIR/*.json $SSH_USER_DEVWS@$SSH_SERVER_DEVWS:$DEVWS_PUBDIR$FTP_ROOTDIR
-          - sleep 10s
-          - echo "Restarting Service"
-          - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS 'sudo systemctl restart neembly-bo-auth.service'
-          - sleep 10
-          - echo "Updating Database"
-          - cd $DB_PROJECT_DIR
-          - dotnet ef database update		  
+      - variables:
+        - name: ServerId
+        - name: Password 		
+      - step:
+          name: Deploy DEV JOb Processors SCP
+          deployment: test
+          script:
+            - echo $ServerId
+            - if [ "$Password" != "$SBWS_VAR_PASSWORD" ]; then exit 1 ; fi
+            - if [ "$ServerId" = "1" ]; then export SSH_SERVER_DEVWS=$SSH_SERVER_DEVWS1;  fi
+            - if [ "$ServerId" = "2" ]; then export SSH_SERVER_DEVWS=$SSH_SERVER_DEVWS2; fi
+            - if [ "$ServerId" = "1" ]; then export SSH_ENV_DEV="Development";  fi
+            - if [ "$ServerId" = "2" ]; then export SSH_ENV_DEV="Development2"; fi
+            - echo $SSH_SERVER_DEVWS
+            - echo $SSH_ENV_DEV
+            - if [ "$SSH_SERVER_DEVWS" = "" ]; then exit 1 ; fi
+            - if [ "$SSH_ENV_DEV" = "" ]; then exit 1 ; fi
+            - echo "export SSH_SERVER_DEVWS=$SSH_SERVER_DEVWS" >> set_env_ws.sh
+            - echo "export SSH_ENV_DEV=$SSH_ENV_DEV" >> set_env_srv.sh
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env_ws.sh
+      - step:
+          name: Upload Dashboard files
+          caches:
+            - dotnetcore
+          script:   
+            - cat set_env_ws.sh 
+            - source set_env_ws.sh
+            - echo $SSH_SERVER_DEVWS            
+            - cat set_env_srv.sh 
+            - source set_env_srv.sh
+            - echo $SSH_ENV_DEV            
+            - export ASPNETCORE_ENVIRONMENT=$SSH_ENV_DEV			
+            - dotnet restore
+            - dotnet build $PROJECT_NAME --configuration Debug
+            - dotnet publish $PROJECT_NAME --configuration Debug
+            - echo "Uploading to Server"
+            - apt-get update && apt-get -y -qq install openssh-client curl
+            - scp -r $DOTNET_BUILD_DIR/bin/Debug/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/* $SSH_USER_DEVWS@$SSH_SERVER_DEVWS:$DEVWS_PUBDIR$FTP_ROOTDIR
+            - scp -r $DOTNET_BUILD_DIR/*.json $SSH_USER_DEVWS@$SSH_SERVER_DEVWS:$DEVWS_PUBDIR$FTP_ROOTDIR
+            - sleep 10s
+            - echo "Restarting Service"
+            - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS 'sudo systemctl restart neembly-bo-auth.service'
+            - sleep 10
+            - echo "Updating Database"
+            - cd $DB_PROJECT_DIR
+            - dotnet ef database update		  
     deploy-sb-ws:
     - variables:
       - name: ServerId
