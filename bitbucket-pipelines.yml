@@ -46,7 +46,7 @@ pipelines:
         - name: ServerId
         - name: Password 		
       - step:
-          name: Deploy DEV Job Processors SCP
+          name: Deploy DEV BO Identity Server SCP
           deployment: test
           script:
             - echo $ServerId
