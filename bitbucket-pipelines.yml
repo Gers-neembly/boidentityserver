@@ -46,7 +46,7 @@ pipelines:
         - name: ServerId
         - name: Password 		
       - step:
-          name: Deploy DEV JOb Processors SCP
+          name: Deploy DEV Job Processors SCP
           deployment: test
           script:
             - echo $ServerId
@@ -65,7 +65,7 @@ pipelines:
             - set_env_ws.sh
             - set_env_srv.sh
       - step:
-          name: Upload Dashboard files
+          name: Upload BO Identity Server files
           caches:
             - dotnetcore
           script:   
