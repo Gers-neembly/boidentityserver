@@ -75,7 +75,7 @@ pipelines:
             - cat set_env_srv.sh 
             - source set_env_srv.sh
             - echo $SSH_ENV_DEV            
-            - export ASPNETCORE_ENVIRONMENT=$SSH_ENV_DEV			
+            - export ASPNETCORE_ENVIRONMENT="Development"			
             - dotnet restore
             - dotnet build $PROJECT_NAME --configuration Debug
             - dotnet publish $PROJECT_NAME --configuration Debug
