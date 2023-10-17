@@ -74,6 +74,9 @@
     <Content Update="appsettings.Sandbox.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="nlog.Development2.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="nlog.ClusterAlpha.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -46,7 +46,7 @@ pipelines:
         - name: ServerId
         - name: Password 		
       - step:
-          name: Deploy DEV BO Identity Server SCP
+          name: Deploy BO Identity Server SCP
           deployment: test
           script:
             - echo $ServerId
@@ -75,7 +75,7 @@ pipelines:
             - cat set_env_srv.sh 
             - source set_env_srv.sh
             - echo $SSH_ENV_DEV            
-            - export ASPNETCORE_ENVIRONMENT="Development"			
+            - export ASPNETCORE_ENVIRONMENT=$SSH_ENV_DEV	
             - dotnet restore
             - dotnet build $PROJECT_NAME --configuration Debug
             - dotnet publish $PROJECT_NAME --configuration Debug
