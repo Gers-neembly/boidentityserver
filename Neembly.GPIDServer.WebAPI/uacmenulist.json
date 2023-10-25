@@ -198,6 +198,15 @@
     "hasChild": "false"
   },
   {
+    "code": "AFFILIATEPROGRAMREPORT",
+    "name": "Affiliate Program",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
@@ -240,6 +249,33 @@
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "FINANCIAL",
+    "hasChild": "false"
+  },
+  {
+    "code": "TIERUPREFERRALREWARDSAFFILIATEREPORT",
+    "name": "Tier Up Referral Rewards",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "REFERRALWELCOMEBONUSAFFILIATEREPORT",
+    "name": "Referral Welcome Bonus",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "WAGERINGAFFILIATEREPORT",
+    "name": "Wagering",
+    "order": "8",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
     "hasChild": "false"
   },
   //{
@@ -621,15 +657,56 @@
     "isMenuHeader": false,
     "parentItemCode": "VIP",
     "hasChild": false
+  },
+  {
+    "code": "AFFILIATE",
+    "name": "Affiliate",
+    "order": 9,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true,
+    "children": [
+      {
+        "code": "AFFILIATECOMMISSIONPLANMANAGEMENT",
+        "name": "Commission Plan Management"
+      },
+      {
+        "code": "AFFILIATESETTINGS",
+        "name": "Settings",
+        "children": [
+          {
+            "code": "TIERUPREFERRALREWARDSAFFILIATESETTINGS",
+            "name": "Tier Up Referral Rewards"
+          },
+          {
+            "code": "REFERRALWELCOMEBONUSAFFILIATESETTINGS",
+            "name": "Referral Welcome Bonus"
+          },
+          {
+            "code": "WAGERINGAFFILIATESETTINGS",
+            "name": "Wagering"
+          }
+        ]
+      },
+      {
+        "code": "AFFILIATEDISBURSEMENT",
+        "name": "Disbursement",
+        "children": [
+          {
+            "code": "TIERUPREFERRALREWARDSAFFILIATEDISBURSEMENT",
+            "name": "Tier Up Referral Rewards"
+          },
+          {
+            "code": "REFERRALWELCOMEBONUSAFFILIATEDISBURSEMENT",
+            "name": "Referral Welcome Bonus"
+          },
+          {
+            "code": "WAGERINGAFFILIATEDISBURSEMENT",
+            "name": "Wagering"
+          }
+        ]
+      }
+    ]
   }
-
-  //{
-  //  "code": "LOYALTY",
-  //  "name": "Loyalty",
-  //  "order": "3",
-  //  "isMenuItem": "true",
-  //  "isMenuHeader": "false",
-  //  "parentItemCode": "CARM",
-  //  "hasChild": "false"
-  //}
 ]
