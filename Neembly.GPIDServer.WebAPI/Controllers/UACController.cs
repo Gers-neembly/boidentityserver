@@ -53,20 +53,20 @@ namespace Neembly.BOIDServer.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserProfile(string username)
         {
-        var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
-        if (userInfo == null)
-            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-        return Ok(userInfo);
+            var userInfo = await Task.Run(() => _dataAccess.GetUserInfo(username));
+            if (userInfo == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+            return Ok(userInfo);
         }
 
         [BOAccessFilter(GlobalConstants.Modules.UserManagement, GlobalConstants.AccessPermission.AllowAccessToUAC)]
         [HttpGet("users/{operatorId}")]
-        public async Task<IActionResult> GetBOUsers(int operatorId)
+        public async Task<IActionResult> GetBOUsers(int operatorId, int pageIndex = 1, int pageSize = 20)
         {
-        var users = await Task.Run(() => _dataAccess.GetUsers(operatorId));
-        if (users == null)
-            return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
-        return Ok(users);
+            var users = await Task.Run(() => _dataAccess.GetUsers(operatorId, pageIndex, pageSize));
+            if (users == null)
+                return NotFound(GlobalConstants.ErrUsernameAccountNotRegistered);
+            return Ok(users);
         }
 
         #endregion

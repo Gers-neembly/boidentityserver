@@ -198,6 +198,15 @@
     "hasChild": "false"
   },
   {
+    "code": "AFFILIATEPROGRAMREPORT",
+    "name": "Affiliate Program",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
@@ -242,6 +251,33 @@
     "parentItemCode": "FINANCIAL",
     "hasChild": "false"
   },
+  {
+    "code": "TIERUPREFERRALREWARDSAFFILIATEREPORT",
+    "name": "Tier Up Referral Rewards",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "REFERRALWELCOMEBONUSAFFILIATEREPORT",
+    "name": "Referral Welcome Bonus",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "WAGERINGAFFILIATEREPORT",
+    "name": "Wagering",
+    "order": "8",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "AFFILIATEPROGRAMREPORT",
+    "hasChild": "false"
+  },
   //{
   //  "code": "LOYALTYREPORT",
   //  "name": "Loyalty Report",
@@ -270,9 +306,18 @@
     "hasChild": "true"
   },
   {
+    "code": "SITESETTINGS",
+    "name": "Site Settings",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
     "code": "MEDIAMANAGER",
     "name": "Media Manager",
-    "order": "1",
+    "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -281,7 +326,7 @@
   {
     "code": "PAGEBUILDER",
     "name": "Page Builder",
-    "order": "2",
+    "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "true",
     "parentItemCode": "CMS",
@@ -333,18 +378,45 @@
     "hasChild": "false"
   },
   {
-    "code": "WIDGETS",
-    "name": "Widgets",
-    "order": "3",
+    "code": "LEFTNAVIGATION",
+    "name": "Left Navigation",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PAGEBUILDER",
+    "hasChild": "false"
+  },
+  {
+    "code": "COMMUNITYCHAT",
+    "name": "Community Chat",
+    "order": "4",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
     "hasChild": "false"
   },
   {
-    "code": "SITESETTINGS",
-    "name": "Site Settings",
-    "order": "4",
+    "code": "GAMESTAGE",
+    "name": "Game Stage",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
+    "code": "WIDGETS",
+    "name": "Widgets",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
+    "code": "POPUPS",
+    "name": "Pop-ups",
+    "order": "7",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -359,7 +431,6 @@
     "parentItemCode": "none",
     "hasChild": "true"
   },
-
   {
     "code": "USERMANAGEMENT",
     "name": "User Management",
@@ -523,14 +594,119 @@
     "isMenuHeader": "false",
     "parentItemCode": "REFERRAL",
     "hasChild": "false"
+  },
+  {
+    "code": "VIP",
+    "name": "Vip",
+    "order": 8,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "VIP_SETTINGS",
+    "name": "Settings",
+    "order": 0,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "TIER_SETTINGS",
+    "name": "Tier Settings",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "ACTIVITY_SETTINGS",
+    "name": "Activity Settings",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "SETTINGS_LEVEL_UP_BONUS",
+    "name": "Settings Level Up Bonus",
+    "order": 3,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "SETTINGS_CASH_REBATE",
+    "name": "Settings Cash Rebate",
+    "order": 4,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "CASH_REBATE_DISBURSEMENT",
+    "name": "Cash Rebate Disbursement",
+    "order": 6,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "AFFILIATE",
+    "name": "Affiliate",
+    "order": 9,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true,
+    "children": [
+      {
+        "code": "AFFILIATECOMMISSIONPLANMANAGEMENT",
+        "name": "Commission Plan Management"
+      },
+      {
+        "code": "AFFILIATESETTINGS",
+        "name": "Settings",
+        "children": [
+          {
+            "code": "TIERUPREFERRALREWARDSAFFILIATESETTINGS",
+            "name": "Tier Up Referral Rewards"
+          },
+          {
+            "code": "REFERRALWELCOMEBONUSAFFILIATESETTINGS",
+            "name": "Referral Welcome Bonus"
+          },
+          {
+            "code": "WAGERINGAFFILIATESETTINGS",
+            "name": "Wagering"
+          }
+        ]
+      },
+      {
+        "code": "AFFILIATEDISBURSEMENT",
+        "name": "Disbursement",
+        "children": [
+          {
+            "code": "TIERUPREFERRALREWARDSAFFILIATEDISBURSEMENT",
+            "name": "Tier Up Referral Rewards"
+          },
+          {
+            "code": "REFERRALWELCOMEBONUSAFFILIATEDISBURSEMENT",
+            "name": "Referral Welcome Bonus"
+          },
+          {
+            "code": "WAGERINGAFFILIATEDISBURSEMENT",
+            "name": "Wagering"
+          }
+        ]
+      }
+    ]
   }
-  //{
-  //  "code": "LOYALTY",
-  //  "name": "Loyalty",
-  //  "order": "3",
-  //  "isMenuItem": "true",
-  //  "isMenuHeader": "false",
-  //  "parentItemCode": "CARM",
-  //  "hasChild": "false"
-  //}
 ]
