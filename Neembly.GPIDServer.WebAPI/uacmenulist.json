@@ -614,7 +614,7 @@
     "hasChild": false
   },
   {
-    "code": "TIER_SETTINGS",
+    "code": "VIPTIERSETTINGS",
     "name": "Tier Settings",
     "order": 1,
     "isMenuItem": true,
@@ -623,7 +623,7 @@
     "hasChild": false
   },
   {
-    "code": "ACTIVITY_SETTINGS",
+    "code": "VIPTIERACTIVITYSETTINGS",
     "name": "Activity Settings",
     "order": 2,
     "isMenuItem": true,
@@ -632,7 +632,7 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_LEVEL_UP_BONUS",
+    "code": "VIPLEVELUPBONUS",
     "name": "Settings Level Up Bonus",
     "order": 3,
     "isMenuItem": true,
@@ -641,7 +641,7 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_CASH_REBATE",
+    "code": "VIPCASHREBATE",
     "name": "Settings Cash Rebate",
     "order": 4,
     "isMenuItem": true,
@@ -650,7 +650,7 @@
     "hasChild": false
   },
   {
-    "code": "CASH_REBATE_DISBURSEMENT",
+    "code": "VIPCASHREBATEDISBURSEMENT",
     "name": "Cash Rebate Disbursement",
     "order": 6,
     "isMenuItem": true,
