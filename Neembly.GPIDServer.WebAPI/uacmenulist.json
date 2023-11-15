@@ -605,7 +605,7 @@
     "hasChild": true
   },
   {
-    "code": "VIP_SETTINGS",
+    "code": "VIPSETTINGS",
     "name": "Settings",
     "order": 0,
     "isMenuItem": true,
@@ -641,9 +641,18 @@
     "hasChild": false
   },
   {
+    "code": "VIPRAKEBACK",
+    "name": "Settings Rakeback",
+    "order": 4,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
     "code": "VIPCASHREBATE",
     "name": "Settings Cash Rebate",
-    "order": 4,
+    "order": 5,
     "isMenuItem": true,
     "isMenuHeader": false,
     "parentItemCode": "VIP",
