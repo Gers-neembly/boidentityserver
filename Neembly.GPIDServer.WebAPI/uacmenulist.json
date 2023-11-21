@@ -200,11 +200,29 @@
   {
     "code": "AFFILIATEPROGRAMREPORT",
     "name": "Affiliate Program",
-    "order": "4",
+    "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "true",
     "parentItemCode": "REPORTS",
     "hasChild": "true"
+  },
+  {
+    "code": "VIPPROGRAMREPORT",
+    "name": "VIP Program",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "VIPRAKEBACKREPORT",
+    "name": "Rakeback Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
   },
   {
     "code": "DEPOSITREPORT",
@@ -605,7 +623,7 @@
     "hasChild": true
   },
   {
-    "code": "VIP_SETTINGS",
+    "code": "VIPSETTINGS",
     "name": "Settings",
     "order": 0,
     "isMenuItem": true,
@@ -614,7 +632,7 @@
     "hasChild": false
   },
   {
-    "code": "TIER_SETTINGS",
+    "code": "VIPTIERSETTINGS",
     "name": "Tier Settings",
     "order": 1,
     "isMenuItem": true,
@@ -623,7 +641,7 @@
     "hasChild": false
   },
   {
-    "code": "ACTIVITY_SETTINGS",
+    "code": "VIPTIERACTIVITYSETTINGS",
     "name": "Activity Settings",
     "order": 2,
     "isMenuItem": true,
@@ -632,7 +650,7 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_LEVEL_UP_BONUS",
+    "code": "VIPLEVELUPBONUS",
     "name": "Settings Level Up Bonus",
     "order": 3,
     "isMenuItem": true,
@@ -641,8 +659,8 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_CASH_REBATE",
-    "name": "Settings Cash Rebate",
+    "code": "VIPRAKEBACK",
+    "name": "Settings Rakeback",
     "order": 4,
     "isMenuItem": true,
     "isMenuHeader": false,
@@ -650,7 +668,16 @@
     "hasChild": false
   },
   {
-    "code": "CASH_REBATE_DISBURSEMENT",
+    "code": "VIPCASHREBATE",
+    "name": "Settings Cash Rebate",
+    "order": 5,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "VIPCASHREBATEDISBURSEMENT",
     "name": "Cash Rebate Disbursement",
     "order": 6,
     "isMenuItem": true,
