@@ -200,11 +200,29 @@
   {
     "code": "AFFILIATEPROGRAMREPORT",
     "name": "Affiliate Program",
-    "order": "4",
+    "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "true",
     "parentItemCode": "REPORTS",
     "hasChild": "true"
+  },
+  {
+    "code": "VIPPROGRAMREPORT",
+    "name": "VIP Program",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "VIPRAKEBACKREPORT",
+    "name": "Rakeback Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
   },
   {
     "code": "DEPOSITREPORT",
