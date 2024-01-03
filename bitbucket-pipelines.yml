@@ -58,8 +58,7 @@ pipelines:
             - scp -rC $RUNNER_BUILD_DIR/*.json $SSH_SERVER_PUB_USER@$SSH_SERVER_PUBWS:$DEVWS_PUBDIR$FTP_ROOTDIR
             - sleep 10s
             - echo "Restarting Service"
-            - ssh $SSH_SERVER_PUB_USER@$SSH_SERVER_PUBWS 'sudo systemctl restart neembly-pp-auth.service'
-            - ssh $SSH_SERVER_PUB_USER@$SSH_SERVER_PUBWS 'sudo systemctl restart neembly-bitcoingame-auth.service'
+            - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS 'sudo systemctl restart neembly-bo-auth.service'
             - sleep 10
             - if [ "$DeployDB" = "false" ]; then exit 0 ; fi
             - echo "Updating Database"
