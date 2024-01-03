@@ -29,7 +29,7 @@ pipelines:
           - echo "Manual deploy to DEV-test environment"
           - export ASPNETCORE_ENVIRONMENT="Development"
           - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Debug 
+          - dotnet build $PROJECT_NAME --no-restore --configuration Debug 
           - dotnet publish $PROJECT_NAME --configuration Debug 
           - echo "Uploading to Server"
           - apt-get update && apt-get -qq install ncftp
