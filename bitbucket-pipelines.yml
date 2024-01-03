@@ -29,8 +29,8 @@ pipelines:
           allowed-values:
           - Yes
           - No
-      - name: Password 	
-        description: Enter password to proceed		
+        - name: Password 	
+          description: Enter password to proceed		
       - step:
           runs-on:
             - self.hosted
