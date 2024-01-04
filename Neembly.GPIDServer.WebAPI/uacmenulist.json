@@ -63,6 +63,15 @@
     "hasChild": "false"
   },
   {
+    "code": "MGATEMERCHANTACCOUNT",
+    "name": "MGate Merchant Account",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCE",
+    "hasChild": "false"
+  },
+  {
     "code": "REPORTS",
     "name": "Reports",
     "order": "4",
