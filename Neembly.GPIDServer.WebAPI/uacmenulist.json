@@ -69,7 +69,7 @@
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "FINANCE",
-    "hasChild": "false"
+    "hasChild": "true"
   },
   {
     "code": "KOMPREQUESTSREALWALLET",
