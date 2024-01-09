@@ -69,7 +69,7 @@
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "FINANCE",
-    "hasChild": "false"
+    "hasChild": "true"
   },
   {
     "code": "KOMPREQUESTSREALWALLET",
@@ -739,15 +739,15 @@
     "parentItemCode": "KOMPSYSTEM",
     "hasChild": false
   },
-  {
-    "code": "KOMPSYSTEMCONVERSION",
-    "name": "Komp Rewards",
-    "order": 3,
-    "isMenuItem": true,
-    "isMenuHeader": false,
-    "parentItemCode": "KOMPSYSTEM",
-    "hasChild": false
-  },
+  //{
+  //  "code": "KOMPSYSTEMREWARDS",
+  //  "name": "Komp Rewards",
+  //  "order": 3,
+  //  "isMenuItem": true,
+  //  "isMenuHeader": false,
+  //  "parentItemCode": "KOMPSYSTEM",
+  //  "hasChild": false
+  //},
   {
     "code": "AFFILIATE",
     "name": "Affiliate",
