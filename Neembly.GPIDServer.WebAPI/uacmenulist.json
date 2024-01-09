@@ -81,15 +81,6 @@
     "hasChild": false
   },
   {
-    "code": "KOMPREQUESTSKOMPBONUS",
-    "name": "Komp Bonus",
-    "order": 2,
-    "isMenuItem": true,
-    "isMenuHeader": false,
-    "parentItemCode": "KOMPREQUESTS",
-    "hasChild": false
-  },
-  {
     "code": "REPORTS",
     "name": "Reports",
     "order": "4",
