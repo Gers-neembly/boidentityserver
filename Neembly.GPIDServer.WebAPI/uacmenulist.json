@@ -63,6 +63,33 @@
     "hasChild": "false"
   },
   {
+    "code": "KOMPREQUESTS",
+    "name": "Komp Requests",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCE",
+    "hasChild": "false"
+  },
+  {
+    "code": "KOMPREQUESTSREALWALLET",
+    "name": "Real Wallet",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "KOMPREQUESTS",
+    "hasChild": false
+  },
+  {
+    "code": "KOMPREQUESTSKOMPBONUS",
+    "name": "Komp Bonus",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "KOMPREQUESTS",
+    "hasChild": false
+  },
+  {
     "code": "REPORTS",
     "name": "Reports",
     "order": "4",
@@ -686,9 +713,45 @@
     "hasChild": false
   },
   {
+    "code": "KOMPSYSTEM",
+    "name": "Komp System",
+    "order": 9,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "KOMPSYSTEMSETTINGS",
+    "name": "Komp Settings",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "KOMPSYSTEM",
+    "hasChild": false
+  },
+  {
+    "code": "KOMPSYSTEMCONVERSION",
+    "name": "Komp Conversion",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "KOMPSYSTEM",
+    "hasChild": false
+  },
+  {
+    "code": "KOMPSYSTEMCONVERSION",
+    "name": "Komp Rewards",
+    "order": 3,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "KOMPSYSTEM",
+    "hasChild": false
+  },
+  {
     "code": "AFFILIATE",
     "name": "Affiliate",
-    "order": 9,
+    "order": 10,
     "isMenuItem": true,
     "isMenuHeader": true,
     "parentItemCode": "CARM",
