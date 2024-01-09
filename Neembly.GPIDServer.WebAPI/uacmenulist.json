@@ -739,15 +739,15 @@
     "parentItemCode": "KOMPSYSTEM",
     "hasChild": false
   },
-  {
-    "code": "KOMPSYSTEMREWARDS",
-    "name": "Komp Rewards",
-    "order": 3,
-    "isMenuItem": true,
-    "isMenuHeader": false,
-    "parentItemCode": "KOMPSYSTEM",
-    "hasChild": false
-  },
+  //{
+  //  "code": "KOMPSYSTEMREWARDS",
+  //  "name": "Komp Rewards",
+  //  "order": 3,
+  //  "isMenuItem": true,
+  //  "isMenuHeader": false,
+  //  "parentItemCode": "KOMPSYSTEM",
+  //  "hasChild": false
+  //},
   {
     "code": "AFFILIATE",
     "name": "Affiliate",
