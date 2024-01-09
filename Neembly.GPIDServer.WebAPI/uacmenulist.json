@@ -740,7 +740,7 @@
     "hasChild": false
   },
   {
-    "code": "KOMPSYSTEMCONVERSION",
+    "code": "KOMPSYSTEMREWARDS",
     "name": "Komp Rewards",
     "order": 3,
     "isMenuItem": true,
