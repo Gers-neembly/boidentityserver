@@ -63,21 +63,21 @@
     "hasChild": "false"
   },
   {
-    "code": "KOMPREQUESTS",
+    "code": "VIPKOMPREQUESTS",
     "name": "Komp Requests",
     "order": "5",
     "isMenuItem": "true",
-    "isMenuHeader": "false",
+    "isMenuHeader": "true",
     "parentItemCode": "FINANCE",
     "hasChild": "true"
   },
   {
-    "code": "KOMPREQUESTSREALWALLET",
+    "code": "VIPKOMPREDEMPTIONREQUESTS",
     "name": "Real Wallet",
     "order": 1,
     "isMenuItem": true,
     "isMenuHeader": false,
-    "parentItemCode": "KOMPREQUESTS",
+    "parentItemCode": "VIPKOMPREQUESTS",
     "hasChild": false
   },
   {
@@ -704,30 +704,30 @@
     "hasChild": false
   },
   {
-    "code": "KOMPSYSTEM",
+    "code": "VIPKOMPSYSTEM",
     "name": "Komp System",
     "order": 9,
     "isMenuItem": true,
     "isMenuHeader": true,
-    "parentItemCode": "CARM",
+    "parentItemCode": "VIP",
     "hasChild": true
   },
   {
-    "code": "KOMPSYSTEMSETTINGS",
+    "code": "VIPKOMPSETTINGS",
     "name": "Komp Settings",
     "order": 1,
     "isMenuItem": true,
     "isMenuHeader": false,
-    "parentItemCode": "KOMPSYSTEM",
+    "parentItemCode": "VIPKOMPSYSTEM",
     "hasChild": false
   },
   {
-    "code": "KOMPSYSTEMCONVERSION",
-    "name": "Komp Conversion",
+    "code": "VIPKOMPCONVERSIONS",
+    "name": "Komp Conversions",
     "order": 2,
     "isMenuItem": true,
     "isMenuHeader": false,
-    "parentItemCode": "KOMPSYSTEM",
+    "parentItemCode": "VIPKOMPSYSTEM",
     "hasChild": false
   },
   //{
