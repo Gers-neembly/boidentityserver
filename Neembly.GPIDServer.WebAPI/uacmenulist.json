@@ -67,7 +67,7 @@
     "name": "Komp Requests",
     "order": "5",
     "isMenuItem": "true",
-    "isMenuHeader": "true",
+    "isMenuHeader": "false",
     "parentItemCode": "FINANCE",
     "hasChild": "true"
   },
@@ -708,7 +708,7 @@
     "name": "Komp System",
     "order": 9,
     "isMenuItem": true,
-    "isMenuHeader": true,
+    "isMenuHeader": false,
     "parentItemCode": "VIP",
     "hasChild": true
   },
