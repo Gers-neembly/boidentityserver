@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.Editing;
+using Microsoft.EntityFrameworkCore;
 using Neembly.BOIDServer.Constants;
 using Neembly.BOIDServer.Persistence.Contexts;
 using Neembly.BOIDServer.Persistence.Entities;
 using Neembly.BOIDServer.Persistence.Interfaces;
 using Neembly.BOIDServer.SharedClasses;
 using Neembly.BOIDServer.SharedClasses.Outputs;
+using Neembly.BOIDServer.SharedClasses.QueryExtension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,9 +157,12 @@ namespace Neembly.BOIDServer.Persistence.Helpers
             return userInfo;
         }
 
-        public List<UserInfo> GetUsers(int operatorId)
+        public async Task<UserInfoViewModel> GetUsers(int operatorId, int pageIndex, int pageSize)
         {
-            var userlist = _appDBContext.Users
+            var userInfoViewModel = new UserInfoViewModel();
+            try
+            {
+                var userlist = _appDBContext.Users
                 .Join(_appDBContext.OperatorAssignments.Where(r => r.OperatorId == operatorId)
                     , users => users.Id, op => op.NetUserId,
                     (users, op) => new { userTable = users, operatorInfo = op })
@@ -175,9 +180,14 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     OperatorId = user.operatorInfo.OperatorId,
                     CreatedDate = user.userTable.CreatedDate,
                     ModifiedDate = user.userTable.ModifiedDate
-                }).ToList();
-
-            return userlist;
+                }).AsNoTracking();
+                userInfoViewModel.UserInfos = await userlist.PaginateAsync(pageIndex, pageSize);
+                return userInfoViewModel;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<List<ClaimsViewModel>> GetUserClaims(string userId)
