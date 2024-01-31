@@ -206,6 +206,33 @@
     "parentItemCode": "REPORTS",
     "hasChild": "false"
   },
+  // {
+  //   "code": "AFFILIATEPROGRAMREPORT",
+  //   "name": "Affiliate Program",
+  //   "order": "5",
+  //   "isMenuItem": "true",
+  //   "isMenuHeader": "true",
+  //   "parentItemCode": "REPORTS",
+  //   "hasChild": "true"
+  // },
+  {
+    "code": "VIPPROGRAMREPORT",
+    "name": "VIP Program",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "VIPRAKEBACKREPORT",
+    "name": "Rakeback Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
   {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
@@ -251,6 +278,33 @@
     "parentItemCode": "FINANCIAL",
     "hasChild": "false"
   },
+  // {
+  //   "code": "TIERUPREFERRALREWARDSAFFILIATEREPORT",
+  //   "name": "Tier Up Referral Rewards",
+  //   "order": "6",
+  //   "isMenuItem": "true",
+  //   "isMenuHeader": "false",
+  //   "parentItemCode": "AFFILIATEPROGRAMREPORT",
+  //   "hasChild": "false"
+  // },
+  // {
+  //   "code": "REFERRALWELCOMEBONUSAFFILIATEREPORT",
+  //   "name": "Referral Welcome Bonus",
+  //   "order": "7",
+  //   "isMenuItem": "true",
+  //   "isMenuHeader": "false",
+  //   "parentItemCode": "AFFILIATEPROGRAMREPORT",
+  //   "hasChild": "false"
+  // },
+  // {
+  //   "code": "WAGERINGAFFILIATEREPORT",
+  //   "name": "Wagering",
+  //   "order": "8",
+  //   "isMenuItem": "true",
+  //   "isMenuHeader": "false",
+  //   "parentItemCode": "AFFILIATEPROGRAMREPORT",
+  //   "hasChild": "false"
+  // },
   //{
   //  "code": "LOYALTYREPORT",
   //  "name": "Loyalty Report",
@@ -578,7 +632,7 @@
     "hasChild": true
   },
   {
-    "code": "VIP_SETTINGS",
+    "code": "VIPSETTINGS",
     "name": "Settings",
     "order": 0,
     "isMenuItem": true,
@@ -587,7 +641,7 @@
     "hasChild": false
   },
   {
-    "code": "TIER_SETTINGS",
+    "code": "VIPTIERSETTINGS",
     "name": "Tier Settings",
     "order": 1,
     "isMenuItem": true,
@@ -596,7 +650,7 @@
     "hasChild": false
   },
   {
-    "code": "ACTIVITY_SETTINGS",
+    "code": "VIPTIERACTIVITYSETTINGS",
     "name": "Activity Settings",
     "order": 2,
     "isMenuItem": true,
@@ -605,7 +659,7 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_LEVEL_UP_BONUS",
+    "code": "VIPLEVELUPBONUS",
     "name": "Settings Level Up Bonus",
     "order": 3,
     "isMenuItem": true,
@@ -614,8 +668,8 @@
     "hasChild": false
   },
   {
-    "code": "SETTINGS_CASH_REBATE",
-    "name": "Settings Cash Rebate",
+    "code": "VIPRAKEBACK",
+    "name": "Settings Rakeback",
     "order": 4,
     "isMenuItem": true,
     "isMenuHeader": false,
@@ -623,7 +677,16 @@
     "hasChild": false
   },
   {
-    "code": "CASH_REBATE_DISBURSEMENT",
+    "code": "VIPCASHREBATE",
+    "name": "Settings Cash Rebate",
+    "order": 5,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": false
+  },
+  {
+    "code": "VIPCASHREBATEDISBURSEMENT",
     "name": "Cash Rebate Disbursement",
     "order": 6,
     "isMenuItem": true,
@@ -631,14 +694,55 @@
     "parentItemCode": "VIP",
     "hasChild": false
   }
-
-  //{
-  //  "code": "LOYALTY",
-  //  "name": "Loyalty",
-  //  "order": "3",
-  //  "isMenuItem": "true",
-  //  "isMenuHeader": "false",
-  //  "parentItemCode": "CARM",
-  //  "hasChild": "false"
-  //}
+  // {
+  //   "code": "AFFILIATE",
+  //   "name": "Affiliate",
+  //   "order": 9,
+  //   "isMenuItem": true,
+  //   "isMenuHeader": true,
+  //   "parentItemCode": "CARM",
+  //   "hasChild": true,
+  //   "children": [
+  //     {
+  //       "code": "AFFILIATECOMMISSIONPLANMANAGEMENT",
+  //       "name": "Commission Plan Management"
+  //     },
+  //     {
+  //       "code": "AFFILIATESETTINGS",
+  //       "name": "Settings",
+  //       "children": [
+  //         {
+  //           "code": "TIERUPREFERRALREWARDSAFFILIATESETTINGS",
+  //           "name": "Tier Up Referral Rewards"
+  //         },
+  //         {
+  //           "code": "REFERRALWELCOMEBONUSAFFILIATESETTINGS",
+  //           "name": "Referral Welcome Bonus"
+  //         },
+  //         {
+  //           "code": "WAGERINGAFFILIATESETTINGS",
+  //           "name": "Wagering"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "code": "AFFILIATEDISBURSEMENT",
+  //       "name": "Disbursement",
+  //       "children": [
+  //         {
+  //           "code": "TIERUPREFERRALREWARDSAFFILIATEDISBURSEMENT",
+  //           "name": "Tier Up Referral Rewards"
+  //         },
+  //         {
+  //           "code": "REFERRALWELCOMEBONUSAFFILIATEDISBURSEMENT",
+  //           "name": "Referral Welcome Bonus"
+  //         },
+  //         {
+  //           "code": "WAGERINGAFFILIATEDISBURSEMENT",
+  //           "name": "Wagering"
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ]
