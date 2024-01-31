@@ -342,15 +342,6 @@
     "hasChild": "false"
   },
   {
-    "code": "IPBLOCKEDPAGE",
-    "name": "Ip Blocked Page",
-    "order": "1",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "SITESETTINGS",
-    "hasChild": "false"
-  },
-  {
     "code": "MEDIAMANAGER",
     "name": "Media Manager",
     "order": "2",
@@ -551,11 +542,11 @@
   {
     "code": "IPBLOCKING",
     "name": "IP Blocking",
-    "order": 1,
-    "isMenuItem": true,
-    "isMenuHeader": false,
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
     "parentItemCode": "SITEBLOCKING",
-    "hasChild": false
+    "hasChild": "false"
   },
   {
     "code": "MANUALPAYMENTSETTINGS",
