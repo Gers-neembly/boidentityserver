@@ -530,8 +530,24 @@
     "parentItemCode": "SETTINGS",
     "hasChild": "false"
   },
-
-
+  {
+    "code": "SITEBLOCKING",
+    "name": "Site Blocking",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "true"
+  },
+  {
+    "code": "IPBLOCKING",
+    "name": "IP Blocking",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SITEBLOCKING",
+    "hasChild": "false"
+  },
   {
     "code": "MANUALPAYMENTSETTINGS",
     "name": "Manual Payment Settings",
