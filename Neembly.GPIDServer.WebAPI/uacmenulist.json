@@ -709,7 +709,7 @@
     "isMenuHeader": false,
     "parentItemCode": "VIP",
     "hasChild": false
-  }
+  },
   // {
   //   "code": "AFFILIATE",
   //   "name": "Affiliate",
@@ -760,5 +760,41 @@
   //       ]
   //     }
   //   ]
-  // }
+  // },
+  {
+    "code": "TOURNAMENT",
+    "name": "Tournament",
+    "order": 10,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "TOURNAMENTLIST",
+    "name": "Tournament List",
+    "order": 0,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  },
+  {
+    "code": "TOURNAMENTREPORT",
+    "name": "Tournament Reports",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  },
+  {
+    "code": "TOURNAMENTLEADERBOARD",
+    "name": "Tournament Leaderboard",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  }
 ]
