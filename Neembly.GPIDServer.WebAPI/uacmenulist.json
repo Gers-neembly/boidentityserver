@@ -262,7 +262,7 @@
   },
   {
     "code": "VIPLEVELUPBONUSREPORT",
-    "name": "Player Tier Report",
+    "name": "Level Up Bonus Report",
     "order": "3",
     "isMenuItem": "true",
     "isMenuHeader": "false",
