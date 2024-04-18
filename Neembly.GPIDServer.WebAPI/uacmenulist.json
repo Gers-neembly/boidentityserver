@@ -261,6 +261,15 @@
     "hasChild": "false"
   },
   {
+    "code": "VIPLEVELUPBONUSREPORT",
+    "name": "Player Tier Report",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
