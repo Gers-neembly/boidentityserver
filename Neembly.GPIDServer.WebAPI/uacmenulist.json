@@ -72,6 +72,24 @@
     "hasChild": "false"
   },
   {
+    "code": "VIPKOMPREQUESTS",
+    "name": "Komp Requests",
+    "order": "5",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "FINANCE",
+    "hasChild": "true"
+  },
+  {
+    "code": "VIPKOMPREDEMPTIONREQUESTS",
+    "name": "Real Wallet",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIPKOMPREQUESTS",
+    "hasChild": false
+  },
+  {
     "code": "REPORTS",
     "name": "Reports",
     "order": "4",
@@ -719,6 +737,42 @@
     "parentItemCode": "VIP",
     "hasChild": false
   },
+  {
+    "code": "VIPKOMPSYSTEM",
+    "name": "Komp System",
+    "order": 9,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIP",
+    "hasChild": true
+  },
+  {
+    "code": "VIPKOMPSETTINGS",
+    "name": "Komp Settings",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIPKOMPSYSTEM",
+    "hasChild": false
+  },
+  {
+    "code": "VIPKOMPCONVERSIONS",
+    "name": "Komp Conversions",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "VIPKOMPSYSTEM",
+    "hasChild": false
+  }
+  //{
+  //  "code": "KOMPSYSTEMREWARDS",
+  //  "name": "Komp Rewards",
+  //  "order": 3,
+  //  "isMenuItem": true,
+  //  "isMenuHeader": false,
+  //  "parentItemCode": "KOMPSYSTEM",
+  //  "hasChild": false
+  //},
   // {
   //   "code": "AFFILIATE",
   //   "name": "Affiliate",
