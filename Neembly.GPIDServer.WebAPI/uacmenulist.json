@@ -216,51 +216,6 @@
     "hasChild": "true"
   },
   {
-    "code": "REFERRALPROGRAMREPORT",
-    "name": "Referral Program",
-    "order": "4",
-    "isMenuItem": "true",
-    "isMenuHeader": "true",
-    "parentItemCode": "REPORTS",
-    "hasChild": "false"
-  },
-  // {
-  //   "code": "AFFILIATEPROGRAMREPORT",
-  //   "name": "Affiliate Program",
-  //   "order": "5",
-  //   "isMenuItem": "true",
-  //   "isMenuHeader": "true",
-  //   "parentItemCode": "REPORTS",
-  //   "hasChild": "true"
-  // },
-  {
-    "code": "VIPPROGRAMREPORT",
-    "name": "VIP Program",
-    "order": "6",
-    "isMenuItem": "true",
-    "isMenuHeader": "true",
-    "parentItemCode": "REPORTS",
-    "hasChild": "true"
-  },
-  {
-    "code": "VIPRAKEBACKREPORT",
-    "name": "Rakeback Report",
-    "order": "1",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "VIPPROGRAMREPORT",
-    "hasChild": "false"
-  },
-  {
-    "code": "VIPPLAYERTIERREPORT",
-    "name": "Player Tier Report",
-    "order": "2",
-    "isMenuItem": "true",
-    "isMenuHeader": "false",
-    "parentItemCode": "VIPPROGRAMREPORT",
-    "hasChild": "false"
-  },
-  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
@@ -305,6 +260,25 @@
     "parentItemCode": "FINANCIAL",
     "hasChild": "false"
   },
+  {
+    "code": "REFERRALPROGRAMREPORT",
+    "name": "Referral Program",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "false"
+  },
+  //{
+  //   "code": "AFFILIATEPROGRAMREPORT",
+  //   "name": "Affiliate Program",
+  //   "order": "5",
+  //   "isMenuItem": "true",
+  //   "isMenuHeader": "true",
+  //   "parentItemCode": "REPORTS",
+  //   "hasChild": "true"
+  // },
+
   // {
   //   "code": "TIERUPREFERRALREWARDSAFFILIATEREPORT",
   //   "name": "Tier Up Referral Rewards",
@@ -341,6 +315,69 @@
   //  "parentItemCode": "REPORTS",
   //  "hasChild": "false"
   //},
+  {
+    "code": "VIPPROGRAMREPORT",
+    "name": "VIP Program",
+    "order": "6",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "VIPRAKEBACKREPORT",
+    "name": "Rakeback Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "VIPPLAYERTIERREPORT",
+    "name": "Player Tier Report",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "VIPLEVELUPBONUSREPORT",
+    "name": "Level Up Bonus Report",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "RAFFLEPROGRAMREPORT",
+    "name": "Raffle Program",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "true"
+  },
+  {
+    "code": "RAFFLEREPORT",
+    "name": "Raffle Report",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "RAFFLEPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "TICKETREPORT",
+    "name": "Ticket Report",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "RAFFLEPROGRAMREPORT",
+    "hasChild": "false"
+  },
   {
     "code": "GAMEMANAGEMENT",
     "name": "Game Management",
@@ -763,7 +800,7 @@
     "isMenuHeader": false,
     "parentItemCode": "VIPKOMPSYSTEM",
     "hasChild": false
-  }
+  },
   //{
   //  "code": "KOMPSYSTEMREWARDS",
   //  "name": "Komp Rewards",
@@ -823,5 +860,69 @@
   //       ]
   //     }
   //   ]
-  // }
+  // },
+  {
+    "code": "TOURNAMENT",
+    "name": "Tournament",
+    "order": 10,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "TOURNAMENTLIST",
+    "name": "Tournament List",
+    "order": 0,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  },
+  {
+    "code": "TOURNAMENTREPORT",
+    "name": "Tournament Reports",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  },
+  {
+    "code": "TOURNAMENTLEADERBOARD",
+    "name": "Tournament Leaderboard",
+    "order": 2,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "TOURNAMENT",
+    "hasChild": false
+  },
+  {
+    "code": "RAFFLE",
+    "name": "Raffle",
+    "order": 11,
+    "isMenuItem": true,
+    "isMenuHeader": true,
+    "parentItemCode": "CARM",
+    "hasChild": true
+  },
+  {
+    "code": "RAFFLELIST",
+    "name": "Raffle List",
+    "order": 0,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "RAFFLE",
+    "hasChild": false
+  },
+  {
+    "code": "RAFFLEDISBURSEMENT",
+    "name": "Raffle Disbursement",
+    "order": 1,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "RAFFLE",
+    "hasChild": false
+  }
+
 ]
