@@ -577,6 +577,15 @@
     "hasChild": "false"
   },
   {
+    "code": "PLAYERDEFAULTCAPABILITIES",
+    "hasChild": false,
+    "isMenuHeader": false,
+    "isMenuItem": true,
+    "name": "Player Default Capabilities",
+    "order": "4",
+    "parentItemCode": "PLAYERSETTINGS"
+  },
+  {
     "code": "PLAYERMETHODSETTINGS",
     "name": "Player Methods Settings",
     "order": "4",
