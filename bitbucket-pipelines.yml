@@ -108,7 +108,7 @@ pipelines:
           - dotnet tool restore
           - dotnet dotnet-ef database update 
           - sleep 10s
-    runner-prod-alpha-ppauth:
+    runner-prod-alpha-boauth:
     - variables:
       - name: ServerId
       - name: Password 		  
