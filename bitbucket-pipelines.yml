@@ -249,4 +249,4 @@ pipelines:
           - export ASPNETCORE_CLUSTER="Sandbox"
           - dotnet restore
           - dotnet build $PROJECT_NAME -p:RunAnalyzers=false --configuration Release 
-          - echo "Select pipeline deploy-release to promote Preprod/Release environment manually"
+          - echo "Select pipeline deploy-release to promote Preprod/Release environment manually" 
