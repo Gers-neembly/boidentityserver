@@ -46,7 +46,7 @@ pipelines:
           - dotnet restore
           - dotnet publish $PROJECT_NAME -p:RunAnalyzers=false --configuration Debug
           - echo "Performing archieve..."
-          - ssh SSH_USER_DEVWS@$SSH_SERVER_DEVWS cp -ax $DEVWS_PUBDIR$FTP_ROOTDIR $DEVWS_PUBDIR$ARCHIEVE$FTP_ROOTDIR
+          - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS cp -ax $DEVWS_PUBDIR$FTP_ROOTDIR $DEVWS_PUBDIR$ARCHIEVE$FTP_ROOTDIR
           - echo "Stopping Service"
           - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS 'sudo systemctl stop neembly-bo-auth.service'
           - sleep 10s
