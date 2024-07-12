@@ -25,6 +25,7 @@ pipelines:
       - name: DeployDB
     - step:
         runs-on:
+          - sandbox.runners
           - self.hosted
           - linux.shell    
         name: Deploy Dev-BoAuth
@@ -68,6 +69,7 @@ pipelines:
       - name: Password 	
     - step:
         runs-on:
+          - sandbox.runners
           - self.hosted
           - linux.shell    
         name: Deploy SB-BOAuth
@@ -115,6 +117,7 @@ pipelines:
       - name: VersionNo
     - step:
         runs-on:
+          - prod.runners
           - self.hosted
           - linux.shell    
         name: Deploy ProdAlpha BOAuth
@@ -159,6 +162,7 @@ pipelines:
       - name: VersionNo
     - step:
         runs-on:
+          - prod.runners
           - self.hosted
           - linux.shell    
         name: Deploy DB ProdAlpha
