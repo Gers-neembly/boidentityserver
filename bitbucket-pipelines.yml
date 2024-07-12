@@ -185,6 +185,7 @@ pipelines:
     # task per ticket item build
     - step:
         runs-on:
+          - sandbox.runners
           - self.hosted
           - linux.shell    
         script:
