@@ -6,6 +6,24 @@
     "isMenuItem": "true",
     "isMenuHeader": "true",
     "parentItemCode": "none",
+    "hasChild": "true"
+  },
+  {
+    "code": "METRICS",
+    "name": "Metrics",
+    "order": "1",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "DASHBOARD",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERANALYTICS",
+    "name": "Player Analytics",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "DASHBOARD",
     "hasChild": "false"
   },
   {
@@ -877,6 +895,6 @@
     "isMenuHeader": false,
     "parentItemCode": "TOURNAMENT",
     "hasChild": false
-  },
-  
+  }
+
 ]
