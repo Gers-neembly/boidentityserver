@@ -28,7 +28,7 @@
   },
   {
     "code": "PLAYERS",
-    "name": "PLAYERS",
+    "name": "Players",
     "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "true",
@@ -46,7 +46,7 @@
   },
   {
     "code": "PLAYERMESSAGING",
-    "name": "MESSAGING",
+    "name": "Messaging",
     "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "true",
