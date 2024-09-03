@@ -27,8 +27,8 @@
     "hasChild": "false"
   },
   {
-    "code": "PLAYERMANAGEMENT",
-    "name": "Player Management",
+    "code": "PLAYERS",
+    "name": "Players",
     "order": "2",
     "isMenuItem": "true",
     "isMenuHeader": "true",
@@ -36,11 +36,20 @@
     "hasChild": "true"
   },
   {
-    "code": "PLAYERS",
-    "name": "Players",
+    "code": "PLAYERMANAGEMENT",
+    "name": "Player Management",
     "order": "1",
     "isMenuItem": "true",
     "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERMESSAGING",
+    "name": "Messaging",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
     "parentItemCode": "PLAYERMANAGEMENT",
     "hasChild": "false"
   },
