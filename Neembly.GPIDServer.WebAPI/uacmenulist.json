@@ -45,6 +45,15 @@
     "hasChild": "false"
   },
   {
+    "code": "PLAYERMESSAGING",
+    "name": "Messaging",
+    "order": "2",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
     "code": "FINANCE",
     "name": "Finance",
     "order": "3",
