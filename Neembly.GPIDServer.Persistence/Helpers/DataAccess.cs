@@ -177,7 +177,6 @@ namespace Neembly.BOIDServer.Persistence.Helpers
                     LastName = boinfo.LastName,
                     Email = user.userTable.Email,
                     Status = user.userTable.RegistrationStatus == RegistrationStatusNames.Registered.ToString() || user.userTable.RegistrationStatus == BOUserStatus.Active.ToString() ? BOUserStatus.Active.ToString() : BOUserStatus.Inactive.ToString(),
-                    OperatorId = user.operatorInfo.OperatorId,
                     CreatedDate = user.userTable.CreatedDate,
                     ModifiedDate = user.userTable.ModifiedDate
                 }).AsNoTracking();
