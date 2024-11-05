@@ -12,7 +12,6 @@ namespace Neembly.BOIDServer.SharedClasses
         public DateTime ModifiedDate { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
-        public int OperatorId { get; set; }
         public string Password { get; set; }
         public bool IsPasswordReset { get; set; }
     }
