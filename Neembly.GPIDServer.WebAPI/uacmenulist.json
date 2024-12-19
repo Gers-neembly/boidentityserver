@@ -496,7 +496,7 @@
   },
   {
     "code": "GAMESTAGE",
-    "name": "Game  Stage",
+    "name": "Game Stage",
     "order": "6",
     "isMenuItem": "true",
     "isMenuHeader": "false",
