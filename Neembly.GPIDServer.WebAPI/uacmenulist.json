@@ -505,8 +505,8 @@
     "hasChild": "false"
   },
   {
-    "code": "COMMUNITYCHAT",
-    "name": "Community Chat",
+    "code": "PRODUCTCATEGORIES",
+    "name": "Product Categories",
     "order": "4",
     "isMenuItem": "true",
     "isMenuHeader": "false",
@@ -514,8 +514,8 @@
     "hasChild": "false"
   },
   {
-    "code": "PRODUCTCATEGORIES",
-    "name": "Product Categories",
+    "code": "COMMUNITYCHAT",
+    "name": "Community Chat",
     "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "false",
