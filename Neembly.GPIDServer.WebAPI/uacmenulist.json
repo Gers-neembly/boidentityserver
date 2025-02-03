@@ -477,9 +477,18 @@
     "hasChild": "false"
   },
   {
+    "code": "PRODUCTCATEGORIES",
+    "name": "Product Categories",
+    "order": "4",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "CMS",
+    "hasChild": "false"
+  },
+  {
     "code": "COMMUNITYCHAT",
     "name": "Community Chat",
-    "order": "4",
+    "order": "5",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -488,7 +497,7 @@
   {
     "code": "GAMESTAGE",
     "name": "Game Stage",
-    "order": "5",
+    "order": "6",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -497,7 +506,7 @@
   {
     "code": "WIDGETS",
     "name": "Widgets",
-    "order": "6",
+    "order": "7",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
@@ -506,7 +515,7 @@
   {
     "code": "POPUPS",
     "name": "Pop-ups",
-    "order": "7",
+    "order": "8",
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "CMS",
