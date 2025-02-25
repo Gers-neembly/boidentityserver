@@ -108,6 +108,15 @@
     "hasChild": "true"
   },
   {
+    "code": "GAMECREDIT",
+    "name": "Game Credit",
+    "order": 6,
+    "isMenuItem": true,
+    "isMenuHeader": false,
+    "parentItemCode": "FINANCE",
+    "hasChild": false
+  },
+  {
     "code": "VIPKOMPREDEMPTIONREQUESTS",
     "name": "Real Wallet",
     "order": 1,
