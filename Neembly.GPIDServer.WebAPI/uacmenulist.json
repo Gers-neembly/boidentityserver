@@ -667,6 +667,15 @@
     "hasChild": "false"
   },
   {
+    "code": "AUDITLOGLIST",
+    "name": "Audit Logs",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "SETTINGS",
+    "hasChild": "false"
+  },
+  {
     "code": "MANUALPAYMENTSETTINGS",
     "name": "Manual Payment Settings",
     "order": "1",
