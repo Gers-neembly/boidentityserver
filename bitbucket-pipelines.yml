@@ -126,7 +126,6 @@ pipelines:
           - echo "Uploading to Server"
           - scp -r $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR/bin/Sandbox/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/* $SSH_USER_SBWS@$SSH_SERVER_SBWS:$SBWS_PUBDIR$FTP_ROOTDIR_WS
           - sleep 10s
-        after-script:
           - echo "Restarting Service"
           - ssh $SSH_USER_SBWS@$SSH_SERVER_SBWS 'sudo systemctl start neembly-bo-auth.service'
           - sleep 10s
