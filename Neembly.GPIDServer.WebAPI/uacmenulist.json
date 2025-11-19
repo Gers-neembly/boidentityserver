@@ -54,6 +54,15 @@
     "hasChild": "false"
   },
   {
+    "code": "PLAYERSECURITYPIN",
+    "name": "SecurityPin",
+    "order": "3",
+    "isMenuItem": "true",
+    "isMenuHeader": "false",
+    "parentItemCode": "PLAYERMANAGEMENT",
+    "hasChild": "false"
+  },
+  {
     "code": "FINANCE",
     "name": "Finance",
     "order": "3",
