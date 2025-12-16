@@ -279,15 +279,6 @@
     "hasChild": "true"
   },
   {
-    "code": "PLAYERBETTRANSACTIONSREPORT",
-    "name": "Player Bet Transactions",
-    "order": "7",
-    "isMenuItem": "true",
-    "isMenuHeader": "true",
-    "parentItemCode": "REPORTS",
-    "hasChild": "false"
-  },
-  {
     "code": "VIPRAKEBACKREPORT",
     "name": "Rakeback Report",
     "order": "1",
@@ -312,6 +303,15 @@
     "isMenuItem": "true",
     "isMenuHeader": "false",
     "parentItemCode": "VIPPROGRAMREPORT",
+    "hasChild": "false"
+  },
+  {
+    "code": "PLAYERBETTRANSACTIONSREPORT",
+    "name": "Player Bet Transactions",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
     "hasChild": "false"
   },
   {
