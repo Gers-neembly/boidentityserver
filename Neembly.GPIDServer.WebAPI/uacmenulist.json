@@ -306,6 +306,15 @@
     "hasChild": "false"
   },
   {
+    "code": "PLAYERBETTRANSACTIONSREPORT",
+    "name": "Player Bet Transactions",
+    "order": "7",
+    "isMenuItem": "true",
+    "isMenuHeader": "true",
+    "parentItemCode": "REPORTS",
+    "hasChild": "false"
+  },
+  {
     "code": "DEPOSITREPORT",
     "name": "Deposit Report",
     "order": "1",
