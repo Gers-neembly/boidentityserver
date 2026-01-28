@@ -56,7 +56,7 @@ pipelines:
           - echo "Restarting Service"
           - ssh $SSH_USER_DEVWS@$SSH_SERVER_DEVWS 'sudo systemctl start neembly-bo-auth.service'
           - sleep 10s
-          - if [ "$DeployDB" = "false" ]; then exit 0 ; fi
+          - if [ "$DeployDB" = "N" ]; then exit 0 ; fi
           - echo "Updating Database"
           - cd $BITBUCKET_CLONE_DIR/$RUNNER_DB_DIR
           - dotnet tool restore
@@ -130,7 +130,7 @@ pipelines:
           - echo "Restarting Service"
           - ssh $SSH_USER_SBWS@$SSH_SERVER_SBWS 'sudo systemctl start neembly-bo-auth.service'
           - sleep 10s
-          - if [ "$DeployDB" = "false" ]; then exit 0 ; fi
+          - if [ "$DeployDB" = "N" ]; then exit 0 ; fi
           - echo "Updating Database"
           - cd $BITBUCKET_CLONE_DIR/$RUNNER_DB_DIR
           - dotnet tool restore
