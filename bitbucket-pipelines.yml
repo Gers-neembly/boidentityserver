@@ -179,7 +179,7 @@ pipelines:
           - echo "System creating backup recovery compressed files"
           - export SSH_BACKUP_CMD="sudo /opt/deploy-assist/create-backup.sh ${TARGETDIR_DEPLOY} ${VERSION_NUMBER}"
           - echo $SSH_BACKUP_CMD
-          - ssh $SSH_USER_PUBWS@$SSH_SERVER_PUBWS2 $SSH_BACKUP_CMD            
+          - ssh $SSH_USER_PUBWS@$SSH_SERVER_PUBWS $SSH_BACKUP_CMD            
           - echo "Stopping Service"
           - ssh $SSH_USER_PUBWS@$SSH_SERVER_PUBWS 'sudo systemctl stop neembly-bo-auth.service'
           - sleep 10s
