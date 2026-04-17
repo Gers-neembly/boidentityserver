@@ -239,10 +239,11 @@ pipelines:
         caches:
           - dotnetcore
         script:
+          - /opt/scripts/mirror-script.sh
           - echo "Development deploy"
           - export ASPNETCORE_ENVIRONMENT="Development"
-          - dotnet restore
-          - dotnet build $PROJECT_NAME -p:RunAnalyzers=false --configuration Debug
+          - dotnet restore $PROJECT_NAME
+          - dotnet build $PROJECT_NAME -c Debug -m -nr:false -v q -p:GenerateFullPaths=true -p:RunAnalyzers=false -p:NuGetAudit=false -p:DebugType=none -p:DebugSymbols=false
           - echo "Select pipeline deploy-to-dev to promote DEV environment manually"
     sandbox:
     # sandbox push-merge build 
