@@ -170,7 +170,7 @@ pipelines:
               eval $(ssh-agent -s);
               git clone --depth 1 $APPSETTINGS_REPO $CONFIG_REPO;
               ls $CONFIG_REPO/$APPCONFIG_DIR;   
-              cp $CONFIG_REPO/$APPCONFIG_DIR/*.* $BITBUCKET_CLONE_DIRR/$RUNNER_BUILD_DIR;
+              cp $CONFIG_REPO/$APPCONFIG_DIR/*.* $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR;
               rm -rf $CONFIG_REPO;
             fi    
           - dotnet restore
@@ -186,6 +186,9 @@ pipelines:
           - rm -rf $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/appsettings.*.json
           - scp -r $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR/bin/Release/$DOTNET_FRAMEWORK/$GIT_PUBLISH_DIR/* $SSH_USER_PUBWS@$SSH_SERVER_PUBWS:$PUBWS_PUBDIR$FTP_ROOTDIR_WS
           - scp -r $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR/appsettings.ClusterAlpha.json $SSH_USER_PUBWS@$SSH_SERVER_PUBWS:$PUBWS_PUBDIR$FTP_ROOTDIR_WS
+          - scp -r $BITBUCKET_CLONE_DIR/$RUNNER_BUILD_DIR/uacmenulist.json $SSH_USER_PUBWS@$SSH_SERVER_PUBWS:$PUBWS_PUBDIR$FTP_ROOTDIR_WS
+          - echo $VERSION_NUMBER
+          - echo "Manual deploy to PROD-release environment (ClusterAlpha)"
           - sleep 10s
           - echo "Restarting Service"
           - ssh $SSH_USER_PUBWS@$SSH_SERVER_PUBWS 'sudo systemctl start neembly-bo-auth.service'
