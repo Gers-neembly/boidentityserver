@@ -226,11 +226,14 @@ pipelines:
           - sandbox.runners
           - self.hosted
           - linux.shell    
+        name: Standard Build
+        caches:
+          - dotnetcore
         script:
           - echo "Hosted Runner compilation..."
           - echo "Branch building..."
-          - dotnet restore
-          - dotnet build $PROJECT_NAME --configuration Debug
+          - dotnet restore $PROJECT_NAME
+          - dotnet build $PROJECT_NAME -c Debug -m -nr:false -v q -p:GenerateFullPaths=true -p:RunAnalyzers=false -p:NuGetAudit=false -p:DebugType=none -p:DebugSymbols=false
   branches:
     master:
     # master push-merge build 
