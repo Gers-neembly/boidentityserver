@@ -325,7 +325,6 @@ pipelines:
         caches:
           - dotnetcore
         script:
-          - curl -I -u "x-token-auth:${BITBUCKET_API_TOKEN}" "https://api.bitbucket.org/2.0/repositories/neembly/gameplatform"
           - /opt/scripts/mirror-script.sh
           - echo "Auto Deployment CI/CD to PROD-release environment"
           - export ASPNETCORE_ENVIRONMENT="Release"
